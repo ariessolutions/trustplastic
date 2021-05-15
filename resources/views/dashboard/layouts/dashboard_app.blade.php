@@ -345,7 +345,7 @@
             $('#itemAutoSelect').typeahead({
                 source: [{
                         id: '1',
-                        name: 'ITM0001'
+                        name: 'ITM00021'
                     },
                     {
                         id: '2',
