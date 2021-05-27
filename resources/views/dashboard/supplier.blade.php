@@ -28,25 +28,8 @@
                                     <div class="col-xl-4">
 
                                         <div class="card">
-                                            <div class="card-header">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mt-2">Supplier Registration</h6>
-                                                    </div>
-                                                    <a class="text-muted mt-2" data-toggle="tooltip" data-placement="top"
-                                                        title="Refresh All Feilds" value="reset() outside form"
-                                                        onclick="supplier_form.reset(); $('#submit').removeClass('btn-indigo'); $('#submit').val('Submit'); ">
-                                                        <i class="fa fa-redo"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-
                                             <div class="card-body pb-2">
-
-                                                @include('dashboard.components.flash')
-
-                                                <form method="POST" action="/supplier/store" name="supplier_form">
-                                                    @csrf
+                                                <form>
                                                     <div class="row">
 
                                                         <div class="col-xl-12">
@@ -54,94 +37,88 @@
                                                                 <label class="form-label">
                                                                     Supplier Code
                                                                 </label>
-                                                                <input id="supplier_code" name="supplier_code" type="text"
-                                                                    class="form-control" value="{{ $supplierCode }}"
+                                                                <input type="text" class="form-control" value="SUP0001"
                                                                     readonly />
-                                                                @error('supplier_code')
-                                                                    <span class="text-danger">
-                                                                        <small>{{ $message }}</small>
-                                                                    </span>
-                                                                @enderror
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-12">
                                                             <div class="form-group mb-3">
-                                                                <label class="form-label" for="supplier_name">
+                                                                <label class="form-label" for="supplierName">
                                                                     Supplier / Business Name
                                                                 </label>
-                                                                <input id="supplier_name" type="text" class="form-control"
-                                                                    name="supplier_name" />
-
-                                                                @error('supplier_name')
-                                                                    <span class="text-danger">
-                                                                        <small>{{ $message }}</small>
-                                                                    </span>
-                                                                @enderror
+                                                                <input id="supplierName" type="text" class="form-control"
+                                                                    name="supplierName" />
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-6">
                                                             <div class="form-group mb-3">
-                                                                <label class="form-label" for="supplier_primary_tel">
+                                                                <label class="form-label" for="supplierTel1">
                                                                     Primary Contact No
                                                                 </label>
-                                                                <input id="supplier_primary_tel" type="text"
-                                                                    class="form-control phone"
-                                                                    name="supplier_primary_tel" />
-
-                                                                @error('supplier_primary_tel')
-                                                                    <span class="text-danger">
-                                                                        <small>{{ $message }}</small>
-                                                                    </span>
-                                                                @enderror
+                                                                <input id="supplierTel1" type="text" class="form-control"
+                                                                    name="supplierTel1" />
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-6">
                                                             <div class="form-group mb-3">
-                                                                <label class="form-label" for="supplier_secondary_tel">
+                                                                <label class="form-label" for="supplierTel2">
                                                                     Secondary Contact No
                                                                 </label>
-                                                                <input id="supplier_secondary_tel" type="text"
-                                                                    class="form-control phone"
-                                                                    name="supplier_secondary_tel" />
+                                                                <input id="supplierTel2" type="text" class="form-control"
+                                                                    name="supplierTel2" />
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-12">
                                                             <div class="form-group mb-3">
-                                                                <label class="form-label" for="supplier_address">Supplier /
+                                                                <label class="form-label" for="supplierAddress">Supplier /
                                                                     Business
                                                                     Address</label>
-                                                                <textarea class="form-control" id="supplier_address"
-                                                                    rows="3" name="supplier_address"></textarea>
+                                                                <textarea class="form-control" id="supplierAddress" rows="3"
+                                                                    name="supplierAddress"></textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-12">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label"
-                                                                    for="supplier_payment_details">Supplier Payment
+                                                                    for="supplierPaymentDetails">Supplier Payment
                                                                     Details</label>
-                                                                <textarea class="form-control" id="supplier_payment_details"
-                                                                    rows="5" name="supplier_payment_details"></textarea>
+                                                                <textarea class="form-control" id="supplierPaymentDetails"
+                                                                    rows="5" name="supplierPaymentDetails"></textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-12">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label"
-                                                                    for="supplier_remark">Remark</label>
-                                                                <textarea class="form-control" id="supplier_remark" rows="5"
-                                                                    name="supplier_remark"></textarea>
+                                                                    for="supplierRemark">Remark</label>
+                                                                <textarea class="form-control" id="supplierRemark" rows="5"
+                                                                    name="supplierRemark"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-12">
+                                                            <div class="form-check form-switch">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    id="supplierStatus" checked>
+                                                                <label class="form-check-label" for="supplierStatus">
+                                                                    Supplier active status
+                                                                </label>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-12">
                                                             <div class="form-group mb-3 mt-3">
-                                                                <input id="submit" type="submit"
-                                                                    class="btn btn-primary text-white" value="Submit" />
+                                                                <input type="submit" class="btn btn-primary text-white"
+                                                                    value="Submit" />
+
+                                                                <button class="btn btn-round btn-secondary">Clear
+                                                                    All</button>
+
                                                             </div>
                                                         </div>
 
@@ -158,19 +135,8 @@
                                     <div class="col-xl-8">
 
                                         <div class="card">
-                                            <div class="card-header">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mt-2">Supplier List</h6>
-                                                    </div>
-                                                    <a type="button" href="#" class="text-muted mt-2" data-toggle="tooltip"
-                                                        data-placement="bottom" title="Refresh Table">
-                                                        <i class="fa fa-redo"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
                                             <div class="card-body table-responsive">
-                                                <table id="supplier_table" class="table table-borderless table-striped text-nowrap pt-2">
+                                                <table class="table table-hover text-nowrap ">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -181,8 +147,35 @@
                                                             <th scope="col">Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody >
-                                                        @include('dashboard.components.supplier_list')
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td class="py-1 align-middle">1</td>
+                                                            <td class="py-1 align-middle">SUP00010</td>
+                                                            <td class="py-1 align-middle"
+                                                                style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;  ">
+                                                                Lorem Ipsum Industries (Private) Ltd</td>
+                                                            <td class="py-1 align-middle">0112 729 729</td>
+                                                            <td class="py-1 align-middle"><span
+                                                                    class="badge bg-green-100 text-success px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i
+                                                                        class="fa fa-circle text-teal fs-9px fa-fw me-5px"></i>
+                                                                    Active</span></td>
+                                                            <td>
+                                                                <div class="input-group flex-nowrap">
+                                                                    <div class="m-1">
+                                                                        <button class="btn btn-secondary btn-sm">
+                                                                            Edit
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="m-1">
+                                                                        <button class="btn btn-round btn-default btn-sm">
+                                                                            Deactivate
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -199,114 +192,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function setSupplierValueForEdit(supplier) {
-            $("#supplier_code").val(supplier.supplier_code);
-            $("#supplier_name").val(supplier.supplier_name);
-            $("#supplier_primary_tel").val(supplier.supplier_primary_tel);
-            $("#supplier_secondary_tel").val(supplier.supplier_secondary_tel);
-            $("#supplier_address").val(supplier.supplier_address);
-            $("#supplier_payment_details").val(supplier.supplier_payment_details);
-            $("#supplier_remark").val(supplier.supplier_remark);
-            $("#submit").val('Update');
-            $("#submit").addClass('btn-indigo');
-        }
-
-    </script>
-
-    <script>
-        $('#supplier_table').DataTable();
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-
-            $(document).on('click', 'a[data-role = completed-deactivate]', function() {
-
-                let id = $(this).data('id');
-                let _token = $(this).data('token');
-
-
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('supplier.deactivate') }}",
-                    data: {
-                        id: id,
-                        _token: _token,
-                    },
-                    success: function(response) {
-
-                        // $('#item_list').html(response);
-
-                        // location.reload();
-
-                        alertProcessing(response);
-
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function() {
-
-            $(document).on('click', 'a[data-role = completed-activate]', function() {
-
-                let id = $(this).data('id');
-                let _token = $(this).data('token');
-
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('supplier.activate') }}",
-                    data: {
-                        id: id,
-                        _token: _token,
-                    },
-                    success: function(response) {
-                        // $('#item_list').html(response);
-
-                        // location.reload();
-
-                        alertProcessing(response);
-
-                    }
-                });
-            });
-        });
-
-        function alertProcessing(response) {
-
-            let timerInterval
-            Swal.fire({
-                title: 'Processing...!',
-                html: 'Will close in <b></b> milliseconds.',
-                timer: response,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    timerInterval = setInterval(() => {
-                        const content = Swal.getHtmlContainer()
-                        if (content) {
-                            const b = content.querySelector('b')
-                            if (b) {
-                                b.textContent = Swal
-                                    .getTimerLeft()
-                            }
-                        }
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.reload();
-                }
-            })
-
-        }
-
-    </script>
 
 @endsection
