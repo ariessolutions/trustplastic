@@ -12,21 +12,30 @@
 
     <!-- CSS files -->
 
-    <link href="assets/css/vendor.min.css" rel="stylesheet" />
-    <link href="assets/css/app.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
 
-    <link href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}"
+        rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <link href="{{ asset('assets/css/notiflix.css') }}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
     </script>
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
+
 <body>
+
     <div>
 
         <main class="py-5">
@@ -112,16 +121,16 @@
                                 <div class="menu-submenu">
 
                                     <div class="menu-item">
-                                        <a href="item-category" class="menu-link">
+                                        <a href="/item/category" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="fa fa-th-large"></i>
                                             </span>
-                                            <span class="menu-text">Item Category Registration</span>
+                                            <span class="menu-text">Category Registration</span>
                                         </a>
                                     </div>
 
                                     <div class="menu-item">
-                                        <a href="item" class="menu-link">
+                                        <a href="/item" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="fa fa-book"></i>
                                             </span>
@@ -133,14 +142,14 @@
                             </div>
 
                             <div class="menu-item">
-                                <a href="supplier" class="menu-link">
+                                <a href="/supplier" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-user-o"></i></span>
                                     <span class="menu-text">Supplier Registration</span>
                                 </a>
                             </div>
 
                             <div class="menu-item">
-                                <a href="purchase-order" class="menu-link">
+                                <a href="/po" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-clipboard"></i></span>
                                     <span class="menu-text">Purchase Order Request</span>
                                 </a>
@@ -151,7 +160,7 @@
                             <div class="menu-header">GRN Management</div>
 
                             <div class="menu-item">
-                                <a href="widgets.html" class="menu-link">
+                                <a href="grn" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-cube"></i></span>
                                     <span class="menu-text">GRN</span>
                                 </a>
@@ -328,15 +337,19 @@
         </main>
     </div>
 
-    <script src="assets/js/vendor.min.js" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
-    <script src="assets/js/app.min.js" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
-
-    {{-- <script src="assets/js/demo/dashboard.demo.js" type="0485eeef8cf3263d1a7b2548-text/javascript"></script> --}}
-
-    <script src="assets/js/rocket-loader.min.js" data-cf-settings="0485eeef8cf3263d1a7b2548-|49" defer=""></script>
-
-    <script src="assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
+    </script>
+    <script src="{{ asset('assets/js/vendor.min.js') }}" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
+    <script src="{{ asset('assets/js/app.min.js') }}" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
+    <script src="{{ asset('assets/js/rocket-loader.min.js') }}" data-cf-settings="0485eeef8cf3263d1a7b2548-|49"
+        defer=""></script>
+    <script src="{{ asset('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"
         type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
+    <script src="{{ asset('assets/js/notiflix.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.maskedinput.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('assets/js/process/admin.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/process/po.js') }}"></script>
+    <script src="{{ asset('assets/js/process/myi.js') }}"></script>
 
     {{-- Item Auto Select --}}
     <script>
@@ -361,16 +374,33 @@
 
     {{-- Supplier Auto Select --}}
     <script>
+        // $(document).ready(function() {
+
+        //     $('#supplierAutoSelect').typeahead({
+        //         source: [{
+        //                 id: '1',
+        //                 name: 'SUP0001'
+        //             },
+        //             {
+        //                 id: '2',
+        //                 name: 'SUP0015'
+        //             },
+        //         ],
+        //         autoSelect: true
+        //     });
+
+        // });
+
         $(document).ready(function() {
 
-            $('#supplierAutoSelect').typeahead({
+            $('#grnAutoSelect').typeahead({
                 source: [{
                         id: '1',
-                        name: 'SUP0001'
+                        name: 'P0001'
                     },
                     {
                         id: '2',
-                        name: 'SUP0015'
+                        name: 'P0015'
                     },
                 ],
                 autoSelect: true
@@ -380,7 +410,31 @@
 
     </script>
 
+    <script type="text/javascript">
+        $(function() {
+            $.mask.definitions['~'] = "[+-]";
+            $("#po_date").mask("99/99/9999", {
+                placeholder: "dd/mm/yyyy",
+                completed: function() {
+                    // alert("completed!");
+                }
+            });
+        });
 
+        $(function() {
+            $.mask.definitions['~'] = "[+-]";
+            $("#po_expt_deliver_date").mask("99/99/9999", {
+                placeholder: "dd/mm/yyyy",
+                completed: function() {
+                    // alert("completed!");
+                }
+            });
+        });
+
+        $(".phone").mask("(999) 999-9999");
+        $("input.precentage").mask("99%");
+
+    </script>
 
 </body>
 
