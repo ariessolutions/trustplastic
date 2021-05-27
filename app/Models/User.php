@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\SessionActivityController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,9 +17,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
         'email',
         'password',
+        'emp_no',
+        'usertype',
+        'status',
     ];
 
     /**
@@ -40,4 +44,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function createUser($data, $activity)
+    {
+        (new SessionActivityController)->createActivity($activity);
+        return $this->create($data);
+    }
+
+    public function getUsers($status = null)
+    {
+        return ($status == null) ? $this::all() : $this::where('status', $status)->get();
+    }
 }
