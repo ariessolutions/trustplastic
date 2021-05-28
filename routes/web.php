@@ -58,6 +58,32 @@ Route::get('/po/sessionPOClear',[PurchaseOrderController::class,'sessionPOClear'
 Route::get('/po/sessionPOItemCheck',[PurchaseOrderController::class,'sessionPOItemCheck'])->name('po.sessionPOItemCheck')->middleware('auth');
 Route::post('/po/savePO',[PurchaseOrderController::class,'savePO'])->name('po.savePO')->middleware('auth');
 
+Route::get('/users',[UserController::class,'index'])->middleware(['auth','permitted']);
+Route::post('/users/enroll',[UserController::class,'enrollorupdate']);
+Route::get('/users/get/table',[UserController::class,'get']);
+Route::get('/users/find/{id}',[UserController::class,'find']);
+Route::get('/users/edit/status/{id}/{status}',[UserController::class,'editStatus']);
+
+Route::get('/permissions',[PermissionController::class,'index'])->middleware(['auth','permitted']);
+Route::post('/permissions/enroll',[PermissionController::class,'enrollorupdate'])->middleware(['auth']);
+Route::get('/permissions/get/table',[PermissionController::class,'get'])->middleware(['auth']);
+Route::get('/permissions/edit/status/{id}/{status}',[PermissionController::class,'editStatus'])->middleware(['auth']);
+Route::get('/permissions/find/{id}',[PermissionController::class,'find']);
+
+Route::get('/vehicles',[VehicleController::class,'index'])->middleware(['auth','permitted']);
+Route::post('/vehicles/enroll',[VehicleController::class,'enrollorupdate']);
+Route::get('/vehicles/get/table',[VehicleController::class,'get']);
+Route::get('/vehicles/find/{id}',[VehicleController::class,'find']);
+Route::get('/vehicles/edit/status/{id}/{status}',[VehicleController::class,'editStatus']);
+Route::get('/vehicles/next/data/{vid}',[VehicleController::class,'nextIdwithVehicleCode']);
+
+Route::get('/products',[ProductController::class,'index'])->middleware(['auth','permitted']);
+Route::get('/products/suggesions',[ProductController::class,'suggetions']);
+Route::post('/products/enroll',[ProductController::class,'enrollorupdate']);
+Route::get('/products/get/table',[ProductController::class,'get']);
+Route::get('/products/find/{id}',[ProductController::class,'find']);
+Route::get('/products/edit/status/{id}/{status}',[ProductController::class,'editStatus']);
+
 Route::get('/grn',function(){
     return view('dashboard.grn');
 });

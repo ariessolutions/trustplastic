@@ -55,4 +55,15 @@ class User extends Authenticatable
     {
         return ($status == null) ? $this::all() : $this::where('status', $status)->get();
     }
+
+    public function edit($id,$data,$activity)
+    {
+        (new SessionActivityController)->createActivity($activity);
+        return $this->where('id',$id)->update($data);
+    }
+
+    public function getData($id)
+    {
+        return $this->where('id',$id)->first();
+    }
 }
