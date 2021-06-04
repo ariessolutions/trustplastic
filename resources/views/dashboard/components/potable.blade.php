@@ -9,7 +9,15 @@
             <td class="py-1 align-middle">{{ $item[2] }}</td>
             <td class="py-1 align-middle">{{ $item[3] }}</td>
             <td class="py-1 align-middle">{{ $item[4] }}</td>
-            <td class="py-1 align-middle">{{ $item[5] }}</td>
+            <td class="py-1 align-middle">
+
+                <?php $tot = $item[5]; ?>
+
+                <script>
+                    formatNumber({{ $tot }},'LKR ');
+                </script>
+
+            </td>
             <td class="py-1 align-middle">
                 <div class="input-group flex-nowrap">
                     <div class="m-1">

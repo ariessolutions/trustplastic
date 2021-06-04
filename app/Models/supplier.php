@@ -26,6 +26,11 @@ class supplier extends Model
         return $this::orderby('status')->get();
     }
 
+    public function getSupplierbyId($value)
+    {
+        return $this::where('id',$value)->first();
+    }
+
     public function getSupplierCount()
     {
         return $this::count();
@@ -52,5 +57,7 @@ class supplier extends Model
     public function getSupplierByCode($code){
         return $this::where('supplier_code',$code)->first();
     }
+
+
 
 }

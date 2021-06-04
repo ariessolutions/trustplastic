@@ -16,13 +16,15 @@ class CreatePoHasItemsTable extends Migration
         Schema::create('po_has_items', function (Blueprint $table) {
             $table->id();
             $table->integer('po_id');
+            $table->integer('bin_location_id')->nullable();
             $table->integer('item_id');
             $table->double('qty');
-            $table->double('unit_price', 10,2);
-            $table->double('sub_tot', 10,2);
+            $table->double('grn_in_qty')->default(0);
+            $table->double('unit_price', 20,2);
+            $table->double('sub_tot', 20,2);
             $table->double('discount', 4,2)->nullable();
             $table->double('vat', 4,2)->nullable();
-            $table->double('net_tot', 8,2);
+            $table->double('net_tot', 20,2);
             $table->tinyInteger('status');
             $table->timestamps();
         });

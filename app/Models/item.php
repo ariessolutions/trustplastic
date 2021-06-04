@@ -10,7 +10,7 @@ class item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['item_code', 'item_name', 'item_category_id', 'measure_unit_id', 'status'];
+    protected $fillable = ['item_code','item_part_code','item_name', 'item_category_id', 'measure_unit_id', 'status'];
 
     public function getAll()
     {
@@ -42,6 +42,35 @@ class item extends Model
     public function getItemByCode($code)
     {
         return $this::where('item_code', $code)->first();
+    }
+
+    public function getItemByPartCode($code)
+    {
+        return $this::where('item_part_code', $code)->first();
+    }
+
+    public function bins()
+    {
+        return $this->hasMany(bin_location::class,'item_id','id');
+    }
+
+    public function suggetions($input)
+    {
+        return $this::where([
+            ['status', '=', 1],
+            ["item_code", "LIKE", "%{$input['query']}%"],
+        ])->orWhere([
+            ['status', '=', 1],
+            ["item_name", "LIKE", "%{$input['query']}%"],
+        ])->orWhere([
+            ['status','=',1],
+            ['item_part_code','LIKE',"%{$input['query']}%"],
+        ])->get();
+    }
+
+    public function munit()
+    {
+        return $this->hasOne(measure_unit::class,'id','measure_unit_id');
     }
 
 }

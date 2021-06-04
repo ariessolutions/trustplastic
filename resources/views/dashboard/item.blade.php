@@ -26,7 +26,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-3">
 
                                         <div class="card mb-3">
                                             <div class="card-header">
@@ -56,6 +56,21 @@
                                                             <input id="item_code" name="item_code" type="text"
                                                                 class="form-control" value="{{ $itemCode }}" readonly />
                                                             @error('item_code')
+                                                                <span class="text-danger">
+                                                                    <small>{{ $message }}</small>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12">
+                                                        <div class="form-group mb-3">
+                                                            <label class="form-label">
+                                                                Item Part Code
+                                                            </label>
+                                                            <input id="item_part_code" name="item_part_code" type="text"
+                                                                class="form-control" />
+                                                            @error('item_part_code')
                                                                 <span class="text-danger">
                                                                     <small>{{ $message }}</small>
                                                                 </span>
@@ -136,7 +151,7 @@
 
                                     </div>
 
-                                    <div class="col-xl-8">
+                                    <div class="col-xl-9">
 
                                         <div class="card">
                                             <div class="card-header">
@@ -158,6 +173,7 @@
                                                         <tr>
                                                             <th scope="col">#</th>
                                                             <th scope="col">Item Code</th>
+                                                            <th scope="col">Item P/C</th>
                                                             <th scope="col">Item Name</th>
                                                             <th scope="col">Category</th>
                                                             <th scope="col">Measure Unit</th>
@@ -190,6 +206,7 @@
     <script>
         function setItemValueForEdit(item) {
             $("#item_code").val(item.item_code);
+            $("#item_part_code").val(item.item_part_code);
             $("#item_name").val(item.item_name);
             $("#item_category_id").val(item.item_category_id);
             $("#measure_unit_id").val(item.measure_unit_id);
@@ -212,23 +229,32 @@
                 let id = $(this).data('id');
                 let _token = $(this).data('token');
 
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('item.deactivate') }}",
-                    data: {
-                        id: id,
-                        _token: _token,
+                Notiflix.Confirm.Show('Item De-activation Confirmation',
+                    'Are you sure want to deactivate this item?', 'Yes', 'No',
+                    function() {
+
+                        $.ajax({
+                            type: "post",
+                            url: "{{ route('item.deactivate') }}",
+                            data: {
+                                id: id,
+                                _token: _token,
+                            },
+                            success: function(response) {
+                                location.reload();
+                                Notiflix.Notify.Success('Item Deactivate Successful');
+
+                            }
+                        });
+
+
                     },
-                    success: function(response) {
+                    function() {
 
-                        // $('#item_list').html(response);
+                        Notiflix.Notify.Warning('Item Deactivate Ignored');
 
-                        // location.reload();
+                    });
 
-                        alertProcessing(response);
-
-                    }
-                });
             });
         });
 
@@ -239,56 +265,30 @@
                 let id = $(this).data('id');
                 let _token = $(this).data('token');
 
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('item.activate') }}",
-                    data: {
-                        id: id,
-                        _token: _token,
+                Notiflix.Confirm.Show('Item Activation Confirmation',
+                    'Are you sure want to activate this item?', 'Yes', 'No',
+                    function() {
+
+                        $.ajax({
+                            type: "post",
+                            url: "{{ route('item.activate') }}",
+                            data: {
+                                id: id,
+                                _token: _token,
+                            },
+                            success: function(response) {
+                                location.reload();
+                                Notiflix.Notify.Success('Item Activate Successful');
+                            }
+                        });
+
                     },
-                    success: function(response) {
-                        // $('#item_list').html(response);
+                    function() {
+                        Notiflix.Notify.Warning('Item Activate Ignored');
+                    });
 
-                        // location.reload();
-
-                        alertProcessing(response);
-
-                    }
-                });
             });
         });
-
-        function alertProcessing(response) {
-
-            let timerInterval
-            Swal.fire({
-                title: 'Processing...!',
-                html: 'Will close in <b></b> milliseconds.',
-                timer: response,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    timerInterval = setInterval(() => {
-                        const content = Swal.getHtmlContainer()
-                        if (content) {
-                            const b = content.querySelector('b')
-                            if (b) {
-                                b.textContent = Swal
-                                    .getTimerLeft()
-                            }
-                        }
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.reload();
-                }
-            })
-
-        }
 
     </script>
 

@@ -16,9 +16,11 @@
                                 <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Purchase Order Management</li>
                             </ul>
+
                             <h1 class="page-header">
                                 Purchase Order Requests
                             </h1>
+
                             <hr class="mb-4" />
 
                             <div class="row">
@@ -48,9 +50,14 @@
                                             </div>
                                             <div class="d-flex">
                                                 <div class="flex-grow-1">
-                                                    <h3 class="mb-1">128</h3>
+                                                    <h3 id="pendingN" class="mb-1">
+
+                                                    </h3>
                                                     <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i> 25%
+                                                        <i class="fa fa-globe"></i>
+                                                        <span id="pendingP">
+
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div
@@ -74,9 +81,9 @@
                                             </div>
                                             <div class="d-flex">
                                                 <div class="flex-grow-1">
-                                                    <h3 class="mb-1">128</h3>
+                                                    <h3 id="activeN" class="mb-1"></h3>
                                                     <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i> 55%
+                                                        <i class="fa fa-globe"></i> <span id="activeP"></span>
                                                     </div>
                                                 </div>
                                                 <div
@@ -100,9 +107,9 @@
                                             </div>
                                             <div class="d-flex">
                                                 <div class="flex-grow-1">
-                                                    <h3 class="mb-1">128</h3>
+                                                    <h3 id="deactiveN" class="mb-1"></h3>
                                                     <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i> 20%
+                                                        <i class="fa fa-globe"></i> <span id="deactiveP"></span>
                                                     </div>
                                                 </div>
                                                 <div
@@ -112,8 +119,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
 
                                 </div>
 
@@ -131,98 +136,24 @@
                                             </div>
                                         </div>
                                         <div class="card-body table-responsive">
-                                            <table class="table table-hover text-nowrap ">
+                                            <table id="purchase_orders"
+                                                class="table table-borderless table-striped text-nowrap pt-2 w-100 ">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">#</th>
                                                         <th scope="col">PO NO</th>
-                                                        <th scope="col">ASQC</th>
                                                         <th scope="col">SUP NAME</th>
                                                         <th scope="col">DATE</th>
-                                                        <th scope="col">EXPT DATE</th>
+                                                        <th scope="col">SUB TOT</th>
                                                         <th scope="col">NET TOT (LKR)</th>
-                                                        <th scope="col">DELIVER ADDRESS</th>
+                                                        <th scope="col">D/ADDRESS</th>
                                                         <th scope="col">STATUS</th>
                                                         <th scope="col">ACTION</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="po_list_tbody">
 
-                                                    <tr>
-                                                        <td scope="row" class="py-1 align-middle">1</td>
-                                                        <td class="py-1 align-middle">PO145</td>
-                                                        <td class="py-1 align-middle">QC451</td>
-                                                        <td class="py-1 align-middle">Test Name 01</td>
-                                                        <td class="py-1 align-middle">15/05/2021</td>
-                                                        <td class="py-1 align-middle">15/05/2021</td>
-                                                        <td class="py-1 align-middle">254,500.00</td>
-                                                        <td class="py-1 align-middle">No. 20 Panadura Rd, Pinwatta</td>
-                                                        <td class="py-1 align-middle"><span
-                                                                class="badge bg-yellow-100 text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i
-                                                                    class="fa fa-circle text-warning fs-9px fa-fw me-5px"></i>
-                                                                Pending</span></td>
-                                                        <td>
-                                                            <div class="input-group flex-nowrap">
-                                                                <div class="m-1">
-                                                                    <button class="btn btn-secondary btn-sm">
-                                                                        View
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="py-1 align-middle">2</td>
-                                                        <td class="py-1 align-middle">PO123</td>
-                                                        <td class="py-1 align-middle">WC451</td>
-                                                        <td class="py-1 align-middle">Test Name 02</td>
-                                                        <td class="py-1 align-middle">28/05/2021</td>
-                                                        <td class="py-1 align-middle">28/05/2021</td>
-                                                        <td class="py-1 align-middle">254,500.00</td>
-                                                        <td class="py-1 align-middle"
-                                                            style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;  ">
-                                                            Kelaniya Rd, Paliyagoda.</td>
-                                                        <td class="py-1 align-middle"><span
-                                                                class="badge bg-green-100 text-success px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i
-                                                                    class="fa fa-circle text-teal fs-9px fa-fw me-5px"></i>
-                                                                Approved</span></td>
-                                                        <td>
-                                                            <div class="input-group flex-nowrap">
-                                                                <div class="m-1">
-                                                                    <button class="btn btn-secondary btn-sm">
-                                                                        View
-                                                                    </button>
-                                                                </div>
-
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td scope="row" class="py-1 align-middle">3</td>
-                                                        <td class="py-1 align-middle">PO175</td>
-                                                        <td class="py-1 align-middle">SD128</td>
-                                                        <td class="py-1 align-middle">Test Name 03</td>
-                                                        <td class="py-1 align-middle">15/05/2021</td>
-                                                        <td class="py-1 align-middle">15/05/2021</td>
-                                                        <td class="py-1 align-middle">254,500.00</td>
-                                                        <td class="py-1 align-middle">No. 20 Nugegoda Rd, Kohuwala</td>
-                                                        <td class="py-1 align-middle"><span
-                                                                class="badge bg-red-100 text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i
-                                                                    class="fa fa-circle text-danger fs-9px fa-fw me-5px"></i>
-                                                                Discontinued</span></td>
-                                                        <td>
-                                                            <div class="input-group flex-nowrap">
-                                                                <div class="m-1">
-                                                                    <button class="btn btn-secondary btn-sm">
-                                                                        View
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    @include('dashboard.components.purchase_orders')
 
                                                 </tbody>
                                             </table>
@@ -239,7 +170,7 @@
         </div>
     </div>
 
-    <div class="modal modal-cover fade bg-dark" id="poItemInsert">
+    <div class="modal modal-cover fade bg-dark " id="poItemInsert">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -249,7 +180,7 @@
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+                            <button id="deleteAllSessions" class="btn btn-default"><i class="fa fa-trash"></i></button>
                         </div>
 
                         <div class="px-1 ">
@@ -268,14 +199,14 @@
 
                     <div class="row">
 
-                        <div class="col-xl-9 mb-3">
+                        <div class="col-xl-9">
 
                             <form id="poForm" method="POST" action="/po/savePO">
                                 @csrf
 
                                 <div class="row">
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-4 mb-3">
 
                                         <div class="card mb-3 h-100 border-0">
 
@@ -310,27 +241,6 @@
                                                         </select>
 
                                                         @error('location_id')
-                                                            <span class="text-danger">
-                                                                <small>{{ $message }}</small>
-                                                            </span>
-                                                        @enderror
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Select Bin Location <span
-                                                                class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa fa-search"></i></span>
-
-                                                            <input id="bin_location_id" name="bin_location_id" type="text"
-                                                                class="form-control" placeholder="Type 'BIN Name' ">
-                                                        </div>
-
-                                                        @error('bin_location_id')
                                                             <span class="text-danger">
                                                                 <small>{{ $message }}</small>
                                                             </span>
@@ -376,13 +286,21 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Expected Deliver Date</label>
+                                                        <input id="po_expt_deliver_date" name="po_expt_deliver_date"
+                                                            class="form-control" type="text" />
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
 
                                     </div>
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-4 mb-3">
 
                                         <div class="card mb-3 h-100 border-0">
 
@@ -393,10 +311,32 @@
                                             <div class="card-body">
 
                                                 <div class="col-xl-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Expected Deliver Date</label>
-                                                        <input id="po_expt_deliver_date" name="po_expt_deliver_date"
-                                                            class="form-control" type="text" />
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            Total Discount (%)
+                                                        </label>
+                                                        <input id="discount" name="discount" type="number" step="0.01"
+                                                            class="form-control" />
+                                                        @error('discount')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            VAT(%)
+                                                        </label>
+                                                        <input id="tot_vat" name="tot_vat" type="number" step="0.01"
+                                                            class="form-control" />
+                                                        @error('tot_vat')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -425,7 +365,7 @@
 
                                     </div>
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-4 mb-3">
 
                                         <div class="card mb-3 h-100 border-0">
 
@@ -457,36 +397,6 @@
                                                     <div class="col-xl-12">
                                                         <div class="form-group mb-3">
                                                             <label class="form-label">
-                                                                Total Discount (%)
-                                                            </label>
-                                                            <input id="discount" name="discount" type="number" step="0.01"
-                                                                class="form-control" />
-                                                            @error('discount')
-                                                                <span class="text-danger">
-                                                                    <small>{{ $message }}</small>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xl-12">
-                                                        <div class="form-group mb-3">
-                                                            <label class="form-label">
-                                                                VAT(%)
-                                                            </label>
-                                                            <input id="tot_vat" name="tot_vat" type="number" step="0.01"
-                                                                class="form-control" />
-                                                            @error('tot_vat')
-                                                                <span class="text-danger">
-                                                                    <small>{{ $message }}</small>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xl-12">
-                                                        <div class="form-group mb-3">
-                                                            <label class="form-label">
                                                                 PO Net Total
                                                             </label>
                                                             <input id="po_net_tot" name="po_net_tot" type="text"
@@ -508,7 +418,7 @@
 
                         </div>
 
-                        <div class="col-xl-3 mb-3">
+                        <div class="col-xl-3 pb-3">
 
                             <div class="card h-100 border-0">
 
@@ -537,12 +447,31 @@
                                                     <span class="input-group-text"><i class="fa fa-search"></i></span>
 
                                                     <input type="text" placeholder="Type 'Item Code / Name'"
-                                                        class="form-control rounded-end" id="item_code" name="item_code" />
+                                                        class="form-control rounded-end" id="item_code" />
                                                 </div>
+                                                <input type="hidden" id="item_code_val" name="item_code" />
                                             </div>
                                         </div>
 
                                         <div class="col-xl-12">
+
+                                            <div class="col-xl-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Item Bin Location <span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="input-group">
+
+                                                        <select id="bin_location_id" name="bin_location_id"
+                                                            class="form-select">
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">
                                                     Unit Price <span class="text-danger">*</span>
@@ -551,7 +480,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-xl-12">
+                                        <div class="col-xl-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">
                                                     Quantity <span class="text-danger">*</span>
@@ -610,10 +539,12 @@
                                     <div class="row">
 
                                         <div class="table-responsive">
-                                            <table id="table" class="table table-borderless table-striped text-nowrap pt-2">
+                                            <table id="table"
+                                                class="table table-borderless table-striped text-nowrap pt-2 w-100">
                                                 <thead>
                                                     <tr>
                                                         <th>Item Code</th>
+                                                        <th>BIN / L</th>
                                                         <th>Unit Price</th>
                                                         <th>Qty</th>
                                                         <th>Discount (%)</th>
@@ -622,13 +553,378 @@
                                                         <th>ACTION</th>
                                                     </tr>
                                                 </thead>
-
-                                                <tbody id="po_item_list">
-                                                    @include('dashboard.components.potable')
-                                                </tbody>
-
                                             </table>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="d-flex">
+
+                            <div class="d-flex">
+                                <div class="px-1">
+
+                                    <button id="submit" class="btn btn-teal"> <i class='fa fa-check'></i>
+                                        Save & Complete </button>
+                                </div>
+
+                                <div class="px-1">
+                                    <button id="deleteAllinPoSave" class="btn btn-default"><i class="fa fa-trash"></i>
+                                        Delete All</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="poItemView">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title">VIEW / UPDATE PURCHASE ORDER</h5>
+
+
+                    <div class="d-flex">
+                        <div class="px-1 ">
+                            <span id="poStatus"
+                                class="badge bg-yellow-100 text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center">
+                                <i class="fa fa-circle text-warning fs-9px fa-fw me-5px"></i>
+                                Pending
+                            </span>
+                        </div>
+
+                        <div class="px-1 ">
+                            <button class="btn btn-default"><i class="fa fa-print"></i></button>
+                        </div>
+
+                        <div class="px-1 ">
+                            <button id="modal_close_btn_view" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-xl-9">
+
+                            <form>
+                                @csrf
+
+                                <div class="row">
+
+                                    <div class="col-xl-4 mb-3">
+
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
+
+                                            <div class="card-header bg-gradient-custom-teal">
+                                                <h6 class="mt-2 text-white">Primary Details</h6>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            Purchase Order Number
+                                                        </label>
+                                                        <input id="po_code_view" name="po_code_view" type="text"
+                                                            class="form-control" readonly />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label" for="location_id">
+                                                            Location
+                                                        </label>
+                                                        <select id="location_id_view" name="location_id_view"
+                                                            class="form-select">
+                                                            <option id="location_id_option_view"></option>
+                                                        </select>
+
+                                                        @error('location_id_view')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Select Supplier <span
+                                                                class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-search"></i></span>
+
+                                                            <input id="supplier_id_view" name="supplier_id_view" type="text"
+                                                                class="form-control"
+                                                                placeholder="Type 'Supplier Code / Name' ">
+
+                                                        </div>
+
+                                                        @error('supplier_id_view')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Created Date <span
+                                                                class="text-danger">*</span></label>
+                                                        <input id="po_date_view" name="po_date_view" class="form-control"
+                                                            type="date" />
+                                                        @error('po_date_view')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Expected Deliver Date</label>
+                                                        <input id="po_expt_deliver_date_view"
+                                                            name="po_expt_deliver_date_view" class="form-control"
+                                                            type="date" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-4 mb-3">
+
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
+
+                                            <div class="card-header bg-gradient-custom-teal border-0">
+                                                <h6 class="mt-2 text-white">Secondary Details</h6>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            Total Discount (%)
+                                                        </label>
+                                                        <input id="discount_view" name="discount_view" type="number"
+                                                            step="0.01" class="form-control" />
+                                                        @error('discount_view')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            VAT(%)
+                                                        </label>
+                                                        <input id="tot_vat_view" name="tot_vat_view" type="number"
+                                                            step="0.01" class="form-control" />
+                                                        @error('tot_vat_view')
+                                                            <span class="text-danger">
+                                                                <small>{{ $message }}</small>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label" for="approved_quotation_code_view">
+                                                            Approved Quotation Code
+                                                        </label>
+                                                        <input id="approved_quotation_code_view"
+                                                            name="approved_quotation_code_view" type="text"
+                                                            class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label" for="remark_view">Remark</label>
+                                                        <textarea class="form-control" id="remark_view" name="remark_view"
+                                                            rows="5"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-4 mb-3">
+
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
+
+                                            <div class="card-header bg-gradient-custom-teal border-0">
+                                                <h6 class="mt-2 text-white">PO Net Amount Details</h6>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-xl-12">
+                                                        <div class="form-group mb-3">
+                                                            <label class="form-label">
+                                                                PO Total
+                                                            </label>
+                                                            <input id="po_tot_view" name="po_tot_view" type="text"
+                                                                class="form-control" readonly />
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12">
+                                                        <div class="form-group mb-3">
+                                                            <label class="form-label">
+                                                                PO Net Total
+                                                            </label>
+                                                            <input id="po_net_tot_view" name="po_net_tot_view" type="text"
+                                                                class="form-control font-weight-500" readonly />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="col-xl-3 pb-3">
+
+                            <div class="card h-100 border-1 shadow-sm">
+
+                                <div class="card-header bg-gradient-cyan-indigo border-0">
+
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mt-2 text-white">PO has Items</h6>
+                                        </div>
+                                        <a class="text-muted mt-2" data-placement="top" title="Refresh All Feilds">
+                                            <i class="fa fa-redo text-white"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-xl-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Item Code <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+
+                                                    <input type="text" placeholder="Type 'Item Code / Name'"
+                                                        class="form-control rounded-end" id="item_code_view" />
+                                                </div>
+                                                <input type="hidden" id="item_code_val_view" name="item_code_view" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-12">
+
+                                            <div class="col-xl-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Item Bin Location <span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="input-group">
+
+                                                        <select id="bin_location_id_view" name="bin_location_id_view"
+                                                            class="form-select">
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">
+                                                    Unit Price <span class="text-danger">*</span>
+                                                </label>
+                                                <input id="unit_price_view" type="number" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">
+                                                    Quantity <span class="text-danger">*</span>
+                                                </label>
+                                                <input id="qty_view" type="number" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">
+                                                    Discount (%)
+                                                </label>
+                                                <input id="item_discount_view" type="number" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">
+                                                    VAT (%)
+                                                </label>
+                                                <input id="item_vat_view" type="number" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <button id="addbutton_view" class="btn btn-block btn-primary w-100"><i
+                                                class="fa fa-plus"></i>&nbsp;
+                                            Add Item
+                                            to Table</button>
                                     </div>
 
                                 </div>
@@ -639,6 +935,43 @@
 
                     </div>
 
+                    <div class="row">
+
+                        <div class="col-xl-12">
+
+                            <div class="card mb-3 border-1 shadow-sm">
+
+                                <div class="card-header bg-dark-400 ">
+                                    <h6 class="mt-2 text-white">Added Items for Purchase Order</h6>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row">
+
+                                        <div class="table-responsive">
+                                            <table id="table_view"
+                                                class="table table-borderless table-striped text-nowrap pt-2 w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Item Code</th>
+                                                        <th>BIN / L</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Qty</th>
+                                                        <th>Discount (%)</th>
+                                                        <th>VAT (%)</th>
+                                                        <th>Total</th>
+                                                        <th>Status</th>
+                                                        <th>ACTION</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -648,22 +981,18 @@
                             <div class="d-flex">
                                 <div class="px-1">
 
-                                    <button type="submit" form="poForm" class="btn btn-teal"> <i class='fa fa-check'></i>
-                                        Save & Complete </button>
+                                    <button id="updatePO" class="btn btn-teal"><i class='fa fa-check'></i>
+                                        Update
+                                    </button>
                                 </div>
 
                                 <div class="px-1">
-                                    <button class="btn btn-default"><i class="fa fa-trash"></i>
-                                        Delete All</button>
-                                </div>
-
-                                <div class="px-1">
-                                    <button class="btn btn-yellow"><i class="fa fa-check"></i>
+                                    <button id="approvePo" class="btn btn-yellow"><i class="fa fa-check"></i>
                                         Approve</button>
                                 </div>
 
                                 <div class="px-1">
-                                    <button class="btn btn-danger"><i class="fa fa-close"></i>
+                                    <button id="refusePo" class="btn btn-danger"><i class="fa fa-close"></i>
                                         Refuse</button>
                                 </div>
 
@@ -677,6 +1006,13 @@
     </div>
 
     <script>
+        var todayDate = new Date();
+
+        $('#po_date').val(('0' +
+                todayDate.getDate()).slice(-2) + '-' + ('0' + (todayDate.getMonth() + 1)).slice(-2) + '-' + todayDate
+            .getFullYear());
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -689,9 +1025,10 @@
             },
         });
 
-        $('#table').DataTable();
+        $('#purchase_orders').DataTable();
 
         var modal = $('#poItemInsert');
+        var modal = $('#poItemView');
 
         var po_tot;
         var po_net_tot;
@@ -700,98 +1037,471 @@
 
         @if ($errors->any())
             $('#poItemInsert').modal('show');
-
-            refreshTotal($('#po_tot').val())
-
+            calculateSessionTotal();
         @endif
 
         @if (session()->has('code'))
-            $('#poItemInsert').modal('show');
+            Notiflix.Notify.Success('Purchase Order Successfully Saved');
         @endif
 
         $('#modal_close_btn').click(function(e) {
             e.preventDefault();
             $('#poItemInsert').modal('hide');
+            $("#poItemInsert").removeClass("in");
+            $('#poItemInsert').modal('toggle');
 
         });
 
-        function refreshTotal(value) {
-            po_tot = parseFloat(value);
-            $('#po_tot').val('');
-            $('#po_tot').val(formatNumber(po_tot, 'LKR '));
-            calculateNetTotal(po_tot);
+        var purchaseOrderTable = $('#table').DataTable({
+            ajax: {
+                url: '/po/table',
+                dataSrc: ''
+            },
+            createdRow: function(row, data, dataIndex, cells) {
+                $(cells).addClass('py-1 align-middle');
+            }
+        });
+
+        $('#modal_close_btn_view').click(function(e) {
+            e.preventDefault();
+            $('#poItemView').modal('hide');
+            $("#poItemView").removeClass("in");
+            $('#poItemView').modal('toggle');
+
+        });
+
+        function loadModalforView(id) {
+            clearLoadPoItemsforView();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('po.viewPO') }}",
+                data: {
+                    po_id: id,
+                },
+                success: function(response) {
+                    purchaseOrderTableView.clear().draw();
+
+                    $('#location_id_view').prop('readonly', true);
+                    $('#supplier_id_view').prop('readonly', true);
+                    $('#po_date_view').prop('readonly', true);
+
+                    $('#location_id_view').empty();
+
+                    $('#po_code_view').val(response[0].po_code);
+
+                    $('#location_id_view').append($('<option>').text(response[1].location_name)
+                        .attr(
+                            'value', response[1].id));
+
+                    $('#supplier_id_view').val(response[2].supplier_name);
+                    $('#po_date_view').val(response[0].po_date);
+                    $('#po_expt_deliver_date_view').val(response[0].po_expected_deliver_date);
+                    $('#discount_view').val(response[0].discount);
+                    $('#tot_vat_view').val(response[0].tot_vat);
+                    $('#approved_quotation_code_view').val(response[0].approved_quotation_code);
+                    $('#remark_view').val(response[0].remark);
+                    $('#po_tot_view').val(formatNumber(response[0].po_tot, 'LKR '));
+                    $('#po_net_tot_view').val(formatNumber(response[0].po_net_tot, 'LKR '));
+
+                    purchaseOrderTableView.ajax.reload(null, false);
+
+                    if (response[0].status === 1) {
+
+                        visibleFalse(true);
+
+                        $('#poStatus').removeAttr('class');
+                        $('#poStatus').addClass(
+                            'badge bg-green-100 text-success px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
+                            );
+                        $('#poStatus').html(
+                            '<i class="fa fa-circle text-success fs-9px fa-fw me-5px"></i>Approved');
+
+                    } else if (response[0].status === 2) {
+
+                        visibleFalse(true);
+
+                        $('#poStatus').removeAttr('class');
+                        $('#poStatus').addClass(
+                            'badge bg-red-100 text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
+                            );
+                        $('#poStatus').html(
+                            '<i class="fa fa-circle text-danger fs-9px fa-fw me-5px"></i>Discontinued');
+
+                    } else if (response[0].status === 3) {
+
+                        visibleFalse(false);
+
+                        $('#poStatus').removeAttr('class');
+                        $('#poStatus').addClass(
+                            'badge bg-yellow-100 text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
+                            );
+                        $('#poStatus').html(
+                            '<i class="fa fa-circle text-warning fs-9px fa-fw me-5px"></i>Pending');
+
+                    } else {
+                        visibleFalse(true);
+                    }
+
+                    $('#poItemView').modal('show');
+
+                }
+            });
         }
 
-        function saveRequest() {
+        function visibleFalse(action) {
+            $('#discount_view').prop('readonly', action);
+            $('#tot_vat_view').prop('readonly', action);
+            $('#addbutton_view').prop('hidden', action);
+            $('#updatePO').prop('hidden', action);
+            $('#approvePo').prop('hidden', action);
+            $('#refusePo').prop('hidden', action);
+        }
 
-            nullCheck = false;
+        var purchaseOrderTableView = $('#table_view').DataTable({
+            ajax: {
+                url: '/po/table_view',
+                dataSrc: ''
+            },
+            processing: true,
+            language: {
+                'loadingRecords': '&nbsp;',
+                'processing': 'Loading...'
+            },
+            createdRow: function(row, data, dataIndex, cells) {
+                $(cells).addClass('py-1 align-middle');
+            }
+        });
 
-            let ic = $("#item_code").val().split('-')[0];
-            let up = $("#unit_price").val();
-            let qty = $("#qty").val();
-            let dis = $("#item_discount").val();
-            let vat = $("#item_vat").val();
+        function viewPOItemFromDb(id) {
 
-            if (!(ic === "") && !(up === "") && !(qty === "")) {
-                nullCheck = true;
-            } else {
+            clearLoadPoItemsforView();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('po.viewPOItems') }}",
+                data: {
+                    id: id,
+                },
+                success: function(response) {
+
+                    $('#bin_location_id_view').empty();
+
+                    $('#item_code_view').val('(' + response[1].item_part_code + ')' + ' ' + response[1]
+                        .item_name);
+
+                    $.each(response[2], function(i, value) {
+                        $('#bin_location_id_view').append($('<option>').text(value
+                                .bin_location_name)
+                            .attr(
+                                'value', value.id));
+                    });
+
+                    $('#bin_location_id_view').val(response[0].bin_location_id);
+                    $('#item_code_val_view').val(response[0].item_id);
+                    $('#unit_price_view').val(response[0].unit_price);
+                    $('#qty_view').val(response[0].qty);
+                    $('#item_discount_view').val(response[0].discount);
+                    $('#item_vat_view').val(response[0].vat);
+
+                }
+            });
+
+        }
+
+        $('#addbutton_view').click(function(e) {
+            e.preventDefault();
+
+            if ($('#unit_price_view').val() === '' || $('#qty_view').val() === '') {
                 Notiflix.Report.Failure('Item Insert Failure',
-                    'Item Code, Unit Price, Quantity Cannot be Empty',
+                    'Unable to insert item with empty quantity or empty unit price. Please try again',
                     'Click');
+            } else {
+
+                Notiflix.Confirm.Show('Item Update Confirmation',
+                    'Are you sure to change purchase order has items ?', 'Yes', 'No',
+                    function() {
+                        UpdateSelectedPoFromDb();
+                        Notiflix.Notify.Success('Successfully complete purchase order item changes');
+                    },
+                    function() {
+                        Notiflix.Notify.Warning('Ignoring purchase order item changes');
+                    });
+
+
             }
 
-            if (nullCheck) {
+        });
+
+        function UpdateSelectedPoFromDb() {
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('po.updateSelectedPoFromDb') }}",
+                data: {
+                    po_expt_deliver_date: $('#po_expt_deliver_date_view').val(),
+                    tot_discount: $('#discount_view').val(),
+                    tot_vat: $('#tot_vat_view').val(),
+                    approved_quotation_code: $('#approved_quotation_code_view').val(),
+                    remark: $('#remark_view').val(),
+                    item_id: $('#item_code_val_view').val(),
+                    bin_location_id: $('#bin_location_id_view').val(),
+                    unit_price: $('#unit_price_view').val(),
+                    qty: $('#qty_view').val(),
+                    discount: $('#item_discount_view').val(),
+                    vat: $('#item_vat_view').val(),
+
+                },
+                success: function(response) {
+                    purchaseOrderTableView.ajax.reload(null, false);
+                    clearLoadPoItemsforView();
+                    refreshLoadPoforView(response)
+                }
+            });
+        }
+
+        function removePOItemFromDb(id) {
+
+            Notiflix.Confirm.Show('Notiflix Confirm', 'Do you agree with me?', 'Yes', 'No', function() {
 
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('po.sessionAdd') }}",
+                    url: "{{ route('po.changeStatusPoItemFromDb') }}",
                     data: {
-                        ic: ic,
-                        up: up,
-                        qty: qty,
-                        dis: dis,
-                        vat: vat
+                        id: id,
                     },
                     success: function(response) {
-
-                        if (response === "1") {
-                            Notiflix.Report.Failure('Item Insert Failure',
-                                'Item Code, Unit Price, Quantity Cannot be Empty',
-                                'Click');
-                        } else if (response === '2') {
-                            Notiflix.Report.Failure('Item Insert Failure',
-                                'Item Not Valid, Please Insert a Registered Item',
-                                'Click');
-
-                        } else {
-                            clearFeilds();
-                            $('#po_item_list').html(response.tbody);
-                            po_tot = response.subtotal;
-                            $('#po_tot').val(formatNumber(response.subtotal, 'LKR '));
-                            Notiflix.Notify.Success('Item Insert Successful');
-                            calculateNetTotal(po_tot)
-                        }
+                        Notiflix.Notify.Success('Successfully Delete Item form Purchase Order');
+                        purchaseOrderTableView.ajax.reload(null, false);
+                        clearLoadPoItemsforView();
+                        refreshLoadPoforView(response);
                     }
                 });
 
+            }, function() {
+                Notiflix.Notify.Warning('Deactivation ignored');
+            });
+        }
+
+        function refreshLoadPoforView(response) {
+
+            $('#po_code_view').val(response.po_code);
+
+            $('#location_id_view').append($('<option>').text(response.location_name)
+                .attr(
+                    'value', response.id));
+
+            $('#po_date_view').val(response.po_date);
+            $('#po_expt_deliver_date_view').val(response.po_expected_deliver_date);
+            $('#discount_view').val(response.discount);
+            $('#tot_vat_view').val(response.tot_vat);
+            $('#approved_quotation_code_view').val(response.approved_quotation_code);
+            $('#po_tot_view').val(formatNumber(response.po_tot, 'LKR '));
+            $('#po_net_tot_view').val(formatNumber(response.po_net_tot, 'LKR '));
+        }
+
+        function clearLoadPoItemsforView() {
+            $('#bin_location_id_view').empty();
+            $("#item_code_val_view").val('');
+            $("#item_code_view").val('');
+            $("#unit_price_view").val('');
+            $("#qty_view").val('');
+            $("#item_discount_view").val('');
+            $("#item_vat_view").val('');
+        }
+
+        $('#discount_view').change(function(e) {
+            e.preventDefault();
+
+            if ($('#discount_view').val() < 0) {
+
+                Notiflix.Report.Failure('Total Discount Inserting Failure ',
+                    'Total Discount Connot Be Negative Value.',
+                    'Click ');
+                $('#discount_view ').val('');
+                calculateDbTotal();
+            } else {
+                calculateDbTotal();
             }
 
+        });
+
+        $('#tot_vat_view').change(function(e) {
+            e.preventDefault();
+
+            if ($('#tot_vat_view').val() < 0) {
+
+                Notiflix.Report.Failure('Total Discount Inserting Failure ',
+                    'Total Discount Connot Be Negative Value.',
+                    'Click ');
+                $('#tot_vat_view ').val('');
+                calculateDbTotal();
+            } else {
+                calculateDbTotal();
+            }
+
+        });
+
+
+        function calculateDbTotal() {
+
+            Notiflix.Confirm.Show('Purchase Order Update Confirm', 'Please confirm the update to purchase order?', 'Yes',
+                'No',
+                function() {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('po.calculateDbTotal') }}",
+                        data: {
+                            dis: $("#discount_view").val(),
+                            vat: $("#tot_vat_view").val(),
+                        },
+                        success: function(response) {
+                            $("#po_net_tot_view").val(formatNumber(parseFloat(response), 'LKR '));
+                        }
+                    });
+
+                },
+                function() {
+                    Notiflix.Notify.Warning('Ignoring Update');
+                });
         }
+
+        $('#updatePO').click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('po.updatePo') }}",
+                data: {
+                    po_expt_deliver_date: $('#po_expt_deliver_date_view').val(),
+                    approved_quotation_code: $('#approved_quotation_code_view').val(),
+                    remark: $('#remark_view').val(),
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    Notiflix.Notify.Success('Purchase order update successful');
+                    clearLoadPoItemsforView();
+                    refreshLoadPoforView(response);
+                }
+            });
+
+        });
+
+
+        $('#approvePo').click(function(e) {
+            e.preventDefault();
+
+            Notiflix.Confirm.Show('Purchase Approval Confirmation',
+                'Are you sure want to approve this purchase order?', 'Yes', 'No',
+                function() {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('po.approvePo') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(response) {
+                            Notiflix.Notify.Success('Approval successful');
+                            setInterval(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    });
+
+                },
+                function() {
+                    Notiflix.Notify.Warning('Ignoring approval purchase order');
+                });
+        });
+
+        $('#refusePo').click(function(e) {
+            e.preventDefault();
+
+            Notiflix.Confirm.Show('Purchase Refuse Confirmation',
+                'Are you sure want to refuse this purchase order?', 'Yes', 'No',
+                function() {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('po.refusePo') }}",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                        success: function(response) {
+                            Notiflix.Notify.Success('Refuse successful');
+                            setInterval(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    });
+                },
+                function() {
+                    Notiflix.Notify.Warning('Ignoring refuse purchase order');
+                });
+        });
+
+
+
+        // Save Scripts
+
+        $('#submit').click(function(e) {
+            e.preventDefault();
+
+            isValid = false;
+
+            if ($('#supplier_id').val() === '') {
+                isValid = false;
+            } else {
+                isValid = true;
+            }
+
+            if (true) {
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('po.savePO') }}",
+                    data: {
+                        po_code: $('#po_code').val(),
+                        location_id: $('#location_id').val(),
+                        supplier_id: $('#supplier_id').val(),
+                        po_date: $('#po_date').val(),
+                        po_expt_deliver_date: $('#po_expt_deliver_date').val(),
+                        discount: $('#discount').val(),
+                        tot_vat: $('#tot_vat').val(),
+                        approved_quotation_code: $('#approved_quotation_code').val(),
+                        remark: $('#remark').val(),
+                        _token: "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        // alert(JSON.stringify(response));
+
+                        if ($.isEmptyObject(response.error)) {
+                            Notiflix.Notify.Success('Purchase order successfully saved ');
+                            setInterval(function() {
+                                location.reload();
+                            }, 1000);
+
+                        } else {
+                            $.each(response.error, function(key, value) {
+                                console.log(key);
+                                Notiflix.Notify.Failure(value);
+                            });
+                        }
+                    }
+                });
+            }
+        });
 
         $('#addbutton').click(function(e) {
             e.preventDefault();
-
-            let item_code = $('#item_code').val().split('-')[0];
 
             $.ajax({
                 type: "GET",
                 url: "{{ route('po.sessionPOItemCheck') }}",
                 data: {
-                    item_code: item_code,
+                    item_code: $('#item_code_val').val(),
                 },
                 success: function(response) {
-
-                    console.log(response)
 
                     if (response === '1') {
 
@@ -813,22 +1523,174 @@
                 }
             });
 
-
-
-
         });
 
-        function editPOItem(item, uc, qty, dis, vat) {
+        function saveRequest() {
 
-            $('#item_code').val(item.item_code + '-' + item.item_name);
-            $("#unit_price").val(uc);
-            $("#qty").val(qty);
-            $("#item_discount").val(dis);
-            $("#item_vat").val(vat);
+            nullCheck = false;
+
+            let ic = $("#item_code_val").val();
+            let bid = $("#bin_location_id").val();
+            let up = $("#unit_price").val();
+            let qty = $("#qty").val();
+            let dis = $("#item_discount").val();
+            let vat = $("#item_vat").val();
+
+            if (!(ic === '') && !(up === '') && !(qty === '')) {
+                nullCheck = true;
+            } else {
+                Notiflix.Report.Failure('Item Insert Failure',
+                    'Item Code, Unit Price, Quantity Cannot be Empty',
+                    'Click');
+            }
+
+            if (nullCheck) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('po.sessionAdd') }}",
+                    data: {
+                        ic: ic,
+                        bid: bid,
+                        up: up,
+                        qty: qty,
+                        dis: dis,
+                        vat: vat,
+                    },
+                    success: function(response) {
+
+                        if (response === "1") {
+                            Notiflix.Report.Failure('Item Insert Failure',
+                                'Item Code, Unit Price, Quantity Cannot be Empty',
+                                'Click');
+                        } else if (response === '2') {
+
+                            $('#item_code').val('');
+                            $('#bin_location_id').empty();
+
+                            Notiflix.Report.Failure('Item Insert Failure',
+                                'Item Not Valid, Please Insert a Registered Item',
+                                'Click');
+
+                        } else {
+                            clearFeilds();
+                            purchaseOrderTable.ajax.reload(null, false);
+                            calculateSessionTotal();
+                            Notiflix.Notify.Success('Item Insert Successful');
+                        }
+                    }
+                });
+
+            }
+
+        }
+
+        function editPOItem(index) {
+            $('#item_code').val($('#editbtn' + index).attr('ia' + index));
+            $('#item_code_val').val($('#editbtn' + index).attr('iaid' + index));
+            $("#unit_price").val($('#editbtn' + index).attr('ic' + index));
+            $("#qty").val($('#editbtn' + index).attr('id' + index));
+            $("#item_discount").val($('#editbtn' + index).attr('ie' + index));
+            $("#item_vat").val($('#editbtn' + index).attr('if' + index));
 
             $("#addbutton").html('<i class="fa fa-pencil-square-o me-1"></i>Update Item');
             $("#addbutton").addClass('btn-indigo');
 
+            $.ajax({
+                type: "GET",
+                url: "{{ Route('po.loadbinlocation') }}",
+                async: true,
+                data: {
+                    item_id: $('#editbtn' + index).attr('iaid' + index),
+                    location_id: $("#location_id").val(),
+                },
+                success: function(response) {
+                    $('#bin_location_id').empty();
+                    $.each(response, function(i, value) {
+                        $('#bin_location_id').append($('<option>').text(value.name)
+                            .attr(
+                                'value', value.id));
+                    });
+
+                    $('#bin_location_id').val($('#editbtn' + index).attr('ib' + index));
+
+                }
+            });
+
+        }
+
+        function formatNumber(n, currency) {
+            return currency + n.toFixed(2).replace(/./g, function(c, i, a) {
+                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+        }
+
+        $('#discount').change(function(e) {
+            e.preventDefault();
+
+            if ($('#discount').val() < 0) {
+
+                Notiflix.Report.Failure('Total Discount Failure ', 'Total Discount Connot Be Negative Value.',
+                    'Click ');
+                $('#discount ').val('');
+                calculateSessionTotal();
+            } else {
+                calculateSessionTotal();
+            }
+
+        });
+
+        $('#tot_vat').change(function(e) {
+            e.preventDefault();
+
+            if ($('#tot_vat').val() < 0) {
+                Notiflix.Report.Failure('Total VAT Failure',
+                    'Total VAT Connot Be Negative Value.',
+                    'Click');
+                $('#tot_vat').val('');
+                calculateSessionTotal();
+            } else {
+                calculateSessionTotal();
+            }
+        });
+
+        function calculateSessionTotal() {
+
+            $.ajax({
+                type: "GET",
+                data: {
+                    dis: $("#discount").val(),
+                    vat: $("#tot_vat").val(),
+                },
+                url: "{{ route('po.calculateSessionTotal') }}",
+                success: function(response) {
+                    $("#po_tot").val(formatNumber(response[0], 'LKR '));
+                    $("#po_net_tot").val(formatNumber(response[1], 'LKR '));
+                }
+            });
+        }
+
+        function sessionDeleteinSave() {
+            Notiflix.Confirm.Show('PO Items Remove All Confirmation',
+                'Do you really want to remove all items from purchase order?', 'Yes', 'No',
+                function() {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('po.sessionPOClear') }}",
+                        success: function(response) {
+                            purchaseOrderTable.ajax.reload(null, false);
+                        }
+                    });
+
+                    Notiflix.Notify.Success('Successfully Removing Items');
+
+                },
+                function() {
+
+                    Notiflix.Notify.Info('Ignoring Removing Items From Purchase Order');
+
+                });
 
         }
 
@@ -846,9 +1708,8 @@
                         },
                         success: function(response) {
                             clearFeilds();
-                            $('#po_item_list').html(response.tbody);
-                            refreshTotal(response.subtotal)
-
+                            purchaseOrderTable.ajax.reload(null, false);
+                            calculateSessionTotal();
                             Notiflix.Notify.Success('Item Removing Successful');
 
                         }
@@ -868,6 +1729,7 @@
 
         function clearFeilds() {
             $("#item_code").val('');
+            $('#bin_location_id').empty();
             $("#unit_price").val('');
             $("#qty").val('');
             $("#item_discount").val('');
@@ -876,122 +1738,44 @@
 
         $('#po_table_refresh').click(function(e) {
             e.preventDefault();
+            sessionDeleteinSave();
+        });
 
+        $('#deleteAllSessions').click(function(e) {
+            e.preventDefault();
+            sessionDeleteinSave();
+        });
 
-            Notiflix.Confirm.Show('PO Items Remove All Confirmation',
-                'Do you really want to remove all items from purchase order?', 'Yes', 'No',
+        $('#deleteAllinPoSave').click(function(e) {
+            e.preventDefault();
+            sessionDeleteinSave();
+        });
+
+        $('#location_id').change(function(e) {
+            e.preventDefault();
+
+            Notiflix.Confirm.Show('Location Changing Warning',
+                'Unable to change the location after adding items. if continued, it will deleted all session data.',
+                'Yes', 'No',
                 function() {
 
                     $.ajax({
                         type: "GET",
                         url: "{{ route('po.sessionPOClear') }}",
                         success: function(response) {
-
-                            $('#po_item_list').html(response);
+                            purchaseOrderTable.ajax.reload(null, false);
                         }
                     });
 
-                    Notiflix.Notify.Success('Successfully Removing Items');
+                    Notiflix.Notify.Success('Successfully clear session');
 
                 },
                 function() {
 
-                    Notiflix.Notify.Info('Ignoring Removing Items From Purchase Order');
+                    Notiflix.Notify.Info('Ignoring Location changing');
 
                 });
 
-        });
-
-        function formatNumber(n, currency) {
-            return currency + n.toFixed(2).replace(/./g, function(c, i, a) {
-                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-            });
-        }
-
-        $('#discount').change(function(e) {
-            e.preventDefault();
-
-            if ($('#discount').val() < 0) {
-                Notiflix.Report.Failure('Total Discount Failure',
-                    'Total Discount Connot Be Negative Value.',
-                    'Click');
-                $('#discount').val('');
-            }
-
-            calculateNetTotal(po_tot)
-
-        });
-
-        $('#tot_vat').change(function(e) {
-            e.preventDefault();
-
-            if ($('#tot_vat').val() < 0) {
-                Notiflix.Report.Failure('Total VAT Failure',
-                    'Total VAT Connot Be Negative Value.',
-                    'Click');
-                $('#tot_vat').val('');
-            }
-
-            calculateNetTotal(po_tot)
-
-        });
-
-        function calculateNetTotal(po_tot) {
-
-            discount = parseFloat($('#discount').val());
-            vat = parseFloat($('#tot_vat').val());
-
-            if (isNaN(discount) && isNaN(vat)) {
-                po_net_tot = po_tot;
-            } else if (!isNaN(discount) && isNaN(vat)) {
-                po_net_tot = po_tot * ((100 - discount) / 100)
-            } else if (isNaN(discount) && !isNaN(vat)) {
-                po_net_tot = po_tot * ((100 + vat) / 100)
-            } else if (!isNaN(discount) && !isNaN(vat)) {
-                po_net_tot = (po_tot * ((100 - discount) / 100)) * ((100 + vat) / 100)
-            }
-
-            $("#po_tot").val(formatNumber(po_tot, 'LKR '));
-            $("#po_net_tot").val(formatNumber(po_net_tot, 'LKR '));
-
-        }
-
-        var bin_location_path = "{{ Route('po.loadbinlocation') }}";
-
-        $('#bin_location_id').typeahead({
-            source: function(query, process) {
-                let selected_location = $('#location_id').val();
-                return $.get(bin_location_path, {
-                    query: query,
-                    location: selected_location
-                }, function(data) {
-                    return process(data);
-                });
-            }
-        });
-
-        var supplier_path = "{{ route('po.loadsupplier') }}";
-
-        $('#supplier_id').typeahead({
-            source: function(query, process) {
-                return $.get(supplier_path, {
-                    query: query,
-                }, function(data) {
-                    return process(data);
-                });
-            }
-        });
-
-        var path = "{{ route('po.loaditem') }}";
-
-        $('#item_code').typeahead({
-            source: function(query, process) {
-                return $.get(path, {
-                    query: query,
-                }, function(data) {
-                    return process(data);
-                });
-            }
         });
 
         $('#po_expt_deliver_date').change(function(e) {
@@ -1001,7 +1785,9 @@
 
                 var isValid = false;
 
-                if (parseFloat($('#po_expt_deliver_date').val().split('/')[2]) > parseFloat($('#po_date').val().split('/')[2])) {
+                if (parseFloat($('#po_expt_deliver_date').val().split('/')[2]) > parseFloat($(
+                            '#po_date').val()
+                        .split('/')[2])) {
 
                     console.log('Year OK');
                     isValid = true;
@@ -1020,9 +1806,9 @@
                         if (parseFloat($('#po_expt_deliver_date').val().split('/')[0]) >=
                             parseFloat($('#po_date').val().split('/')[0])) {
 
-                                isValid = true;
+                            isValid = true;
 
-                        }else{
+                        } else {
 
                             isValid = false;
 
@@ -1032,7 +1818,7 @@
 
                 } else {
 
-                        isValid = false;
+                    isValid = false;
 
                 }
 
@@ -1048,65 +1834,170 @@
 
                 }
 
-                // if (parseFloat($('#po_date').val().split("/")[2]) <=
-                //     parseFloat($('#po_expt_deliver_date').val().split("/")[2]) &&
-                //     parseFloat($('#po_date').val().split("/")[1]) <=
-                //     parseFloat($('#po_expt_deliver_date').val().split("/")[1]) &&
-                //     parseFloat($('#po_date').val().split("/")[0]) <=
-                //     parseFloat($('#po_expt_deliver_date').val())) {
-
-                // } else {
-
-                //     $('#po_expt_deliver_date').val('');
-                //     $('#po_expt_deliver_date').focus();
-
-                //     Notiflix.Report.Failure('Invalid Date Inserting',
-                //         'Please insert valid date as purchase order expecting date',
-                //         'Click');
-
-                // }
-
             }
 
         });
 
-        var location_id;
-        var bin_location_id;
-        var supplier_id;
-        var approved_quotation_code;
-        var po_date;
-        var po_expt_deliver_date;
-        var remark;
+        var supplier_path = "{{ route('po.loadsupplier') }}";
 
-        $('#saveandcomplete').click(function(e) {
-            e.preventDefault();
-
-            date_validation = false;
-
-            po_code = $('#po_code').val();
-            location_id = $('#location_id').val();
-            bin_location_id = $('#bin_location_id').val();
-            supplier_id = $('#supplier_id').val();
-            approved_quotation_code = $('#approved_quotation_code').val();
-            po_date = $("#po_date").val()
-            po_expt_deliver_date = $("#po_expected_deliver_date").val()
-            remark = $('#remark').val();
-
-            // variables_validation(po_code, location_id, bin_location_id, supplier_id, po_date, po_date)
-
-            if (true) {
-                if (po_expt_deliver_date !== "") {
-
-                    if (date_check_and_validation(po_date, po_expt_deliver_date)) {
-                        date_validation = true;
-                    } else {
-                        date_validation = false;
-                    }
-                }
-                date_validation = true;
+        $('#supplier_id').typeahead({
+            source: function(query, process) {
+                return $.get(supplier_path, {
+                    query: query,
+                }, function(data) {
+                    return process(data);
+                });
             }
+        });
 
-            posubmit_data(date_validation)
+        var itemsDataArray = {};
+
+        var poItemsTypeHead = $('#item_code').typeahead({
+            source: function(query, process) {
+                return $.get("{{ route('po.loaditem') }}", {
+                    query: query,
+                }, function(data) {
+                    itemsDataArray = {};
+                    data.forEach(element => {
+                        itemsDataArray[element['name']] = element['id'];
+                    });
+                    return process(data);
+                });
+            },
+        });
+
+        poItemsTypeHead.change(function(e) {
+            var tempId = itemsDataArray[$('#item_code').val()];
+            if (tempId != undefined) {
+                $('#item_code_val').val(tempId);
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ Route('po.loadbinlocation') }}",
+                    async: true,
+                    data: {
+                        item_id: tempId,
+                        location_id: $("#location_id").val(),
+                    },
+                    success: function(response) {
+
+                        if (response.length !== 0) {
+
+                            $('#bin_location_id').empty();
+                            $.each(response, function(i, value) {
+                                $('#bin_location_id').append($('<option>').text(
+                                        value.name)
+                                    .attr(
+                                        'value', value.id));
+                            });
+
+                        } else {
+
+                            $('#item_code').val('');
+
+                            Notiflix.Report.Failure('Item Insert Failure',
+                                'This item does not exist a BIN Location. Please assign a BIN Location and try again.',
+                                'Click');
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+        var poItemsTypeHead = $('#item_code_view').typeahead({
+            source: function(query, process) {
+                return $.get("{{ route('po.loaditem') }}", {
+                    query: query,
+                }, function(data) {
+                    itemsDataArray = {};
+                    data.forEach(element => {
+                        itemsDataArray[element['name']] = element['id'];
+                    });
+                    return process(data);
+                });
+            },
+        });
+
+        poItemsTypeHead.change(function(e) {
+            var tempId = itemsDataArray[$('#item_code_view').val()];
+            if (tempId != undefined) {
+                $('#item_code_val_view').val(tempId);
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ Route('po.loadbinlocation') }}",
+                    async: true,
+                    data: {
+                        item_id: tempId,
+                        location_id: $("#location_id").val(),
+                    },
+                    success: function(response) {
+
+                        if (response.length !== 0) {
+
+                            $('#bin_location_id_view').empty();
+                            $.each(response, function(i, value) {
+                                $('#bin_location_id_view').append($('<option>').text(
+                                        value.name)
+                                    .attr(
+                                        'value', value.id));
+                            });
+
+                        } else {
+
+                            $('#item_code_view').val('');
+
+                            Notiflix.Report.Failure('Item Insert Failure',
+                                'This item does not exist a BIN Location. Please assign a BIN Location and try again.',
+                                'Click');
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+        $(function() {
+            $.mask.definitions['~'] = "[+-]";
+            $("#po_expt_deliver_date").mask("99/99/9999", {
+                placeholder: "dd/mm/yyyy",
+                completed: function() {
+                    // alert("completed!");
+                }
+            });
+        });
+
+        $(function() {
+            $.mask.definitions['~'] = "[+-]";
+            $("#po_date").mask("99/99/9999", {
+                placeholder: "dd/mm/yyyy",
+                completed: function() {
+                    // alert("completed!");
+                }
+            });
+        });
+
+        $(document).ready(function() {
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('po.counts') }}",
+                success: function(response) {
+
+                    $('#pendingN').html(response[2]);
+                    $('#pendingP').html(((response[2] / response[3]) * 100).toFixed(2) + '%');
+
+                    $('#activeN').html(response[0]);
+                    $('#activeP').html(((response[0] / response[3]) * 100).toFixed(2) + '%');
+
+                    $('#deactiveN').html(response[1]);
+                    $('#deactiveP').html(((response[1] / response[3]) * 100).toFixed(2) + '%');
+
+                }
+            });
 
         });
 

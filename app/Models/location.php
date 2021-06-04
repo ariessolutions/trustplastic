@@ -14,4 +14,19 @@ class location extends Model
         return $this::where('status', 1)->get();
     }
 
+    public function getLocationbyId($value)
+    {
+        return $this::where('id',$value)->first();
+    }
+
+    public function getAll($status = null)
+    {
+        return ($status == null) ? $this::all() : $this::where('status', $status)->with('vehicles')->get();
+    }
+
+    public function binlocations()
+    {
+        return $this->hasMany(bin_location::class, 'id', 'location_id');
+    }
+
 }

@@ -12,6 +12,8 @@
 
     <!-- CSS files -->
 
+
+
     <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
 
@@ -23,14 +25,27 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
     <link href="{{ asset('assets/css/notiflix.css') }}" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
-    </script>
-    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+    </script>
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
+    </script>
+    <script src="{{ asset('assets/js/notiflix.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.maskedinput.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('assets/js/process/print.js') }}"></script>
+
+
 </head>
 
 
@@ -160,16 +175,16 @@
                             <div class="menu-header">GRN Management</div>
 
                             <div class="menu-item">
-                                <a href="grn" class="menu-link">
+                                <a href="/grn" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-cube"></i></span>
                                     <span class="menu-text">GRN</span>
                                 </a>
                             </div>
 
                             <div class="menu-item">
-                                <a href="widgets.html" class="menu-link">
+                                <a href="/stocks" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-cubes"></i></span>
-                                    <span class="menu-text">Item Stock</span>
+                                    <span class="menu-text">Stock</span>
                                 </a>
                             </div>
 
@@ -195,22 +210,21 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="email_inbox.html" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-cube"></i>
-                                            </span>
-                                            <span class="menu-text">Product Registration</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="email_compose.html" class="menu-link">
+                                        <a href="/vehicles" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="fa fa-car"></i>
                                             </span>
                                             <span class="menu-text">Vehicle Registration</span>
                                         </a>
                                     </div>
-
+                                    <div class="menu-item">
+                                        <a href="/products" class="menu-link">
+                                            <span class="menu-icon">
+                                                <i class="fa fa-cube"></i>
+                                            </span>
+                                            <span class="menu-text">Product Registration</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -224,7 +238,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="email_inbox.html" class="menu-link">
+                                        <a href="/job" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="fa fa-wrench"></i>
                                             </span>
@@ -307,12 +321,17 @@
                             <div class="menu-header">User Management</div>
 
                             <div class="menu-item">
-                                <a href="user-registration" class="menu-link">
+                                <a href="/users" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-users"></i></span>
                                     <span class="menu-text">User Registration</span>
                                 </a>
                             </div>
-
+                            <div class="menu-item">
+                                <a href="/permissions" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-key"></i></span>
+                                    <span class="menu-text">Permission Management</span>
+                                </a>
+                            </div>
                             <div class="menu-item">
                                 <a href="user-registration" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-window-restore"></i></span>
@@ -337,100 +356,27 @@
         </main>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
-    </script>
+
+
+
     <script src="{{ asset('assets/js/vendor.min.js') }}" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
     <script src="{{ asset('assets/js/app.min.js') }}" type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
     <script src="{{ asset('assets/js/rocket-loader.min.js') }}" data-cf-settings="0485eeef8cf3263d1a7b2548-|49"
         defer=""></script>
     <script src="{{ asset('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"
         type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
-    <script src="{{ asset('assets/js/notiflix.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.maskedinput.js') }}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('assets/js/process/admin.js') }}"></script> --}}
-    <script src="{{ asset('assets/js/process/po.js') }}"></script>
-    <script src="{{ asset('assets/js/process/myi.js') }}"></script>
 
-    {{-- Item Auto Select --}}
+    <script src="{{ asset('assets/js/process/admin.js') }}"></script>
+
+
+    @if ((session()->has('code') && session()->get('code') == 2) || $errors->any())
+        <script>
+            $('#modal').modal('show');
+
+        </script>
+    @endif
+
     <script>
-        $(document).ready(function() {
-
-            $('#itemAutoSelect').typeahead({
-                source: [{
-                        id: '1',
-                        name: 'ITM00021'
-                    },
-                    {
-                        id: '2',
-                        name: 'ITM0015'
-                    },
-                ],
-                autoSelect: true
-            });
-
-        });
-
-    </script>
-
-    {{-- Supplier Auto Select --}}
-    <script>
-        // $(document).ready(function() {
-
-        //     $('#supplierAutoSelect').typeahead({
-        //         source: [{
-        //                 id: '1',
-        //                 name: 'SUP0001'
-        //             },
-        //             {
-        //                 id: '2',
-        //                 name: 'SUP0015'
-        //             },
-        //         ],
-        //         autoSelect: true
-        //     });
-
-        // });
-
-        $(document).ready(function() {
-
-            $('#grnAutoSelect').typeahead({
-                source: [{
-                        id: '1',
-                        name: 'P0001'
-                    },
-                    {
-                        id: '2',
-                        name: 'P0015'
-                    },
-                ],
-                autoSelect: true
-            });
-
-        });
-
-    </script>
-
-    <script type="text/javascript">
-        $(function() {
-            $.mask.definitions['~'] = "[+-]";
-            $("#po_date").mask("99/99/9999", {
-                placeholder: "dd/mm/yyyy",
-                completed: function() {
-                    // alert("completed!");
-                }
-            });
-        });
-
-        $(function() {
-            $.mask.definitions['~'] = "[+-]";
-            $("#po_expt_deliver_date").mask("99/99/9999", {
-                placeholder: "dd/mm/yyyy",
-                completed: function() {
-                    // alert("completed!");
-                }
-            });
-        });
-
         $(".phone").mask("(999) 999-9999");
         $("input.precentage").mask("99%");
 

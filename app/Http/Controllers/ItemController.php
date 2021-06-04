@@ -27,6 +27,7 @@ class ItemController extends Controller
 
         $request->validate([
             'item_code' => 'required|min:4|max:10',
+            'item_part_code' => 'required|min:4|max:15',
             'item_name' => 'required|min:3|max:255',
             'item_category_id' => 'required',
             'measure_unit_id' => 'required',
@@ -35,6 +36,7 @@ class ItemController extends Controller
         if (item::where('item_code', $request->item_code)->first()) {
 
             (new item)->edit('item_code', $request->item_code, [
+                'item_part_code' => $request->item_part_code,
                 'item_name' => $request->item_name,
                 'item_category_id' => $request->item_category_id,
                 'measure_unit_id' => $request->measure_unit_id,
@@ -46,6 +48,7 @@ class ItemController extends Controller
 
             (new item)->add([
                 'item_code' => $request->item_code,
+                'item_part_code' => $request->item_part_code,
                 'item_name' => $request->item_name,
                 'item_category_id' => $request->item_category_id,
                 'measure_unit_id' => $request->measure_unit_id,
@@ -89,6 +92,20 @@ class ItemController extends Controller
     public function getItemById($id)
     {
         return (new item)->getItemById($id);
+    }
+
+    public function getItemSuggetions(Request $request)
+    {
+        $data = array();
+
+        foreach ((new item)->suggetions($request->all()) as $item) {
+            $data[] = [
+                'id' => $item->id,
+                'name' => '(' . $item->item_part_code . ')' . ' ' . $item->item_name,
+            ];
+        }
+
+        return response()->json($data, 200);
     }
 
 }

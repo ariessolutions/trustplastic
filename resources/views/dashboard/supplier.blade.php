@@ -238,11 +238,8 @@
                     },
                     success: function(response) {
 
-                        // $('#item_list').html(response);
-
-                        // location.reload();
-
-                        alertProcessing(response);
+                        location.reload();
+                        Notiflix.Notify.Success('Supplier Deactivation Successful');
 
                     }
                 });
@@ -264,48 +261,14 @@
                         _token: _token,
                     },
                     success: function(response) {
-                        // $('#item_list').html(response);
-
-                        // location.reload();
-
-                        alertProcessing(response);
+                        location.reload();
+                        Notiflix.Notify.Success('Supplier Activation Successful');
 
                     }
                 });
             });
         });
 
-        function alertProcessing(response) {
-
-            let timerInterval
-            Swal.fire({
-                title: 'Processing...!',
-                html: 'Will close in <b></b> milliseconds.',
-                timer: response,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    timerInterval = setInterval(() => {
-                        const content = Swal.getHtmlContainer()
-                        if (content) {
-                            const b = content.querySelector('b')
-                            if (b) {
-                                b.textContent = Swal
-                                    .getTimerLeft()
-                            }
-                        }
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.reload();
-                }
-            })
-
-        }
 
     </script>
 

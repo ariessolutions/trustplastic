@@ -11,6 +11,7 @@ $rowval = 0; ?>
     <tr>
         <td class="py-1 align-middle">{{ $rowval += 1 }}</td>
         <td class="py-1 align-middle">{{ $item->item_code }}</td>
+        <td class="py-1 align-middle">{{ $item->item_part_code }}</td>
         <td class="py-1 align-middle">{{ $item->item_name }}</td>
         <td class="py-1 align-middle">{{ $item_category->item_category_name }}</td>
         <td class="py-1 align-middle">{{ $measure_unit->symbol }}</td>
