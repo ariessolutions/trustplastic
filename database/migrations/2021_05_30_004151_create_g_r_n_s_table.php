@@ -18,7 +18,7 @@ class CreateGRNSTable extends Migration
             $table->integer('po_id')->nullable();
             $table->integer('location_id');
             $table->string('grn_code');
-            $table->string('remark')->nullable();
+            $table->longText('remark')->nullable();
             $table->tinyInteger('grn_status')->default(1);
             $table->double('grn_total');
             $table->timestamps();

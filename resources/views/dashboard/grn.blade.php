@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body table-responsive">
-                                        <table class="table table-hover text-nowrap " id="grnDataTable">
+                                        <table class="table table-borderless table-striped text-nowrap pt-2" id="grnDataTable">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>

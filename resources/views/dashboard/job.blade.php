@@ -222,7 +222,6 @@
 
                     <h5 class="modal-title">CREATE NEW JOB</h5>
 
-
                     <div class="d-flex">
                         <div class="px-1 ">
                             <button class="btn btn-default"><i class="fa fa-trash"></i></button>
@@ -248,19 +247,18 @@
 
                             <div class="row">
 
-
-                                <div class="col-xl-6 mb-3">
+                                <div class="col-xl-3 mb-3">
 
                                     <div class="card shadow-sm mb-3 h-100 border-1">
 
-                                        <div class="card-header bg-gradient-custom-teal">
-                                            <h6 class="mt-2 text-white">Primary Details</h6>
+                                        <div class="card-header bg-gradient-cyan-indigo border-0">
+                                            <h6 class="mt-2 text-white">Job Primary Details</h6>
                                         </div>
 
                                         <div class="card-body">
 
                                             <div class="row">
-                                                <div class="col-xl-6">
+                                                <div class="col-xl-12">
                                                     <div class="form-group mb-3">
                                                         <label class="form-label">
                                                             Job Code
@@ -270,7 +268,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-xl-6">
+                                                <div class="col-xl-12">
                                                     <div class="form-group mb-3">
                                                         <label class="form-label">
                                                             Job Date
@@ -284,6 +282,33 @@
 
                                             </div>
 
+                                            <div class="col-xol-12">
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label">
+                                                        Select Location
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select id="location_id" name="location_id" class="form-select">
+                                                        <option>Kaleniya Main Factory</option>
+                                                        <option>Polgahawela</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Select Vehicle<span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+
+                                                        <input type="text" placeholder="Type 'Modal Code / Name'"
+                                                            class="form-control rounded-end" id="vehicle_m_code"
+                                                            name="vehicle_m_code" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="col-xl-12">
                                                 <div class="form-group mb-3">
                                                     <label class="form-label" for="remark">Remark</label>
@@ -292,181 +317,296 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Discount (%)
-                                                        </label>
-                                                        <input id="discount" name="discount" type="number" step="0.01"
-                                                            class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            VAT (%)
-                                                        </label>
-                                                        <input id="vat" name="vat" type="number" step="0.01"
-                                                            class="form-control" />
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Sub Labour Cost <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input id="sub_labour_cost" name="sub_labour_cost" type="number"
-                                                            step="0.01" class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Net Labour Cost <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input id="vat" name="vat" type="number" step="0.01"
-                                                            class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
                                         </div>
 
                                     </div>
 
                                 </div>
 
-                                <div class="col-xl-6 mb-3">
+                                <div class="col-xl-9 mb-3">
 
                                     <div class="card shadow-sm mb-3 h-100 border-1">
 
-                                        <div class="card-header bg-gradient-cyan-indigo border-0">
+                                        <div class="card-header bg-dark-400">
+                                            <h6 class="mt-2 text-white">Add Product to Job</h6>
+                                        </div>
 
-                                            <div class="d-flex">
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mt-2 text-white">Job Has Products</h6>
+                                        <div class="card-body">
+
+                                            <div class="row">
+
+                                                <div class="col-xl-4 mb-3">
+
+                                                    <div class="card shadow-sm mb-3 h-100 border-1">
+
+                                                        <div class="card-header">
+
+                                                            <div class="d-flex">
+                                                                <div class="flex-grow-1">
+                                                                    <h6 class="mt-2">Job Has Products</h6>
+                                                                </div>
+                                                                <a id="po_table_refresh" class="text-muted mt-2"
+                                                                    data-placement="top" title="Refresh All Feilds">
+                                                                    <i class="fa fa-redo text-dark"></i>
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="card-body">
+                                                            <div class="row">
+
+                                                                <div class="col-xl-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Select BIN Location <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-search"></i></span>
+
+                                                                            <input type="text"
+                                                                                placeholder="Type 'Type BIN Code'"
+                                                                                class="form-control rounded-end"
+                                                                                id="bin_location_id"
+                                                                                name="bin_location_id" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Product Code <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-search"></i></span>
+
+                                                                            <input type="text"
+                                                                                placeholder="Type 'Product Code / Name'"
+                                                                                class="form-control rounded-end"
+                                                                                id="product_code" name="product_code" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-12">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Unit Labour Cost <span
+                                                                                class="text-danger">*</span>
+                                                                        </label>
+                                                                        <input id="unite_labour_cost" type="number"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Qty <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <input id="qty" type="number"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            VAT (%)
+                                                                        </label>
+                                                                        <input id="sub_total" type="number"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-12">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Sub Total
+                                                                        </label>
+                                                                        <input id="sub_total" type="number"
+                                                                            class="form-control" readonly />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-12">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Net Total
+                                                                        </label>
+                                                                        <input id="net_total" type="number"
+                                                                            class="form-control" readonly />
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
-                                                <a id="po_table_refresh" class="text-muted mt-2" data-placement="top"
-                                                    title="Refresh All Feilds">
-                                                    <i class="fa fa-redo text-white"></i>
-                                                </a>
+
+                                                <div class="col-xl-8 mb-3">
+
+                                                    <div class="card shadow-sm mb-3 h-100 border-1">
+
+                                                        <div class="card-header">
+
+                                                            <div class="d-flex">
+                                                                <div class="flex-grow-1">
+                                                                    <h6 class="mt-2">Outside Expenses Details</h6>
+                                                                </div>
+
+                                                                <a id="po_table_refresh" class="text-muted mt-2"
+                                                                    data-placement="top" title="Refresh All Feilds">
+                                                                    <i class="fa fa-redo text-dark"></i>
+                                                                </a>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="card-body">
+
+                                                            <div class="row">
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Expense Name
+                                                                        </label>
+                                                                        <input id="exp_name" name="exp_name"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Expense Reference
+                                                                        </label>
+                                                                        <input id="exp_ref" name="exp_ref"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label">
+                                                                            Expense Amount
+                                                                        </label>
+                                                                        <input type="number" id="exp_amount"
+                                                                            name="exp_amount" class="form-control" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-xl-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label class="form-label"
+                                                                            for="ref_remark">Remark</label>
+                                                                        <textarea class="form-control" id="ref_remark"
+                                                                            name="ref_remark" rows="1"></textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div style="margin-left: -16px; margin-right: -16px">
+                                                                <hr>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="d-flex flex-row-reverse">
+                                                                    <div class="px-1">
+                                                                        <button id="jobadd_button" class="btn btn-primary">
+                                                                            <i class='fa fa-plus'></i>
+                                                                            Add Expense</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="card-header border-1 mt-3 mb-3"
+                                                                style="margin-left: -16px; margin-right: -16px; border-top: 1px solid #e0e0e0">
+                                                                <h6 class="mt-2 ">Outside Expenses List</h6>
+                                                            </div>
+
+                                                            <div class="row">
+
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table table-borderless table-striped text-nowrap pt-2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Expense Name</th>
+                                                                                <th>Reference</th>
+                                                                                <th>Amount</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody id="job_outside_exp_list">
+
+                                                                            <tr>
+                                                                                <td class="py-1 align-middle">1</td>
+                                                                                <td class="py-1 align-middle">Buffer Paints
+                                                                                </td>
+                                                                                <td class="py-1 align-middle">fcd396Qv</td>
+                                                                                <td class="py-1 align-middle">173,450.00
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="input-group flex-nowrap">
+                                                                                        <div class="m-1">
+                                                                                            <button
+                                                                                                class="btn btn-round btn-default btn-sm">
+                                                                                                Remove
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
 
-                                        <div class="card-body">
-                                            <div class="row">
-
-                                                <div class="col-xl-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Product Code <span
-                                                                class="text-danger">*</span></label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"><i
-                                                                    class="fa fa-search"></i></span>
-
-                                                            <input type="text" placeholder="Type 'Product Code / Name'"
-                                                                class="form-control rounded-end" id="product_code"
-                                                                name="product_code" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Unit Labour Cost <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input id="unite_labour_cost" type="number" class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Product Quantity <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input id="qty" type="number" class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Other Expenses
-                                                        </label>
-                                                        <input id="sub_total" type="number" class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            VAT (%)
-                                                        </label>
-                                                        <input id="sub_total" type="number" class="form-control" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Sub Total
-                                                        </label>
-                                                        <input id="sub_total" type="number" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="form-group mb-3">
-                                                        <label class="form-label">
-                                                            Net Total
-                                                        </label>
-                                                        <input id="net_total" type="number" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <br>
+                                        <div class="card-footer">
                                             <div class="col-xl-12">
 
                                                 <div class="row">
 
-                                                    <div class="d-flex">
+                                                    <div class="d-flex flex-row-reverse">
 
-                                                        <div class="d-flex">
-                                                            <div class="px-1">
-
-                                                                <button id="jobadd_button" class="btn btn-primary">
-                                                                    <i class='fa fa-check'></i>
-                                                                    Add Product to Job </button>
-                                                            </div>
-
-                                                            <div class="px-1">
-                                                                <button id="jobsessionclear_button"
-                                                                    class="btn btn-default"><i class="fa fa-trash"></i>
-                                                                    Delete All</button>
-                                                            </div>
-
+                                                        <div class="px-1">
+                                                            <button id="jobsessionclear_button" class="btn btn-default"><i
+                                                                    class="fa fa-trash"></i>
+                                                                Delete All</button>
                                                         </div>
+
+                                                        <div class="px-1">
+                                                            <button id="jobadd_button" class="btn btn-primary">
+                                                                <i class='fa fa-check'></i>
+                                                                Add Product to Job </button>
+                                                        </div>
+
+
                                                     </div>
+
 
                                                 </div>
 
                                             </div>
-
                                         </div>
 
                                     </div>
@@ -501,9 +641,8 @@
                                                             <th>Unit L/C</th>
                                                             <th>Qty</th>
                                                             <th>Sub total</th>
-                                                            <th>Discount (%)</th>
                                                             <th>VAT (%)</th>
-                                                            <th>Other Exp</th>
+                                                            <th>Tot O/Exp</th>
                                                             <th>Net total</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -518,7 +657,6 @@
                                                             <td class="py-1 align-middle">15,250.00</td>
                                                             <td class="py-1 align-middle">12</td>
                                                             <td class="py-1 align-middle">15,3400.00</td>
-                                                            <td class="py-1 align-middle">7.5</td>
                                                             <td class="py-1 align-middle">8.75</td>
                                                             <td class="py-1 align-middle">8,000.00</td>
                                                             <td class="py-1 align-middle">173,450.00</td>
@@ -546,7 +684,6 @@
                                                             <td class="py-1 align-middle">15,250.00</td>
                                                             <td class="py-1 align-middle">12</td>
                                                             <td class="py-1 align-middle">15,3400.00</td>
-                                                            <td class="py-1 align-middle">7.5</td>
                                                             <td class="py-1 align-middle">8.75</td>
                                                             <td class="py-1 align-middle">8,000.00</td>
                                                             <td class="py-1 align-middle">173,450.00</td>
