@@ -12,72 +12,67 @@
             size: A4;
             margin: 0;
         }
-
+        
         @media print {
-
             html,
             body {
                 width: 210mm;
                 height: 297mm;
                 padding-left: 10px;
                 padding-right: 20px;
-                padding-top:10px;
-                padding-bottom:10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
             }
-
         }
-
+        
         .font {
             font-family: 'Segoe UI';
         }
-
+        
         .text-center {
             text-align: center;
         }
-
-
+        
         .row {
             width: 100%;
             display: flex;
             flex-wrap: wrap;
             margin-top: 5px;
         }
-
+        
         .col-2 {
             width: 16.66%;
         }
-
-
+        
         .col-3 {
             width: 25%;
         }
-
+        
         .col-4 {
             width: 33.33%
         }
-
+        
         .col-6 {
             width: 50%;
         }
-
+        
         .tborderth {
             border-top: 1px solid #212121;
             /* border: 1px solid black; */
             padding: 5px;
             margin: 0px;
-
         }
-
-        .tbleft{
+        
+        .tbleft {
             padding-left: 10px;
             border-left: 1px solid #212121
         }
-
-        .tbright{
+        
+        .tbright {
             padding-right: 10px;
             border-right: 1px solid #212121
         }
-
+        
         .tborder {
             /* border-left: 1px solid #212121; */
             /* border-right: 1px solid #212121; */
@@ -87,39 +82,37 @@
             padding-top: 10px;
             padding-bottom: 10px;
             margin: 0px;
-
         }
-
+        
         .alright {
             text-align: right
         }
-
+        
         .smargin {
             padding: 5px;
         }
-
+        
         .bold-100 {
             font-weight: 500;
         }
-
+        
         .trcolor {
             background-color: #eeeeee;
             -webkit-print-color-adjust: exact;
         }
-
-        .text-align-right{
+        
+        .text-align-right {
             margin-left: auto;
             margin-right: 0px;
         }
-
-        .text-center{
+        
+        .text-center {
             text-align: center;
         }
-
-        .text-left{
+        
+        .text-left {
             text-align: left;
         }
-
     </style>
 
 </head>
@@ -196,35 +189,35 @@
         <br>
 
         <div>
-            <table class="table-border"
-                style="border-spacing: 0; border-width: 0; padding: 0; border-width: 0; width:100%">
+            <table class="table-border" style="border-spacing: 0; border-width: 0; padding: 0; border-width: 0; width:100%">
                 <thead>
                     <tr class="trcolor">
                         <th class="tborderth tborder tbleft bold-100" style="text-align: left">#</th>
                         <th class="tborderth tborder bold-100" style="text-align: left">Item Code</th>
                         <th class="tborderth tborder bold-100" style="text-align: left">Part Code</th>
                         <th class="tborderth tborder bold-100" style="text-align: center">Item Name</th>
+                        @if($data['filters']['checked']==1)
+                        <th class="tborderth tborder bold-100" style="text-align: center">Bin Location</th>
+                        @endif
                         <th class="tborderth tborder bold-100" style="text-align: center">Qty</th>
                         <th class="tborderth tborder tbright bold-100" style="text-align: center">Low Stock</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $index=1;
-                    @endphp
-                    @foreach ($data['records'] as $record)
+                    @php $index=1; @endphp @foreach ($data['records'] as $record)
                     <tr>
                         <td style="text-align: left" class="tborder tbleft">{{ $index }}</td>
                         <td style="text-align: left" class="tborder">{{ $record[0]['item_code'] }}</td>
                         <td style="text-align: left" class="tborder">{{ $record[0]['item_part_code'] }}</td>
                         <td style="text-align: center" class="tborder">{{ $record[0]['item_name'] }}</td>
+                        @if($data['filters']['checked']==1)
+                        <td style="text-align: center" class="tborder">{{ $record[2] }}</td>
+                        @endif
                         <td style="text-align: center" class="tborder">{{ $record[1]['totqty'] }}</td>
-                        <td style="text-align: center" class="tborder tbright">{{ ($record[1]['totqty']<5)?'YES':'NO' }}</td>
+                        <td style="text-align: center" class="tborder tbright">{{ ($record[1]['totqty']
+                            <5)? 'YES': 'NO' }}</td>
                     </tr>
-                    @php
-                        $index++;
-                    @endphp
-                    @endforeach
+                    @php $index++; @endphp @endforeach
                 </tbody>
             </table>
 

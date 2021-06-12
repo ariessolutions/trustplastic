@@ -13,7 +13,7 @@
 
                     <div class="col-xl-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                            <li class="breadcrumb-item header_new_text"><a href="/home">Dashboard</a></li>
                             <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                         </ul>
                         <h1 class="page-header header_new_text">
@@ -171,16 +171,16 @@
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <a id="job_modal_reset_button" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                            <a id="job_modal_reset_button" class="btn btn-sm btn-default btnround"><i class="fa fa-trash"></i></a>
+                        </div>
+
+                        <div id="jobprintbtn_div">
+                            <a id="jobprintbtn" class="btn btn-sm btn-default btnround"><i class="fa fa-print"></i></a>
                         </div>
 
                         <div class="px-1 ">
-                            <a id="jobprintbtn" class="btn btn-default"><i class="fa fa-print"></i></a>
-                        </div>
-
-                        <div class="px-1 ">
-                            <a id="modal_close" class="btn bg-dark-100">
-                                <i class="fa fa-times"></i>
+                            <a id="modal_close" class="btn btn-sm btn-yellow btnround">
+                                <i class="far fa-window-minimize"></i>
                             </a>
                         </div>
                     </div>
@@ -462,7 +462,7 @@
                                                             <div class="row">
 
                                                                 <div class="table-responsive">
-                                                                    <table class="table table-borderless table-striped text-nowrap pt-2">
+                                                                    <table class="table table-striped text-nowrap pt-2">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>#</th>
@@ -505,11 +505,7 @@
                                                                 <i class='fa fa-check'></i>
                                                                 Add / Update Job Product </a>
                                                         </div>
-
-
                                                     </div>
-
-
                                                 </div>
 
                                             </div>

@@ -99,7 +99,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title">ADD MATERIAL REQUEST FOR <span id="mr_job_code" class="text-primary"
+                    <h5 class="modal-title Available">ADD MATERIAL REQUEST FOR <span id="mr_job_code" class="text-primary"
                             style="font-weight: 700"></span></h5>
 
                     <div class="d-flex">

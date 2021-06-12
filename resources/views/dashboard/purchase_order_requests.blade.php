@@ -13,7 +13,7 @@
 
                         <div class="col-xl-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                                <li class="breadcrumb-item header_new_text"><a href="/home">Dashboard</a></li>
                                 <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                             </ul>
 
@@ -212,18 +212,17 @@
     <div class="modal fade " id="poItemInsert">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark-400">
 
-                    <h5 class="modal-title header_new_text">CREATE PURCHASE ORDER</h5>
-
+                    <h5 class="modal-title header_new_text text-white">CREATE PURCHASE ORDER</h5>
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <button id="deleteAllSessions" class="btn btn-default"><i class="far fa-trash-alt"></i></button>
+                            <button id="deleteAllSessions" class="btn btn-sm btn-default btnround"><i class="far fa-trash-alt"></i></button>
                         </div>
 
                         <div class="px-1 ">
-                            <button id="modal_close_btn" class="btn btn-default">
+                            <button id="modal_close_btn" class="btn btn-sm btn-yellow btnround">
                                 <i class="far fa-window-minimize"></i>
                             </button>
                         </div>
@@ -624,9 +623,9 @@
     <div class="modal fade " id="poItemView">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark-400">
 
-                    <h5 class="modal-title header_new_text">VIEW / UPDATE PURCHASE ORDER</h5>
+                    <h5 class="modal-title header_new_text text-white">VIEW / UPDATE PURCHASE ORDER</h5>
 
 
                     <div class="d-flex">
@@ -638,12 +637,12 @@
                             </span>
                         </div>
 
-                        <div class="px-1 ">
-                            <button id="po_printReport_button" class="btn btn-default"><i class="fa fa-print"></i></button>
+                        <div class="px-1">
+                            <button id="po_printReport_button" class="btn btn-sm btn-default btnround"><i class="fa fa-print"></i></button>
                         </div>
 
-                        <div class="px-1 ">
-                            <button id="modal_close_btn_view" class="btn btn-default">
+                        <div class="px-1">
+                            <button id="modal_close_btn_view" class="btn btn-sm btn-yellow btnround">
                                 <i class="far fa-window-minimize"></i>
                             </button>
                         </div>

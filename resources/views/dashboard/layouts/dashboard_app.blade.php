@@ -83,7 +83,14 @@
             padding: 5px;
             background-color: transparent;
             margin-left: 3px;
-}
+        }
+
+        .btnround{
+            display:block;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+        }
 
 
 

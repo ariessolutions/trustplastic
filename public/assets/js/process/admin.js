@@ -22,7 +22,7 @@ function clearInputs(data) {
     });
 }
 
-$('#modal_close').click(function (e) {
+$('#modal_close').click(function(e) {
     $("#modal").removeClass("in");
     $(".modal-backdrop").remove();
     $('#modal').modal('toggle');
@@ -55,17 +55,25 @@ function isNotEmpty(data) {
     return check;
 }
 
+function markAsErrorField(element, isError) {
+    if (isError == true) {
+        element.addClass('border-danger');
+    } else {
+        element.removeClass('border-danger');
+    }
+}
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
     },
-    beforeSend: function () {
+    beforeSend: function() {
         Notiflix.Loading.Circle('Please wait...');
     },
-    complete: function () {
+    complete: function() {
         Notiflix.Loading.Remove();
     },
-    error: function (x, status, error) {
+    error: function(x, status, error) {
         if (x.status == 403) {
             alert("Sorry, your session has expired. Please login again to continue");
             window.location.href = "/Account/Login";
@@ -78,7 +86,7 @@ $.ajaxSetup({
     }
 });
 
-$('#resetbtn').on('click', function () {
+$('#resetbtn').on('click', function() {
     $('#formconfig').val('enroll');
     $('input').removeAttr('readonly');
     $('input').val('');
@@ -89,7 +97,7 @@ $('#resetbtn').on('click', function () {
     tempAjaxRun = true;
 });
 
-$('#resetatag').on('click', function () {
+$('#resetatag').on('click', function() {
     $('#resetbtn').click();
 });
 
@@ -98,31 +106,31 @@ var usersDataTable = $('#usersTable').DataTable({
         url: '/users/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
 
 function csusers(uid, status) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/users/edit/status/" + uid + "/" + status,
-            success: function (response) {
+            success: function(response) {
                 usersDataTable.ajax.reload(null, false);
                 Notiflix.Notify.Success('Record Updated.');
             }
         });
-    }, function () {});
+    }, function() {});
 
 }
 
 function gudata(uid) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/users/find/" + uid,
-            success: function (response) {
+            success: function(response) {
                 $('#formkey').val(response.id);
                 $('#formconfig').val('update');
                 $('#submitbtn').val('Update').removeClass('btn-primary').addClass('btn-warning');
@@ -140,7 +148,7 @@ function gudata(uid) {
                 }
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
 var permissionsDataTable = $('#permissionsTable').DataTable({
@@ -148,32 +156,32 @@ var permissionsDataTable = $('#permissionsTable').DataTable({
         url: '/permissions/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
 
 function csusertypes(utid, status) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/permissions/edit/status/" + utid + "/" + status,
-            success: function (response) {
+            success: function(response) {
                 permissionsDataTable.ajax.reload(null, false);
                 Notiflix.Notify.Success('Record Updated.');
             }
         });
-    }, function () {});
+    }, function() {});
 
 }
 
 
 function gutdata(uid) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/permissions/find/" + uid,
-            success: function (response) {
+            success: function(response) {
 
                 $('input:checkbox').removeAttr('checked');
 
@@ -194,17 +202,17 @@ function gutdata(uid) {
                 });
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
-$('#vehicle_name').keyup(function () {
+$('#vehicle_name').keyup(function() {
     if ($(this).val() && $(this).val().length > 1 && $('#vehicle_model_name').val() && $('#vehicle_model_name').val().length > 1) {
         if ($(this).val().length == 2 && tempAjaxRun == true) {
             $.ajax({
                 type: "GET",
                 url: "/vehicles/nextId",
                 async: false,
-                success: function (response) {
+                success: function(response) {
                     $('#vehicle_model_code').val($('#vehicle_name').val().substring(0, 2).toUpperCase() + '/' + $('#vehicle_model_name').val().substring(0, 2).toUpperCase() + '/' + pad(response.toString(), 3));
                 }
             });
@@ -218,14 +226,14 @@ $('#vehicle_name').keyup(function () {
     }
 });
 
-$('#vehicle_model_name').keyup(function () {
+$('#vehicle_model_name').keyup(function() {
     if ($(this).val() && $(this).val().length > 1 && $('#vehicle_name').val() && $('#vehicle_name').val().length > 1) {
         if ($(this).val().length == 2 && tempAjaxRun == true) {
             $.ajax({
                 type: "GET",
                 url: "/vehicles/nextId",
                 async: false,
-                success: function (response) {
+                success: function(response) {
                     $('#vehicle_model_code').val($('#vehicle_name').val().substring(0, 2).toUpperCase() + '/' + $('#vehicle_model_name').val().substring(0, 2).toUpperCase() + '/' + pad(response.toString(), 3));
                 }
             });
@@ -241,10 +249,10 @@ $('#vehicle_model_name').keyup(function () {
 
 var vehicleTempMap = {};
 var vehicleTypeHead = $('#products_vehicle_code').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/products/suggesions', {
             query: query,
-        }, function (data) {
+        }, function(data) {
             vehicleTempMap = {};
             data.forEach(element => {
                 vehicleTempMap[element['name']] = element['id'];
@@ -255,7 +263,7 @@ var vehicleTypeHead = $('#products_vehicle_code').typeahead({
     }
 });
 
-vehicleTypeHead.change(function (e) {
+vehicleTypeHead.change(function(e) {
     var tempId = vehicleTempMap[$('#products_vehicle_code').val()];
     if (tempId != undefined) {
         $('#products_vehicle_code_result').val(tempId);
@@ -268,31 +276,31 @@ var vehiclesDataTable = $('#vehiclesTableView').DataTable({
         url: '/vehicles/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
 
 function csvehicles(vid, status) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/vehicles/edit/status/" + vid + "/" + status,
-            success: function (response) {
+            success: function(response) {
                 vehiclesDataTable.ajax.reload(null, false);
                 Notiflix.Notify.Success('Record Updated.');
             }
         });
-    }, function () {});
+    }, function() {});
 
 }
 
 function gvehicledata(vid) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/vehicles/find/" + vid,
-            success: function (response) {
+            success: function(response) {
                 tempAjaxRun = false;
                 $('#formkey').val(response.id);
                 $('#vehicle_name').val(response.brand);
@@ -302,7 +310,7 @@ function gvehicledata(vid) {
                 $('#submitbtn').val('Update').removeClass('btn-primary').addClass('btn-warning');
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
 var productsDataTable = $('#productsTable').DataTable({
@@ -310,25 +318,25 @@ var productsDataTable = $('#productsTable').DataTable({
         url: '/products/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
 
 function csproducts(pid, status) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/products/edit/status/" + pid + "/" + status,
-            success: function (response) {
+            success: function(response) {
                 productsDataTable.ajax.reload(null, false);
                 Notiflix.Notify.Success('Record Updated.');
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
-$('#product_name').keyup(function () {
+$('#product_name').keyup(function() {
     productsCodeFetch($(this).val());
 });
 
@@ -337,7 +345,7 @@ function productsCodeFetch(proNameVal) {
         $.ajax({
             type: "GET",
             url: "/vehicles/next/data/" + $('#products_vehicle_code_result').val(),
-            success: function (response) {
+            success: function(response) {
                 $('#product_code').val(response.code + '/' + proNameVal.replace('-', '').replace(' ', '').toUpperCase().substring(0, 2) + '/' + pad(response.id, 3));
             }
         });
@@ -347,11 +355,11 @@ function productsCodeFetch(proNameVal) {
 }
 
 function gproductdata(pid) {
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to update this record ?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/products/find/" + pid,
-            success: function (response) {
+            success: function(response) {
                 $('#formkey').val(response.id);
                 $('#product_code').val(response.code);
                 $('#product_name').val(response.name);
@@ -361,7 +369,7 @@ function gproductdata(pid) {
                 $('#submitbtn').val('Update').removeClass('btn-primary').addClass('btn-warning');
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
 var grnNewDataTable = $('#grnTable').DataTable({
@@ -369,18 +377,18 @@ var grnNewDataTable = $('#grnTable').DataTable({
         url: '/grn/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
 
-$('#grnmodalclose').click(function (e) {
+$('#grnmodalclose').click(function(e) {
     $("#modal").removeClass("in");
     $(".modal-backdrop").remove();
     $('#modal').modal('toggle');
 });
 
-$('#grnaddnewbtn').click(function () {
+$('#grnaddnewbtn').click(function() {
     $('#grnpocode').removeAttr('readonly', true);
     $('#grn_remark').removeAttr('readonly', true);
     $('#newgrnsubmitbtn').removeClass('d-none');
@@ -394,32 +402,32 @@ $('#grnaddnewbtn').click(function () {
     $('#modal').modal('show');
 });
 
-$('#grnpocode').keyup(function (e) {
+$('#grnpocode').keyup(function(e) {
     $.ajax({
         type: "GET",
         data: {
             'code': $('#grnpocode').val()
         },
         url: "/purchaseorders/find/code",
-        success: function (response) {
+        success: function(response) {
             if (response != 2) {
-                Notiflix.Confirm.Show('Found', 'Purchase order found by this number. Do you want to load it ?', 'Yes', 'No', function () {
+                Notiflix.Confirm.Show('Found', 'Purchase order found by this number. Do you want to load it ?', 'Yes', 'No', function() {
                     grnNewDataTable.ajax.reload(null, false);
-                }, function () {});
+                }, function() {});
             }
         }
     });
 });
 
 
-$('#grnmodalreset').click(function (e) {
+$('#grnmodalreset').click(function(e) {
     e.preventDefault();
     $('form#grnForm').trigger("reset");
     $('#grn_date').val(todayDate.getFullYear() + '-' + ('0' + (todayDate.getMonth() + 1)).slice(-2) + '-' + ('0' + todayDate.getDate()).slice(-2));
     clearGRNSession();
 });
 
-$('#grnallclearbtn').click(function (e) {
+$('#grnallclearbtn').click(function(e) {
     e.preventDefault();
     $('#grnmodalreset').click();
     clearGRNSession();
@@ -430,7 +438,7 @@ function clearGRNSession() {
     $.ajax({
         type: "GET",
         url: "/grn/session/clear",
-        success: function (response) {
+        success: function(response) {
             grnNewDataTable.ajax.reload(null, false);
             Notiflix.Notify.Warning('Records Cleared Successfully.');
         }
@@ -446,7 +454,7 @@ function editGRNItem(index, quantity) {
             $.ajax({
                 type: "GET",
                 url: "/grn/session/update/" + index + "/" + qty,
-                success: function (response) {
+                success: function(response) {
                     grnNewDataTable.ajax.reload(null, false);
                 }
             });
@@ -462,7 +470,7 @@ function removeGRNItem(index) {
     $.ajax({
         type: "GET",
         url: "/grn/session/remove/" + index,
-        success: function (response) {
+        success: function(response) {
             grnNewDataTable.ajax.reload(null, false);
             Notiflix.Notify.Warning('Records Updated Successfully.');
         }
@@ -474,7 +482,7 @@ var grnDataTable = $('#grnDataTable').DataTable({
         url: '/grn/data/get/table',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
@@ -492,7 +500,7 @@ function viewGrn(grnID) {
     $.ajax({
         type: "GET",
         url: "/grn/view/" + grnID,
-        success: function (response) {
+        success: function(response) {
             $('#grnpocode').val($('#grnrecord' + grnID).attr('pocode'));
             $('#grn_remark').val($('#grnrecord' + grnID).attr('remark'));
             grnNewDataTable.ajax.reload(null, false);
@@ -503,10 +511,10 @@ function viewGrn(grnID) {
 
 var stockGRNTempMap = {};
 var stockGRNTempMap = $('#grn_code_filter').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/grn/code/get/all', {
             query: query,
-        }, function (data) {
+        }, function(data) {
             stockGRNTempMap = {};
             data.forEach(element => {
                 stockGRNTempMap[element['name']] = element['id'];
@@ -517,12 +525,12 @@ var stockGRNTempMap = $('#grn_code_filter').typeahead({
     }
 });
 
-$('#stockprintbtn').click(function (e) {
+$('#stockprintbtn').click(function(e) {
     e.preventDefault();
     $.ajax({
         type: "GET",
-        url: '/stocks/print/report/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' +(($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0),
-        success: function (response) {
+        url: '/stocks/print/report/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0) + '/' + ((stockbinwise.is(':checked')) ? 1 : 2),
+        success: function(response) {
             if (response == 2) {
                 Notiflix.Notify.Warning('No Records Found For Above Filters.');
             } else {
@@ -532,13 +540,13 @@ $('#stockprintbtn').click(function (e) {
     });
 });
 
-$('#grn_code_filter').keyup(function (e) {
+$('#grn_code_filter').keyup(function(e) {
     if ($(this).val().length == 0) {
         $('#exist_grn_code').val('');
     }
 });
 
-stockGRNTempMap.change(function (e) {
+stockGRNTempMap.change(function(e) {
     var tempId = stockGRNTempMap[$('#grn_code_filter').val()];
     if (tempId != undefined) {
         $('#exist_grn_code').val(tempId);
@@ -547,10 +555,10 @@ stockGRNTempMap.change(function (e) {
 
 var stockItemTempMap = {};
 var stockItemTempMap = $('#stock_item_code').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/items/get/suggetions', {
             query: query,
-        }, function (data) {
+        }, function(data) {
             stockItemTempMap = {};
             data.forEach(element => {
                 stockItemTempMap[element['name']] = element['id'];
@@ -561,28 +569,28 @@ var stockItemTempMap = $('#stock_item_code').typeahead({
     }
 });
 
-$('#stock_item_code').keyup(function (e) {
+$('#stock_item_code').keyup(function(e) {
     if ($(this).val().length == 0) {
         $('#stock_item').val('');
     }
 });
 
-stockItemTempMap.change(function (e) {
+stockItemTempMap.change(function(e) {
     var tempId = stockItemTempMap[$('#stock_item_code').val()];
     if (tempId != undefined) {
         $('#stock_item').val(tempId);
     }
 });
 
-$('#stocklocation').change(function (e) {
+$('#stocklocation').change(function(e) {
     e.preventDefault();
     $('#stockbin').html('');
     $.ajax({
         type: "GET",
         url: "/binlocations/get/suggetions/" + $(this).val(),
-        success: function (response) {
+        success: function(response) {
             $('#stockbin').append($('<option>').text('None')
-                    .attr('value', 0));
+                .attr('value', 0));
             response.forEach(element => {
                 $('#stockbin').append($('<option>').text(element.name)
                     .attr(
@@ -592,14 +600,15 @@ $('#stocklocation').change(function (e) {
     });
 });
 
+var stockbinwise = $('#stock-bin-wise');
 
 
 var stockTable = $('#stockTable').DataTable({
     ajax: {
-        url: '/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0),
+        url: '/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0) + '/' + ((stockbinwise.is(':checked')) ? 1 : 2),
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle py-2');
     },
     "oLanguage": {
@@ -608,24 +617,24 @@ var stockTable = $('#stockTable').DataTable({
 });
 
 
-$('#submitstockfilters').click(function (e) {
+$('#submitstockfilters').click(function(e) {
     e.preventDefault();
-    stockTable.ajax.url('/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0)).load(null, false);
+    stockTable.ajax.url('/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0) + '/' + ((stockbinwise.is(':checked')) ? 1 : 2)).load(null, false);
 });
 
-$('#refreshstocktable').click(function (e) {
+$('#refreshstocktable').click(function(e) {
     e.preventDefault();
     $('#resetbtn').click();
-    stockTable.ajax.url('/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0)).load(null, false);
+    stockTable.ajax.url('/stocks/get/table/' + (($('#stock_item').val() !== '') ? $('#stock_item').val() : 0) + '/' + (($('#exist_grn_code').val() !== '') ? $('#exist_grn_code').val() : 0) + '/' + (($('#stockdatefrom').val() !== '') ? $('#stockdatefrom').val() : 0) + '/' + (($('#stockdateto').val() !== '') ? $('#stockdateto').val() : 0) + '/' + (($('#stockbin').val() !== '' && $('#stockbin').val() != null) ? $('#stockbin').val() : 0) + '/' + (($('#stocklocation').val() !== '' && $('#stocklocation').val() != null) ? $('#stocklocation').val() : 0) + '/' + ((stockbinwise.is(':checked')) ? 1 : 2)).load(null, false);
 });
 
 
 function printGRN(id) {
-    Notiflix.Confirm.Show('Print', 'Do you sure to print this report?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Print', 'Do you sure to print this report?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/grn/get/print/" + id,
-            success: function (response) {
+            success: function(response) {
                 if (response == 2) {
                     Notiflix.Notify.Warning('Something Wrong.');
                 } else {
@@ -633,12 +642,12 @@ function printGRN(id) {
                 }
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
 //Start Functions - JOB
 
-$('#job_location_id').change(function (e) {
+$('#job_location_id').change(function(e) {
     e.preventDefault();
     checkJobPrimaryDetailsFilled();
     $('#bin_location_suggetion').val('');
@@ -647,10 +656,10 @@ $('#job_location_id').change(function (e) {
 
 var jobVehiclesTempMap = {};
 var jobVehiclesTempMap = $('#job_vehicle_suggetions').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/vehicles/get/suggetions', {
             query: query,
-        }, function (data) {
+        }, function(data) {
             jobVehiclesTempMap = {};
             data.forEach(element => {
                 jobVehiclesTempMap[element['name']] = element['id'];
@@ -660,7 +669,7 @@ var jobVehiclesTempMap = $('#job_vehicle_suggetions').typeahead({
         });
     }
 });
-$('#job_vehicle_suggetions').keyup(function (e) {
+$('#job_vehicle_suggetions').keyup(function(e) {
     if ($(this).val().length == 0) {
         $('#job_vehicle').val('');
         $('#job_product_sugg').val('');
@@ -670,7 +679,7 @@ $('#job_vehicle_suggetions').keyup(function (e) {
 });
 
 
-jobVehiclesTempMap.change(function (e) {
+jobVehiclesTempMap.change(function(e) {
     $('#job_product_sugg').val('');
     $('#job_product').val('');
     var tempId = jobVehiclesTempMap[$('#job_vehicle_suggetions').val()];
@@ -687,23 +696,23 @@ function refreshJobCode() {
     $.ajax({
         type: "GET",
         url: "/job/next/code",
-        success: function (response) {
+        success: function(response) {
             $('#job_code').val(response);
         }
     });
 }
 
-$('#job_code').ready(function () {
+$('#job_code').ready(function() {
     refreshJobCode();
     loadExpences();
 });
 
 var jobBinLocationsTempMap = {};
 var jobBinLocationsTempMap = $('#bin_location_suggetion').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/binlocations/get/suggetions/' + $('#job_location_id').val(), {
             query: query,
-        }, function (data) {
+        }, function(data) {
             jobBinLocationsTempMap = {};
             data.forEach(element => {
                 jobBinLocationsTempMap[element['name']] = element['id'];
@@ -713,12 +722,12 @@ var jobBinLocationsTempMap = $('#bin_location_suggetion').typeahead({
         });
     }
 });
-$('#bin_location_suggetion').keyup(function (e) {
+$('#bin_location_suggetion').keyup(function(e) {
     if ($(this).val().length == 0) {
         $('#job_bin_location').val('');
     }
 });
-jobBinLocationsTempMap.change(function (e) {
+jobBinLocationsTempMap.change(function(e) {
     var tempId = jobBinLocationsTempMap[$('#bin_location_suggetion').val()];
     if (tempId != undefined) {
         $('#job_bin_location').val(tempId);
@@ -727,10 +736,10 @@ jobBinLocationsTempMap.change(function (e) {
 
 var jobProductTempMap = {};
 var jobProductTempMap = $('#job_product_sugg').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get('/products/suggesions/' + $('#job_vehicle').val(), {
             query: query,
-        }, function (data) {
+        }, function(data) {
             jobProductTempMap = {};
             data.forEach(element => {
                 jobProductTempMap[element['name']] = element['id'];
@@ -740,13 +749,13 @@ var jobProductTempMap = $('#job_product_sugg').typeahead({
         });
     }
 });
-$('#job_product_sugg').keyup(function (e) {
+$('#job_product_sugg').keyup(function(e) {
     if ($(this).val().length == 0) {
         $('#job_product').val('');
     }
 });
 
-jobProductTempMap.change(function (e) {
+jobProductTempMap.change(function(e) {
     var tempId = jobProductTempMap[$('#job_product_sugg').val()];
     if (tempId != undefined) {
         $('#job_product').val(tempId);
@@ -783,12 +792,12 @@ var job_sessionclear_button = $('#job_sessionclear_button');
 
 var job_register_product_table = $('#job_register_product_table');
 
-job_jhpc_btn.click(function (e) {
+job_jhpc_btn.click(function(e) {
     e.preventDefault();
     clearInputs([bin_location_suggetion, job_bin_location, job_product_sugg, job_product, job_unit_labour_cost, job_qty, job_vat, job_sub_total, job_net_total]);
 });
 
-job_unit_labour_cost.add(job_qty).add(job_vat).keyup(function (e) {
+job_unit_labour_cost.add(job_qty).add(job_vat).keyup(function(e) {
     e.preventDefault();
     if (job_unit_labour_cost.val() && job_qty.val()) {
         job_sub_total.val((Number(job_unit_labour_cost.val()) * Number(job_qty.val())).toFixed(2));
@@ -812,29 +821,29 @@ var job_outside_exp_list = $('#job_outside_exp_list');
 
 var jobExpensesDetailsArray = [];
 
-job_oxc_btn.click(function (e) {
+job_oxc_btn.click(function(e) {
     e.preventDefault();
     jobExpensesDetailsArray = [];
     clearInputs([job_exp_name, job_exp_ref, job_exp_amount, job_ref_remark]);
     loadExpences();
 });
 
-job_sessionclear_button.click(function (e) {
+job_sessionclear_button.click(function(e) {
     e.preventDefault();
     job_add_expenses_button.click();
     job_oxc_btn.click();
-    Notiflix.Confirm.Show('Confirmation', 'Are you sure to clear job data?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to clear job data?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/job/session/clear",
-            success: function (response) {
+            success: function(response) {
                 Notiflix.Notify.Success('Data Cleared Successfully.');
             }
         });
-    }, function () {});
+    }, function() {});
 });
 
-job_add_expenses_button.click(function (e) {
+job_add_expenses_button.click(function(e) {
     e.preventDefault();
     if (job_exp_name.val() && job_exp_amount.val()) {
         jobExpensesDetailsArray.push([job_exp_name.val(), job_exp_ref.val(), job_exp_amount.val(), job_ref_remark.val()]);
@@ -860,8 +869,8 @@ function loadExpences() {
             div1.addClass('input-group flex-nowrap');
             var div2 = $('<div></div>');
             div2.addClass('m-1');
-            var btn1 = $('<button style="margin-right:5px;">View</button>').addClass('btn btn-round btn-default btn-sm').attr('title', 'View').attr('onclick', 'viewFromExpenseArray(' + index + ')');
-            var btn2 = $('<button>Delete</button>').addClass('btn btn-round btn-default btn-sm').attr('title', 'Remove').attr('onclick', 'removeFromExpenseArray(' + index + ')');
+            var btn1 = $('<a style="margin-right:5px;">View</a>').addClass('btn btn-round btn-default btn-sm').attr('title', 'View').attr('onclick', 'viewFromExpenseArray(' + index + ')');
+            var btn2 = $('<a>Delete</a>').addClass('btn btn-round btn-default btn-sm').attr('title', 'Remove').attr('onclick', 'removeFromExpenseArray(' + index + ')');
             tr.append($('<td></td>').addClass('py-1 align-middle').append(btn1).append(btn2));
             job_outside_exp_list.append(tr);
             index++;
@@ -889,7 +898,7 @@ function clearExpencesTable() {
     job_outside_exp_list.html('');
 }
 
-job_add_button.click(function (e) {
+job_add_button.click(function(e) {
     e.preventDefault();
     if (isNotEmpty([
             [job_bin_location, bin_location_suggetion],
@@ -908,13 +917,13 @@ job_add_button.click(function (e) {
             type: "GET",
             url: "/job/session/add",
             data: $data,
-            success: function (response) {
+            success: function(response) {
                 job_jhpc_btn.click();
                 job_oxc_btn.click();
                 bin_location_suggetion.focus();
                 innerJobRecordsDataTable.ajax.reload(null, false);
             },
-            error: function (err) {
+            error: function(err) {
                 if (err.status == 422) {
                     Notiflix.Notify.Warning(err.responseJSON.message);
                 } else {
@@ -932,7 +941,7 @@ var innerJobRecordsDataTable = job_register_product_table.DataTable({
         url: '/job/session/table/get',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
@@ -942,7 +951,7 @@ function jobViewEditSession(index) {
     $.ajax({
         type: "GET",
         url: "/job/session/get/" + index,
-        success: function (response) {
+        success: function(response) {
             var data = JSON.parse(response);
             bin_location_suggetion.val(data[0].bin_location_name);
             job_bin_location.val(data[0].id);
@@ -973,7 +982,7 @@ function jobRemoveSession(index) {
     $.ajax({
         type: "GET",
         url: "/job/session/remove/" + index,
-        success: function (response) {
+        success: function(response) {
             innerJobRecordsDataTable.ajax.reload(null, false);
         }
     });
@@ -986,7 +995,7 @@ var jobRecordsDataTable = job_table.DataTable({
         url: '/job/table/get',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
@@ -1004,12 +1013,12 @@ var job_approve = $('#jobapprove');
 var job_refuse = $('#job_refuse');
 var jobprintbtn = $('#jobprintbtn');
 
-job_approve.click(function (e) {
+job_approve.click(function(e) {
     e.preventDefault();
     $.ajax({
         type: "GET",
         url: "/job/approve/" + $('#formkey').val(),
-        success: function (response) {
+        success: function(response) {
             $("#modal").removeClass("in");
             $(".modal-backdrop").remove();
             $('#modal').modal('toggle');
@@ -1020,12 +1029,12 @@ job_approve.click(function (e) {
     });
 });
 
-job_refuse.click(function (e) {
+job_refuse.click(function(e) {
     e.preventDefault();
     $.ajax({
         type: "GET",
         url: "/job/refused/" + $('#formkey').val(),
-        success: function (response) {
+        success: function(response) {
             $("#modal").removeClass("in");
             $(".modal-backdrop").remove();
             $('#modal').modal('toggle');
@@ -1036,13 +1045,13 @@ job_refuse.click(function (e) {
     });
 });
 
-$('#jonrecords_refresh').click(function (e) {
+$('#jonrecords_refresh').click(function(e) {
     e.preventDefault();
     jobRecordsDataTable.ajax.reload(null, false);
 });
 
 
-$('.job_modal_button').click(function (e) {
+$('.job_modal_button').click(function(e) {
     e.preventDefault();
     innerJobRecordsDataTable.ajax.reload(null, false);
     $('#job_date').val(todayDate.getFullYear() + '-' + ('0' + (todayDate.getMonth() + 1)).slice(-2) + '-' + ('0' + todayDate.getDate()).slice(-2));
@@ -1063,14 +1072,14 @@ $('.job_modal_button').click(function (e) {
     $.ajax({
         type: "GET",
         url: "/job/session/clear",
-        success: function (response) {
+        success: function(response) {
             innerJobRecordsDataTable.ajax.reload(null, false);
             $('#modal').modal('show');
         }
     });
 });
 
-$('#job_modal_reset_button').click(function (e) {
+$('#job_modal_reset_button').click(function(e) {
     e.preventDefault();
     innerJobRecordsDataTable.ajax.reload(null, false);
     $('#job_date').val(todayDate.getFullYear() + '-' + ('0' + (todayDate.getMonth() + 1)).slice(-2) + '-' + ('0' + todayDate.getDate()).slice(-2));
@@ -1093,7 +1102,7 @@ $('#job_modal_reset_button').click(function (e) {
     $.ajax({
         type: "GET",
         url: "/job/session/clear",
-        success: function (response) {
+        success: function(response) {
             innerJobRecordsDataTable.ajax.reload(null, false);
         }
     });
@@ -1104,7 +1113,7 @@ function viewJob(id) {
     $.ajax({
         type: "GET",
         url: "/job/session/load/" + id,
-        success: function (response) {
+        success: function(response) {
             $('#job_form').trigger("reset");
             job_code.val(response['code']);
             job_date.val(response['date']);
@@ -1142,7 +1151,7 @@ function editJob(id) {
     $.ajax({
         type: "GET",
         url: "/job/session/load/" + id,
-        success: function (response) {
+        success: function(response) {
             $('#job_form').trigger("reset");
             job_code.val(response['code']);
             job_date.val(response['date']);
@@ -1178,7 +1187,7 @@ function refreshStatistics() {
     $.ajax({
         type: "GET",
         url: "/job/statistics",
-        success: function (response) {
+        success: function(response) {
             $('#job_pending_count1').html(response[2][0]);
             $('#job_pending_count11').html(response[2][1]);
             $('#job_pending_count2').html(response[0][0]);
@@ -1190,11 +1199,11 @@ function refreshStatistics() {
 }
 
 function printJob(id) {
-    Notiflix.Confirm.Show('Print', 'Do you sure to print this report?', 'Yes', 'No', function () {
+    Notiflix.Confirm.Show('Print', 'Do you sure to print this report?', 'Yes', 'No', function() {
         $.ajax({
             type: "GET",
             url: "/job/get/print/" + id,
-            success: function (response) {
+            success: function(response) {
                 if (response == 2) {
                     Notiflix.Notify.Warning('Something Wrong.');
                 } else {
@@ -1202,27 +1211,122 @@ function printJob(id) {
                 }
             }
         });
-    }, function () {});
+    }, function() {});
 }
 
 //END Functions - JOB
 
 //START Functions - TRANSFER
 
-$('.transfer_modal_button').click(function (e) {
+$('.transfer_modal_button').click(function(e) {
     e.preventDefault();
     $('#modal').modal('show');
 });
 
 var transfer_modal_from = $('#transfer_location_from');
 var transfer_modal_to = $('#transfer_location_to');
+var transfer_item_suggetions = $('#transfer_item_suggetions');
+var transfer_item = $('#transfer_item');
+var transfer_available_bins = $('#transfer_available_bins');
+var transfer_qty = $('#transfer_qty');
+var transfercompletebtn = $('#transfercompletebtn');
+var transferresetbtn = $('#transferresetbtn');
+var transfermodaltable = $('#transfermodaltable');
+var transfer_session_add_button = $('#transfer_session_add_button');
+var transfer_qty_show_available = $('#transfer_qty_show_available');
 
-transfer_modal_from.add(transfer_modal_to).change(function (e) {
+
+transfer_modal_from.add(transfer_modal_to).change(function(e) {
     e.preventDefault();
     if (transfer_modal_from.val() == transfer_modal_to.val() && transfer_modal_from.val() !== 'none' && transfer_modal_to.val() !== 'none') {
         $(this).val('none');
         Notiflix.Notify.Failure('Please select deferrent locations.');
     }
 });
+
+var transferItemTempMap = {};
+var transferItemTempMap = transfer_item_suggetions.typeahead({
+    source: function(query, process) {
+
+        if (!transfer_modal_from.val()) {
+            Notiflix.Notify.Warning('Please select locations.');
+            transfer_item_suggetions.val('');
+            transfer_item.val('');
+            transfer_modal_from.focus();
+        }
+
+        return $.get('/transfer/item/suggessions/' + transfer_modal_from.val(), {
+            query: query,
+        }, function(data) {
+            transferItemTempMap = {};
+            data.forEach(element => {
+                transferItemTempMap[element['name']] = element['id'];
+            });
+
+            return process(data);
+        });
+    }
+});
+
+transfer_item_suggetions.keyup(function(e) {
+    if ($(this).val().length == 0) {
+        transfer_item.val('');
+    }
+});
+
+transferItemTempMap.change(function(e) {
+    var tempId = transferItemTempMap[transfer_item_suggetions.val()];
+    if (tempId != undefined) {
+        transfer_item.val(tempId);
+        loadTransferModalBins();
+    }
+});
+
+function loadTransferModalBins() {
+    transfer_available_bins.html('');
+    $.ajax({
+        type: "GET",
+        url: "/transfer/item/bins/" + transfer_item.val(),
+        success: function(response) {
+            if (response == 2) {
+                Notiflix.Notify.Warning('No item bins available for this product At targeted location.');
+            } else {
+                transfer_available_bins.append($('<option>').text('None').attr('value', 0));
+                response.forEach(element => {
+                    transfer_available_bins.append($('<option>').text(element.bin_location_name)
+                        .attr(
+                            'value', element.id));
+                });
+
+                transfer_available_bins.attr('aqty', response[0].aqty);
+                transfer_available_bins.attr('symbol', response[0].symbol);
+            }
+        }
+    });
+}
+
+transfer_available_bins.change(function(e) {
+    e.preventDefault();
+    if ($(this).attr('aqty') && $(this).val() != '0') {
+        transfer_qty_show_available.html('( ' + $(this).attr('aqty') + ' ' + $(this).attr('symbol') + ' available )');
+    } else {
+        transfer_qty_show_available.html('');
+    }
+});
+
+transfer_qty.keyup(function(e) {
+    if ($(this).val() > Number(transfer_available_bins.attr('aqty'))) {
+        markAsErrorField(transfer_qty, true);
+    } else {
+        markAsErrorField(transfer_qty, false);
+    }
+});
+
+// transfer_session_add_button.click(function (e) {
+//     e.preventDefault();
+//     if(){
+
+//     }
+// });
 
 //END Functions - TRANSFER

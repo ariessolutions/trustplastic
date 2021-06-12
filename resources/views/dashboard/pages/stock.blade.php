@@ -1,6 +1,4 @@
-@extends('dashboard.layouts.dashboard_app')
-
-@section('content')
+@extends('dashboard.layouts.dashboard_app') @section('content')
 
 <div id="content" class="app-content">
     <div class="container-fluid">
@@ -13,7 +11,7 @@
 
                     <div class="col-xl-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                            <li class="breadcrumb-item header_new_text"><a href="/home">Dashboard</a></li>
                             <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                         </ul>
                         <h1 class="page-header header_new_text">
@@ -50,30 +48,27 @@
                                                                 <i class="fa fa-search"></i>
                                                             </span>
                                                             <input type="text" value="{{ old('grn_code_filter') }}" placeholder="GRN Code" class="form-control rounded-end" name="grn_code_filter" id="grn_code_filter" />
-                                                            <input value="{{ old('exist_grn_code') }}" type="hidden" class="form-control rounded-end" id="exist_grn_code" name="exist_grn_code" />
-                                                            @error('exist_grn_code')
+                                                            <input value="{{ old('exist_grn_code') }}" type="hidden" class="form-control rounded-end" id="exist_grn_code" name="exist_grn_code" /> @error('exist_grn_code')
                                                             <span class="text-danger">
                                                                 <small>{{ $message }}</small>
-                                                            </span>
-                                                            @enderror
+                                                            </span> @enderror
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl-6">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Item Code<span class="text-danger">*</span></label>
+                                                        <label class="form-label">Item Code<span
+                                                                class="text-danger">*</span></label>
                                                         <div class="input-group">
                                                             <span class="input-group-text">
                                                                 <i class="fa fa-search"></i>
                                                             </span>
                                                             <input type="text" value="{{ old('stock_item_code') }}" placeholder="Item Code" class="form-control rounded-end" name="stock_item_code" id="stock_item_code" />
-                                                            <input value="{{ old('stock_item') }}" type="hidden" class="form-control rounded-end" id="stock_item" name="stock_item" />
-                                                            @error('stock_item')
+                                                            <input value="{{ old('stock_item') }}" type="hidden" class="form-control rounded-end" id="stock_item" name="stock_item" /> @error('stock_item')
                                                             <span class="text-danger">
                                                                 <small>{{ $message }}</small>
-                                                            </span>
-                                                            @enderror
+                                                            </span> @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -105,7 +100,8 @@
                                                         <select class="form-control" name="stocklocation" id="stocklocation">
                                                             <option value="0" selected>None</option>
                                                             @foreach ($data['locations'] as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->location_name }}</option>
+                                                            <option value="{{ $item->id }}">{{ $item->location_name }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -115,7 +111,7 @@
 
                                                     <div class="form-group mb-3">
                                                         <label class="form-label" for="stockbin">
-                                                        Bin Location
+                                                            Bin Location
                                                         </label>
                                                         <select class="form-control clearhtml" name="stockbin" id="stockbin">
                                                         </select>
@@ -125,17 +121,55 @@
                                             </div>
 
                                             <div class="col-xl-12">
-                                                <div class="form-group mb-3 mt-4">
-                                                    <a id="submitstockfilters" class="btn btn-primary text-white">
-                                                        <i class="fa fa-share-square-o" aria-hidden="true"></i> Submit</a>
 
-                                                    <button id="resetbtn" type="reset" class="btn btn-round btn-secondary">
-                                                        <i class="fa fa-filter" aria-hidden="true"></i> Refine Filters
-                                                    </button>
+                                                <div class="row">
 
-                                                    <a id="stockprintbtn" class="btn btn-default">
-                                                        <i class="fa fa-print" aria-hidden="true"></i>  Print Report
-                                                    </a>
+                                                    <div class="col-xl-6">
+
+
+                                                        <div class="form-group mb-3 mt-4">
+                                                            <a id="submitstockfilters" class="btn btn-primary text-white">
+                                                                <i class="fa fa-share-square-o" aria-hidden="true"></i> Submit
+                                                            </a>
+
+                                                            <button id="resetbtn" type="reset" class="btn btn-round btn-secondary">
+                                                                <i class="fa fa-filter" aria-hidden="true"></i> Refine
+                                                                Filters
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-xl-6">
+
+                                                        <div class="form-group mb-3 mt-4">
+                                                            <div class="d-flex flex-row-reverse">
+
+                                                                <a id="stockprintbtn" class="btn btn-default">
+                                                                    <i class="fa fa-print" aria-hidden="true"></i> Print Report
+                                                                </a>
+
+                                                                <div class="form-check px-3 pt-2">
+                                                                    <!-- <i class="fa fa-database" aria-hidden="true"></i>&nbsp; -->
+                                                                    <input class="form-check-input" type="radio" id="stock-bin-wise" name="a" />
+                                                                    <label class="form-check-label" for="stock-bin-wise">Bin</label>
+                                                                </div>
+
+                                                                <div class="form-check px-3 pt-2">
+                                                                    <!-- <i class="fa fa-book" aria-hidden="true"></i>&nbsp; -->
+                                                                    <input class="form-check-input" type="radio" id="stock-item-wise" name="a" checked />
+                                                                    <label class="form-check-label" for="stock-item-wise">Item</label>
+                                                                </div>
+
+                                                                <div class="form-check px-3 pt-2">
+                                                                    <i class="fa fa-filter" aria-hidden="true"></i>&nbsp;
+                                                                    <label class="form-check-label">Order by</label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -168,6 +202,7 @@
                                                     <th scope="col">#</th>
                                                     <th scope="col">Item Code</th>
                                                     <th scope="col">Part Code</th>
+                                                    <th scope="col">Bin Location</th>
                                                     <th scope="col">Item Name</th>
                                                     <th scope="col">Qty</th>
                                                     <th scope="col">Low Stock</th>

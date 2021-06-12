@@ -3,22 +3,22 @@
     <div class="modal fade" id="modal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark-400">
 
-                    <h5 class="modal-title header_new_text">ADD NEW GRN</h5>
+                    <h5 class="modal-title header_new_text text-white">ADD NEW GRN</h5>
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <a id="grnmodalreset" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                            <a id="grnmodalreset" class="btn btn-sm btn-default btnround"><i class="far fa-trash-alt"></i></a>
+                        </div>
+
+                        <div id="printmodal_div" class="px-1">
+                            <a id="printmodal" class="btn btn-sm btn-default btnround"><i class="fa fa-print"></i></a>
                         </div>
 
                         <div class="px-1 ">
-                            <a id="printmodal" class="btn btn-default"><i class="fa fa-print"></i></a>
-                        </div>
-
-                        <div class="px-1 ">
-                            <a id="grnmodalclose" class="btn bg-dark-100">
-                                <i class="fa fa-times"></i>
+                            <a id="grnmodalclose" class="btn btn-sm btn-yellow btnround">
+                                <i class="far fa-window-minimize"></i>
                             </a>
                         </div>
                     </div>
@@ -48,23 +48,27 @@
 
                                             @include('alerts.formalert')
 
-                                            <div class="col-xl-12">
-                                                <div class="form-group mb-3">
-                                                    <label class="form-label">
-                                                        Date
-                                                    </label>
-                                                    <input id="grn_date" autofocus="autofocus" name="grn_date" type="date" class="form-control" readonly />
-                                                </div>
-                                            </div>
+                                            <div class="row">
 
-                                            <div class="col-xl-12">
-                                                <div class="form-group mb-3">
-                                                    <label class="form-label">
-                                                        PO Code
-                                                    </label>
-                                                    <input id="grnpocode" name="grnpocode" type="text" class="form-control" />
-
+                                                <div class="col-xl-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            Date
+                                                        </label>
+                                                        <input id="grn_date" autofocus="autofocus" name="grn_date" type="date" class="form-control" readonly />
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-xl-6">
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">
+                                                            PO Code
+                                                        </label>
+                                                        <input id="grnpocode" name="grnpocode" type="text" class="form-control" />
+
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             <div class="col-xl-12">

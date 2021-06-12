@@ -61,7 +61,7 @@ class GRN extends Model
         return $this::where('id', $id)->with('grnitems')->with('po')->with('location')->first();
     }
 
-    public function getStock($data)
+    public function getStock($data,$binWise=false)
     {
         $query = StockHasItems::where('status', 1);
 
@@ -89,8 +89,13 @@ class GRN extends Model
             $query->whereIn('stock_id', (new Stock)->getGrnStocks($data['grnid']));
         }
 
-        return $query->selectRaw("item_id,SUM(qty) as totqty")
+        if($binWise==false){
+            return $query->selectRaw("item_id,SUM(qty) as totqty")
             ->groupBy('item_id')->get();
+        }else{
+            return $query->selectRaw("item_id,bin_location_id,SUM(qty) as totqty")
+            ->groupBy('bin_location_id')->get();
+        }
     }
 
     public function suggetions($input)

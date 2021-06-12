@@ -135,8 +135,8 @@ Route::get('/grn/code/get/all',[GRNController::class,'suggetions']);
 Route::get('/grn/get/print/{id}',[GRNController::class,'printReport']);
 
 Route::get('/stocks',[StockController::class,'index'])->middleware(['auth','permitted']);
-Route::get('/stocks/get/table/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}',[StockController::class,'tableView']);
-Route::get('/stocks/print/report/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}',[StockController::class,'printReport']);
+Route::get('/stocks/get/table/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}/{isChecked}',[StockController::class,'tableView']);
+Route::get('/stocks/print/report/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}/{isChecked}',[StockController::class,'printReport']);
 
 Route::get('/job',[JobController::class,'index'])->middleware(['auth','permitted']);
 Route::get('//job/table/get',[JobController::class,'getAll'])->middleware(['auth']);

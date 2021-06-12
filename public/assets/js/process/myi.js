@@ -16,7 +16,7 @@ $('#mr_modal').click(function (e) {
                 row_data += '<div>' +
                     '<div class="list-group-item d-flex ps-3 border-0 shadow-sm mb-3">' +
                     '<div class="me-3">' +
-                    '<i class="far fa-circle text-warning fa-fw fa-lg"></i>' +
+                    '<i class="fa fa-cube fa-fw fa-lg" style="color:#212121" ></i>' +
                     '</div>' +
                     '<div class="flex-fill">' +
                     '<div class="font-weight-600 text-dark">' + response["products"][i]['code'] + '</div>' +
@@ -29,7 +29,7 @@ $('#mr_modal').click(function (e) {
                     '<div class="input-group flex-nowrap">' +
                     '<div>' +
                     '<button class="btn btn-primary btn-sm" onclick="mr_loadProductDetails(' + response["products"][i]['id'] + ')">' +
-                    '<i class="fa fa - plus"></i>Add Materials </button>' +
+                    '<i class="fa fa-share-square-o" aria-hidden="true"></i> Add Materials </button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
