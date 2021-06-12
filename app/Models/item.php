@@ -36,7 +36,7 @@ class item extends Model
 
     public function getItemById($id)
     {
-        return $this::where('id', $id)->first();
+        return $this::where('id', $id)->with('munit')->first();
     }
 
     public function getItemByCode($code)

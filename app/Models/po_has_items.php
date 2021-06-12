@@ -49,16 +49,21 @@ class po_has_items extends Model
         return $this->hasOne(item::class, 'id', 'item_id')->with('munit');
     }
 
+    public function bindata()
+    {
+        return $this->hasOne(bin_location::class, 'id', 'bin_location_id');
+    }
+
     public function updateGrnInQty($poiid, $grnQty)
     {
         $rec = $this::where('id', $poiid)->first();
 
-        if ($rec->grn_in_qty==0 && $rec->qty <= $grnQty) {
+        if ($rec->grn_in_qty == 0 && $rec->qty <= $grnQty) {
             $rec->update([
                 'status' => 4,
             ]);
         } else {
-            $newQty = ((($rec->grn_in_qty==0)?$rec->qty:$rec->grn_in_qty) - $grnQty);
+            $newQty = ((($rec->grn_in_qty == 0) ? $rec->qty : $rec->grn_in_qty) - $grnQty);
             $rec->update([
                 'grn_in_qty' => $newQty,
             ]);
@@ -73,8 +78,7 @@ class po_has_items extends Model
 
     public function getNonGRNZeros($poid)
     {
-        return $this::where('grn_in_qty','>',0)->where('po_id', $poid)->count();
+        return $this::where('grn_in_qty', '>', 0)->where('po_id', $poid)->count();
     }
-
 
 }

@@ -22,11 +22,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
     <link href="{{ asset('assets/css/notiflix.css') }}" rel="stylesheet" />
 
-    <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+    {{--  <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet" />  --}}
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -45,6 +44,50 @@
 
     <script src="{{ asset('assets/js/process/print.js') }}"></script>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+        .header_new_text{
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .seldisable{
+            pointer-events:none;
+            background-color:#DAE0EC;
+        }
+
+        .dataTables_paginate a {
+            padding: 6px 12px !important;
+            /* border: 2px solid #eeeeee; */
+            border-radius: 3px;
+            background: white !important;
+            border-color: white !important;
+        }
+
+        .dataTables_paginate a:hover{
+            background:#eeeeee !important;
+            /* color: #ffffff */
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: transparent;
+            padding: 4px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: transparent;
+            margin-left: 3px;
+}
+
+
+
+    </style>
 
 </head>
 
@@ -246,7 +289,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="email_compose.html" class="menu-link">
+                                        <a href="/mr" class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="fa fa-flask"></i>
                                             </span>
@@ -367,19 +410,18 @@
         type="0485eeef8cf3263d1a7b2548-text/javascript"></script>
 
     <script src="{{ asset('assets/js/process/admin.js') }}"></script>
+    <script src="{{ asset('assets/js/process/myi.js') }}"></script>
 
 
     @if ((session()->has('code') && session()->get('code') == 2) || $errors->any())
         <script>
             $('#modal').modal('show');
-
         </script>
     @endif
 
     <script>
         $(".phone").mask("(999) 999-9999");
         $("input.precentage").mask("99%");
-
     </script>
 
 </body>

@@ -1,11 +1,11 @@
 <form action="/grn/enroll" method="POST" id="grnForm">
     @csrf
-    <div class="modal modal-cover fade bg-dark" id="modal">
+    <div class="modal fade" id="modal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title text-white">ADD NEW GRN</h5>
+                    <h5 class="modal-title header_new_text">ADD NEW GRN</h5>
 
                     <div class="d-flex">
                         <div class="px-1 ">
@@ -28,8 +28,8 @@
                         <div class="col-xl-12">
 
                             <div class="row">
-                                <div class="col-xl-3 mb-3">
-                                    <div class="card mb-3 h-100 border-0">
+                                <div class="col-xl-12 mb-3">
+                                    <div class="card mb-3 h-100 border-1 shadow-sm">
 
                                         <div class="card-header bg-gradient-custom-teal border-0">
 
@@ -85,9 +85,9 @@
                                     </div>
 
                                 </div>
-                                <div class="col-xl-9">
+                                <div class="col-xl-12">
 
-                                    <div class="card mb-3 border-0">
+                                    <div class="card mb-3 border-1 shadow-sm">
 
                                         <div class="card-header bg-dark-400 ">
                                             <h6 class="mt-2 text-white">Added Items for Purchase Order</h6>
@@ -98,7 +98,7 @@
                                             <div class="row">
 
                                                 <div class="table-responsive">
-                                                    <table id="grnTable" class="table table-borderless table-striped text-nowrap pt-2 w-100">
+                                                    <table id="grnTable" class="tableMheight table table-borderless table-striped text-nowrap pt-2 w-100">
                                                         <thead>
                                                             <tr>
                                                                 <th>Item Code</th>
@@ -114,25 +114,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="d-flex">
-
-                                                    <div class="d-flex">
-                                                        <div class="px-1">
-
-                                                            <button id="newgrnsubmitbtn" type="submit" form="grnForm" class="btn btn-teal"> <i class='fa fa-check'></i>
-                                                                Save & Complete </button>
-                                                        </div>
-
-                                                        <div class="px-1">
-                                                            <a class="btn btn-default" id="grnallclearbtn"><i class="fa fa-trash"></i>
-                                                                Delete All</a>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
 
                                     </div>
@@ -143,6 +124,28 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="d-flex">
+
+                            <div class="d-flex">
+                                <div class="px-1">
+
+                                    <button id="newgrnsubmitbtn" type="submit" form="grnForm" class="btn btn-teal"> <i class='fa fa-check'></i>
+                                        Save & Complete </button>
+                                </div>
+
+                                <div class="px-1">
+                                    <a class="btn btn-default" id="grnallclearbtn"><i class="fa fa-trash"></i>
+                                        Delete All</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

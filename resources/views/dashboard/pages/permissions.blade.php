@@ -13,10 +13,10 @@
 
                     <div class="col-xl-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
-                            <li class="breadcrumb-item active">{{ Session::get('view', 'non') }}</li>
+                            <li class="breadcrumb-item header_new_text"><a href="/home">Dashboard</a></li>
+                            <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                         </ul>
-                        <h1 class="page-header">
+                        <h1 class="page-header header_new_text">
                             {{ Session::get('view', 'non') }}
                         </h1>
                         <hr class="mb-4" />

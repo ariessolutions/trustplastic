@@ -42,6 +42,20 @@ class Product extends Model
 
     public function vehicles()
     {
-        return $this->hasOne(Vehicle::class,'id','vehicle');
+        return $this->hasOne(Vehicle::class, 'id', 'vehicle');
     }
+
+    public function suggetions($vid,$input)
+    {
+        return $this::where('vehicle',$vid)->where([
+            ['status', '=', 1],
+            ['vehicle', '=', $vid],
+            ["name", "LIKE", "%{$input['query']}%"],
+        ])->orWhere([
+            ['status', '=', 1],
+            ['vehicle', '=', $vid],
+            ["code", "LIKE", "%{$input['query']}%"],
+        ])->get();
+    }
+
 }

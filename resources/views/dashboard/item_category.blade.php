@@ -13,20 +13,19 @@
 
                         <div class="col-xl-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Item Management</li>
-                                <li class="breadcrumb-item active">Item Caregory Registration</li>
+                                <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                                <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                             </ul>
-                            <h1 class="page-header">
-                                Item Category Registration
+                            <h1 class="page-header header_new_text">
+                                {{ Session::get('view', 'non') }}
                             </h1>
                             <hr class="mb-4" />
 
                             <div class="row">
 
-                                <div class="col-xl-4">
+                                <div class="col-xl-12">
 
-                                    <div id="formControls" class="mb-5">
+                                    <div id="formControls" class="mb-3">
 
                                         <div class="card">
                                             <div class="card-header">
@@ -98,7 +97,7 @@
 
                                 </div>
 
-                                <div class="col-xl-8">
+                                <div class="col-xl-12">
 
                                     <div class="card">
                                         <div class="card-header">
@@ -181,14 +180,9 @@
                     },
                     success: function(response) {
 
-
-
                         location.reload();
 
                         Notiflix.Notify.Success('Item Category Deactivation Successful');
-
-
-
                     }
                 });
             });

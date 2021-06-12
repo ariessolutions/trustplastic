@@ -35,6 +35,20 @@ class ProductController extends Controller
         return response()->json($data, 200);
     }
 
+    public function suggetionsVehicle($vid, Request $request)
+    {
+        $data = array();
+
+        foreach ((new Product)->suggetions($vid, $request->all()) as $item) {
+            $data[] = [
+                'id' => $item->id,
+                'name' => '(' . $item->code . ')' . ' - ' . $item->name,
+            ];
+        }
+
+        return response()->json($data, 200);
+    }
+
     public function enrollorupdate(Request $request)
     {
 
@@ -100,11 +114,11 @@ class ProductController extends Controller
             $resp[] = [$index, $value->code,
                 $value->name,
                 $value->vehicles->brand,
-                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'ACTIVE' : 'INACTIVE') . '</span>',
+                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'Active' : 'Inactive') . '</span>',
                 '<div class="input-group flex-nowrap">
                 <div class="m-1">
                     <button class="btn btn-secondary btn-sm" onclick="gproductdata(' . $value->id . ')">
-                        Edit
+                       View / Edit
                     </button>
                 </div>
                 <div class="m-1">

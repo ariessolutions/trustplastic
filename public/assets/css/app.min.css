@@ -55,6 +55,10 @@
 	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))
 }
 
+.tableMheight tr{
+    line-height: 30px;
+}
+
 *,
 ::after,
 ::before {

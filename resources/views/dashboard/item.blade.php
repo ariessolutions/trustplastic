@@ -13,22 +13,22 @@
 
                         <div class="col-xl-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Item Management</li>
-                                <li class="breadcrumb-item active">Item Registration</li>
+                                <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                                <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                             </ul>
-                            <h1 class="page-header">
-                                Item Registration
+                            <h1 class="page-header header_new_text">
+                                {{ Session::get('view', 'non') }}
                             </h1>
                             <hr class="mb-4" />
 
-                            <div id="formControls" class="mb-5">
+                            <div id="formControls" class="mb-3">
 
                                 <div class="row">
 
-                                    <div class="col-xl-3">
+                                    <div class="col-xl-12">
 
                                         <div class="card mb-3">
+
                                             <div class="card-header">
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
@@ -41,6 +41,7 @@
                                                     </a>
                                                 </div>
                                             </div>
+
                                             <div class="card-body pb-2">
 
                                                 @include('dashboard.components.flash')
@@ -68,6 +69,7 @@
                                                             <label class="form-label">
                                                                 Item Part Code
                                                             </label>
+
                                                             <input id="item_part_code" name="item_part_code" type="text"
                                                                 class="form-control" />
                                                             @error('item_part_code')
@@ -146,13 +148,10 @@
 
                                                 </form>
                                             </div>
-
                                         </div>
-
                                     </div>
 
-                                    <div class="col-xl-9">
-
+                                    <div class="col-xl-12">
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="d-flex">
@@ -218,7 +217,6 @@
 
     <script>
         $('#itemtable').DataTable();
-
     </script>
 
     <script>

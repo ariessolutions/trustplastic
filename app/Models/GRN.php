@@ -81,6 +81,10 @@ class GRN extends Model
             $query=$query->where('item_id', $data['item_id']);
         }
 
+        if ($data['locationid']!=null) {
+            $query->whereIn('stock_id', (new Stock)->getLocationStocks($data['locationid']));
+        }
+
         if ($data['grnid']!=null) {
             $query->whereIn('stock_id', (new Stock)->getGrnStocks($data['grnid']));
         }

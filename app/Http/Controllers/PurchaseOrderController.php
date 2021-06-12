@@ -693,12 +693,24 @@ class PurchaseOrderController extends Controller
         $active = (new purchase_order)->where('status', 1)->count();
         $deactive = (new purchase_order)->where('status', 2)->count();
         $pending = (new purchase_order)->where('status', 3)->count();
+        $complete = (new purchase_order)->where('status', 4)->count();
         $all = (new purchase_order)->getPoCount();
 
-        $data = [$active, $deactive, $pending, $all];
+        $data = [$active, $deactive, $pending, $all, $complete];
 
         return $data;
 
+    }
+
+    public function printReport(Request $request)
+    {
+        $data = (new purchase_order)->printReport($request->id);
+        if($data){
+            // return $data;
+            return view('reports.poReport')->with('data',$data);
+        }else{
+            return 2;
+        }
     }
 
 }

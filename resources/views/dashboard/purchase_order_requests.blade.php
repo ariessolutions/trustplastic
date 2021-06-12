@@ -13,12 +13,12 @@
 
                         <div class="col-xl-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Purchase Order Management</li>
+                                <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                                <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                             </ul>
 
-                            <h1 class="page-header">
-                                Purchase Order Requests
+                            <h1 class="page-header header_new_text">
+                                {{ Session::get('view', 'non') }}
                             </h1>
 
                             <hr class="mb-4" />
@@ -35,94 +35,133 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xl-3">
+                                <div class="col-xl-12">
 
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex mb-3">
-                                                <div class="flex-grow-1">
-                                                    <h5 class="mb-1"><span class="text-warning">Pending</span> Quotations
-                                                    </h5>
-                                                    <div>Total pending quotations count</div>
-                                                </div>
-                                                <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
-                                                        class="fa fa-redo"></i></a>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="flex-grow-1">
-                                                    <h3 id="pendingN" class="mb-1">
+                                   <div class="row">
 
-                                                    </h3>
-                                                    <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i>
-                                                        <span id="pendingP">
-
-                                                        </span>
+                                    <div class="col-xl-3">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-warning">Pending</span> Quotations
+                                                        </h5>
+                                                        <div>Total pending quotations count</div>
                                                     </div>
+                                                    <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
                                                 </div>
-                                                <div
-                                                    class="width-50 height-50 bg-warning-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-hourglass-end fa-lg text-warning"></i>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 id="pendingN" class="mb-1">
+
+                                                        </h3>
+                                                        <div class="text-success font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i>
+                                                            <span id="pendingP">
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-warning-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-hourglass-end fa-lg text-warning"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex mb-3">
-                                                <div class="flex-grow-1">
-                                                    <h5 class="mb-1"><span class="text-success">Approved</span> Quotations
-                                                    </h5>
-                                                    <div>Total approved quotations count</div>
-                                                </div>
-                                                <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
-                                                        class="fa fa-redo"></i></a>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="flex-grow-1">
-                                                    <h3 id="activeN" class="mb-1"></h3>
-                                                    <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i> <span id="activeP"></span>
+                                    <div class="col-xl-3">
+
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-success">Approved</span> Quotations
+                                                        </h5>
+                                                        <div>Total approved quotations count</div>
                                                     </div>
+                                                    <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
                                                 </div>
-                                                <div
-                                                    class="width-50 height-50 bg-success-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-check fa-lg text-success"></i>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 id="activeN" class="mb-1"></h3>
+                                                        <div class="text-success font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i> <span id="activeP"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-success-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-check fa-lg text-success"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex mb-3">
-                                                <div class="flex-grow-1">
-                                                    <h5 class="mb-1"><span class="text-danger">Discontinued</span>
-                                                        Quotations</h5>
-                                                    <div>Total discontinued quotations count</div>
-                                                </div>
-                                                <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
-                                                        class="fa fa-redo"></i></a>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="flex-grow-1">
-                                                    <h3 id="deactiveN" class="mb-1"></h3>
-                                                    <div class="text-success font-weight-600 fs-13px">
-                                                        <i class="fa fa-globe"></i> <span id="deactiveP"></span>
+                                    <div class="col-xl-3">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-danger">Discontinued</span>
+                                                            Quotations</h5>
+                                                        <div>Total discontinued quotations count</div>
                                                     </div>
+                                                    <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
                                                 </div>
-                                                <div
-                                                    class="width-50 height-50 bg-danger-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-close fa-lg text-danger"></i>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 id="deactiveN" class="mb-1"></h3>
+                                                        <div class="text-success font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i> <span id="deactiveP"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-danger-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-close fa-lg text-danger"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-xl-3">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-primary">Completed</span>
+                                                            Purchase Orders</h5>
+                                                        <div>Total completed purchase order count</div>
+                                                    </div>
+                                                    <a href="#" data-bs-toggle="dropdown" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 id="completeN" class="mb-1"></h3>
+                                                        <div class="text-success font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i> <span id="completeP"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-primary-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-check-circle fa-lg text-primary"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   </div>
 
                                 </div>
 
-                                <div class="col-xl-9">
+                                <div class="col-xl-12">
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="d-flex">
@@ -170,26 +209,22 @@
         </div>
     </div>
 
-    <div class="modal modal-cover fade bg-dark " id="poItemInsert">
+    <div class="modal fade " id="poItemInsert">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title text-white">CREATE PURCHASE ORDER</h5>
+                    <h5 class="modal-title header_new_text">CREATE PURCHASE ORDER</h5>
 
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <button id="deleteAllSessions" class="btn btn-default"><i class="fa fa-trash"></i></button>
+                            <button id="deleteAllSessions" class="btn btn-default"><i class="far fa-trash-alt"></i></button>
                         </div>
 
                         <div class="px-1 ">
-                            <button class="btn btn-default"><i class="fa fa-print"></i></button>
-                        </div>
-
-                        <div class="px-1 ">
-                            <button id="modal_close_btn" class="btn bg-dark-100">
-                                <i class="fa fa-times"></i>
+                            <button id="modal_close_btn" class="btn btn-default">
+                                <i class="far fa-window-minimize"></i>
                             </button>
                         </div>
                     </div>
@@ -208,7 +243,7 @@
 
                                     <div class="col-xl-4 mb-3">
 
-                                        <div class="card mb-3 h-100 border-0">
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
 
                                             <div class="card-header bg-gradient-custom-teal">
                                                 <h6 class="mt-2 text-white">Primary Details</h6>
@@ -302,7 +337,7 @@
 
                                     <div class="col-xl-4 mb-3">
 
-                                        <div class="card mb-3 h-100 border-0">
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
 
                                             <div class="card-header bg-gradient-custom-teal border-0">
                                                 <h6 class="mt-2 text-white">Secondary Details</h6>
@@ -367,7 +402,7 @@
 
                                     <div class="col-xl-4 mb-3">
 
-                                        <div class="card mb-3 h-100 border-0">
+                                        <div class="card mb-3 h-100 border-1 shadow-sm">
 
                                             <div class="card-header bg-gradient-custom-teal border-0">
                                                 <h6 class="mt-2 text-white">PO Net Amount Details</h6>
@@ -420,7 +455,7 @@
 
                         <div class="col-xl-3 pb-3">
 
-                            <div class="card h-100 border-0">
+                            <div class="card h-100 border-1 shadow-sm">
 
                                 <div class="card-header bg-gradient-cyan-indigo border-0">
 
@@ -528,7 +563,7 @@
 
                         <div class="col-xl-12">
 
-                            <div class="card mb-3 border-0">
+                            <div class="card mb-3 border-1 shadow-sm">
 
                                 <div class="card-header bg-dark-400 ">
                                     <h6 class="mt-2 text-white">Added Items for Purchase Order</h6>
@@ -591,7 +626,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title">VIEW / UPDATE PURCHASE ORDER</h5>
+                    <h5 class="modal-title header_new_text">VIEW / UPDATE PURCHASE ORDER</h5>
 
 
                     <div class="d-flex">
@@ -604,12 +639,12 @@
                         </div>
 
                         <div class="px-1 ">
-                            <button class="btn btn-default"><i class="fa fa-print"></i></button>
+                            <button id="po_printReport_button" class="btn btn-default"><i class="fa fa-print"></i></button>
                         </div>
 
                         <div class="px-1 ">
                             <button id="modal_close_btn_view" class="btn btn-default">
-                                <i class="fa fa-times"></i>
+                                <i class="far fa-window-minimize"></i>
                             </button>
                         </div>
                     </div>
@@ -1082,6 +1117,8 @@
                 success: function(response) {
                     purchaseOrderTableView.clear().draw();
 
+                    $('#po_printReport_button').attr('onclick', 'po_printReport(' + id + ')');
+
                     $('#location_id_view').prop('readonly', true);
                     $('#supplier_id_view').prop('readonly', true);
                     $('#po_date_view').prop('readonly', true);
@@ -1113,7 +1150,7 @@
                         $('#poStatus').removeAttr('class');
                         $('#poStatus').addClass(
                             'badge bg-green-100 text-success px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
-                            );
+                        );
                         $('#poStatus').html(
                             '<i class="fa fa-circle text-success fs-9px fa-fw me-5px"></i>Approved');
 
@@ -1124,7 +1161,7 @@
                         $('#poStatus').removeAttr('class');
                         $('#poStatus').addClass(
                             'badge bg-red-100 text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
-                            );
+                        );
                         $('#poStatus').html(
                             '<i class="fa fa-circle text-danger fs-9px fa-fw me-5px"></i>Discontinued');
 
@@ -1135,12 +1172,18 @@
                         $('#poStatus').removeAttr('class');
                         $('#poStatus').addClass(
                             'badge bg-yellow-100 text-warning px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
-                            );
+                        );
                         $('#poStatus').html(
                             '<i class="fa fa-circle text-warning fs-9px fa-fw me-5px"></i>Pending');
 
                     } else {
                         visibleFalse(true);
+                        $('#poStatus').removeAttr('class');
+                        $('#poStatus').addClass(
+                            'badge bg-blue-100 text-primary px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center'
+                        );
+                        $('#poStatus').html(
+                            '<i class="fa fa-circle text-primary fs-9px fa-fw me-5px"></i>GRN In : Completed');
                     }
 
                     $('#poItemView').modal('show');
@@ -1341,7 +1384,6 @@
             }
 
         });
-
 
         function calculateDbTotal() {
 
@@ -1996,10 +2038,34 @@
                     $('#deactiveN').html(response[1]);
                     $('#deactiveP').html(((response[1] / response[3]) * 100).toFixed(2) + '%');
 
+                    $('#completeN').html(response[4]);
+                    $('#completeP').html(((response[4] / response[3]) * 100).toFixed(2) + '%');
+
                 }
             });
 
         });
+
+        function po_printReport(id) {
+
+            Notiflix.Confirm.Show('Print', 'Do you sure to print this report?', 'Yes', 'No', function() {
+                $.ajax({
+                    type: "GET",
+                    url: "/po/printReport",
+                    data: {
+                        id: id,
+                    },
+                    success: function(response) {
+                        if (response == 2) {
+                            Notiflix.Notify.Warning('Something Wrong.');
+                        } else {
+                            printReport(response);
+                        }
+                    }
+                });
+            }, function() {});
+
+        }
 
     </script>
 

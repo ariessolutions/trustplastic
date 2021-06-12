@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $data['grn_code'] }} - {{ Session::get('view', 'non') }}</title>
+    <title>Stock Report - {{ Session::get('view', 'non') }}</title>
 
     <style>
         @page {
@@ -129,6 +129,7 @@
     <div class="text-center">
         <h3>TRUST PLASTIC INDUSTRIES PRIVATE LIMITED</h3>
         <span>No. 451/6, Makola North, Makola - 11640</span>
+        <span> - <strong>Stock Report</strong></span>
     </div>
 
     <br>
@@ -140,22 +141,22 @@
                     <tr>
                         <td><b>GRN #</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ $data['grn_code'] }}</td>
+                        <td>{{ ($data['filters']['grn']!=null)?$data['filters']['grn']['grn_code']:'-'}}</td>
                     </tr>
                     <tr>
-                        <td><b>GRN Date</b></td>
+                        <td><b>Item</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ $data['created_at'] }}</td>
+                        <td>{{ ($data['filters']['item']!=null)?'('.$data['filters']['item']['item_code'].') '.$data['filters']['item']['item_name']:'-'}}</td>
                     </tr>
                     <tr>
-                        <td><b>Receiving Store</b></td>
+                        <td><b>Location</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ $data['location']['location_name'] }}, {{ $data['location']['location_address'] }}</td>
+                        <td>{{ ($data['filters']['location']!=null)?$data['filters']['location']['location_name'].' '.$data['filters']['location']['location_address']:'-'}}</td>
                     </tr>
                     <tr>
-                        <td><b>Purchase Order #</b></td>
+                        <td><b>Bin Location</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ $data['po']['po_code'] }}</td>
+                        <td>{{ ($data['filters']['bin']!=null)?$data['filters']['bin']['bin_location_name']:'-'}}</td>
                     </tr>
                 </table>
             </div>
@@ -164,15 +165,14 @@
                 <div style="margin-left: auto; margin-right: 0px">
                     <table>
                         <tr>
-                            <td><b>Vendor #</b></td>
+                            <td><b>Date From</b></td>
                             <td>&nbsp;</td>
-                            <td>{{ $data['po']['supplier']['supplier_code'] }}</td>
+                            <td>{{ ($data['filters']['from']!=0)?$data['filters']['from']:'-'}}</td>
                         </tr>
-
                         <tr>
-                            <td><b>Vendor Name</b></td>
+                            <td><b>Date To</b></td>
                             <td>&nbsp;</td>
-                            <td>{{ $data['po']['supplier']['supplier_name'] }}</td>
+                            <td>{{ ($data['filters']['to']!=0)?$data['filters']['to']:'-'}}</td>
                         </tr>
 
                         <tr>
@@ -201,29 +201,25 @@
                 <thead>
                     <tr class="trcolor">
                         <th class="tborderth tborder tbleft bold-100" style="text-align: left">#</th>
-                        <th class="tborderth tborder bold-100" style="text-align: left">Item Part</th>
-                        <th class="tborderth tborder bold-100" style="text-align: left">Item Name</th>
-                        <th class="tborderth tborder bold-100 text-left">Unit Price</th>
-                        <th class="tborderth tborder bold-100" style="text-align: right">Qty</th>
-                        <th class="tborderth tborder bold-100" style="text-align: right">Discount %</th>
-                        <th class="tborderth tborder bold-100" style="text-align: right">VAT %</th>
-                        <th class="tborderth tborder tbright bold-100 " style="text-align: right">Amount</th>
+                        <th class="tborderth tborder bold-100" style="text-align: left">Item Code</th>
+                        <th class="tborderth tborder bold-100" style="text-align: left">Part Code</th>
+                        <th class="tborderth tborder bold-100" style="text-align: center">Item Name</th>
+                        <th class="tborderth tborder bold-100" style="text-align: center">Qty</th>
+                        <th class="tborderth tborder tbright bold-100" style="text-align: center">Low Stock</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
                         $index=1;
                     @endphp
-                    @foreach ($data['grnitems'] as $gi)
+                    @foreach ($data['records'] as $record)
                     <tr>
-                        <td class="tborder tbleft">{{ $index }}</td>
-                        <td class="tborder">{{ $gi['item']['item_part_code'] }}</td>
-                        <td class="tborder">{{ $gi['item']['item_name'] }}</td>
-                        <td class="tborder alright text-left">{{ env('CURRENCY').' ' . number_format($gi['unit_price'], 2, '.', ',') }}</td>
-                        <td class="tborder alright text-center">{{ $gi['qty'] }} {{ $gi['item']['munit']->symbol }}</td>
-                        <td class="tborder alright text-center">{{ $gi['discount'] }}</td>
-                        <td class="tborder alright text-center">{{ $gi['vat'] }}</td>
-                        <td class="tborder alright tbright ">{{ env('CURRENCY').' ' . number_format($gi['subtotal'], 2, '.', ',') }}</td>
+                        <td style="text-align: left" class="tborder tbleft">{{ $index }}</td>
+                        <td style="text-align: left" class="tborder">{{ $record[0]['item_code'] }}</td>
+                        <td style="text-align: left" class="tborder">{{ $record[0]['item_part_code'] }}</td>
+                        <td style="text-align: center" class="tborder">{{ $record[0]['item_name'] }}</td>
+                        <td style="text-align: center" class="tborder">{{ $record[1]['totqty'] }}</td>
+                        <td style="text-align: center" class="tborder tbright">{{ ($record[1]['totqty']<5)?'YES':'NO' }}</td>
                     </tr>
                     @php
                         $index++;
@@ -236,54 +232,6 @@
 
     </div>
     <br>
-
-    <div>
-
-        <div class="row">
-            <table style="margin-left: auto; margin-right: 0;">
-                <tr class="smargin">
-                    <td class="smargin"><b>Sub Total (LKR)</b></td>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right">{{  number_format($data['po_tot'], 2, '.', ',') }}</td>
-                </tr>
-                <tr class="smargin">
-                    <td class="smargin"><b>Discount (%)</b></td>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right">{{  number_format($data['po']['discount'], 2, '.', ',') }}</td>
-                </tr>
-                <tr class="smargin">
-                    <td class="smargin"><b>VAT (%)</b></td>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right; ">{{  number_format($data['po']['tot_vat'], 2, '.', ',') }}</td>
-                </tr>
-                <tr class="smargin">
-                    <td class="smargin"><b>Net Total (LKR)</b></td>
-                    <td>&nbsp;</td>
-                    <td style="text-align: right; border-bottom: 4px double black; border-top:1px solid black">
-                        {{  number_format($data['grn_total'], 2, '.', ',') }}
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div style="margin-top: 50px">
-        @if ($data['remark'])
-        <p style="text-align: justify"><strong>Remark : </strong>{{ $data['remark'] }}</p>
-        @endif
-
-        <br>
-        <div class="row" style="margin-top: 50px">
-            <div class="col-4">
-                <div style="margin-right: auto; margin-left: 0px;" class="text-center"><span>..............................................</span><br><span><i>Issued by</i></span></div>
-            </div>
-            <div class="col-4 text-center text-align-right">
-                <span>..............................................</span><br><span><i>Received
-                        by</i></span>
-            </div>
-        </div>
-
-    </div>
 
 </body>
 

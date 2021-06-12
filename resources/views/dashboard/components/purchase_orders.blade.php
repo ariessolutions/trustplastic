@@ -61,6 +61,9 @@
                         <button class="btn btn-secondary btn-sm" onclick="loadModalforView({{ $po->id }})">
                             View
                         </button>
+                        <button class="btn btn-default btn-sm" onclick="po_printReport({{ $po->id }})">
+                            <i class="fa fa-print" aria-hidden="true"></i> Print
+                        </button>
                     </div>
                 </div>
             </td>

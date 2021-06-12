@@ -284,7 +284,7 @@ class GRNController extends Controller
             </div>
             <div class="m-1">
                 <a onclick="printGRN('.$value->id.')" class="btn btn-round btn-default btn-sm" data-role="completed-deactivate">
-                    Print
+                <i class="fa fa-print" aria-hidden="true"></i> Print
                 </a>
             </div>
         </div>',

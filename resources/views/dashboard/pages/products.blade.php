@@ -13,17 +13,17 @@
 
                     <div class="col-xl-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
-                            <li class="breadcrumb-item active">{{ Session::get('view', 'non') }}</li>
+                            <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                            <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                         </ul>
-                        <h1 class="page-header">
+                        <h1 class="page-header header_new_text">
                             {{ Session::get('view', 'non') }}
                         </h1>
                         <hr class="mb-4" />
 
                         <div class="row">
 
-                            <div class="col-xl-4">
+                            <div class="col-xl-12 mb-3">
                                 <div class="card">
 
                                     <div class="card-header">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-8">
+                            <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="d-flex">
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body table-responsive">
-                                        <table id="productsTable" class="display table table-borderless table-striped text-nowrap pt-2">
+                                        <table id="productsTable" class="table table-borderless table-striped text-nowrap pt-2">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>

@@ -13,11 +13,11 @@
 
                         <div class="col-xl-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="inventory">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Supplier Management</li>
+                                <li class="breadcrumb-item header_new_text"><a href="inventory">Dashboard</a></li>
+                                <li class="breadcrumb-item active header_new_text">{{ Session::get('view', 'non') }}</li>
                             </ul>
-                            <h1 class="page-header">
-                                Supplier Registration
+                            <h1 class="page-header header_new_text">
+                                {{ Session::get('view', 'non') }}
                             </h1>
                             <hr class="mb-4" />
 
@@ -25,7 +25,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-xl-4">
+                                    <div class="col-xl-12 mb-3">
 
                                         <div class="card">
                                             <div class="card-header">
@@ -49,7 +49,7 @@
                                                     @csrf
                                                     <div class="row">
 
-                                                        <div class="col-xl-12">
+                                                        <div class="col-xl-3">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label">
                                                                     Supplier Code
@@ -65,7 +65,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-12">
+                                                        <div class="col-xl-3">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label" for="supplier_name">
                                                                     Supplier / Business Name
@@ -81,7 +81,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-6">
+                                                        <div class="col-xl-3">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label" for="supplier_primary_tel">
                                                                     Primary Contact No
@@ -98,7 +98,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-6">
+                                                        <div class="col-xl-3">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label" for="supplier_secondary_tel">
                                                                     Secondary Contact No
@@ -119,7 +119,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-12">
+                                                        <div class="col-xl-6">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label"
                                                                     for="supplier_payment_details">Supplier Payment
@@ -129,7 +129,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-12">
+                                                        <div class="col-xl-6">
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label"
                                                                     for="supplier_remark">Remark</label>
@@ -155,7 +155,7 @@
 
                                     </div>
 
-                                    <div class="col-xl-8">
+                                    <div class="col-xl-12">
 
                                         <div class="card">
                                             <div class="card-header">

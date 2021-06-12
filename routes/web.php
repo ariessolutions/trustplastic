@@ -5,7 +5,9 @@ use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\GRNController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MaterialRequestController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -40,17 +42,17 @@ Route::get('/home',function(){
     return view('dashboard.dashboard');
 })->middleware('auth');
 
-Route::get('/item/category',[ItemCategoryController::class,'index'])->middleware('auth');
+Route::get('/item/category',[ItemCategoryController::class,'index'])->middleware(['auth','permitted']);
 Route::post('/item/category/store',[ItemCategoryController::class,'store'])->middleware('auth');
 Route::post('/item/category/deactivate',[ItemCategoryController::class,'deactivate'])->name('item/category.deactivate')->middleware('auth');
 Route::post('/item/category/activate',[ItemCategoryController::class,'activate'])->name('item/category.activate')->middleware('auth');
 
-Route::get('/item',[ItemController::class,'index'])->middleware('auth');
+Route::get('/item',[ItemController::class,'index'])->middleware(['auth','permitted']);
 Route::post('/item/store',[ItemController::class,'store'])->middleware('auth');
 Route::post('/item/deactivate',[ItemController::class,'deactivate'])->name('item.deactivate')->middleware('auth');
 Route::post('/item/activate',[ItemController::class,'activate'])->name('item.activate')->middleware('auth');
 
-Route::get('/supplier',[SupplierController::class,'index'])->middleware('auth');
+Route::get('/supplier',[SupplierController::class,'index'])->middleware(['auth','permitted']);
 Route::post('/supplier/store',[SupplierController::class,'store'])->middleware('auth');
 Route::post('/supplier/deactivate',[SupplierController::class,'deactivate'])->name('supplier.deactivate')->middleware('auth');
 Route::post('/supplier/activate',[SupplierController::class,'activate'])->name('supplier.activate')->middleware('auth');
@@ -76,6 +78,7 @@ Route::post('/po/approvePo',[PurchaseOrderController::class,'approvePo'])->name(
 Route::post('/po/refusePo',[PurchaseOrderController::class,'refusePo'])->name('po.refusePo')->middleware('auth');
 Route::get('/po/counts',[PurchaseOrderController::class,'counts'])->name('po.counts')->middleware('auth');
 Route::get('/po/changeStatusPoItemFromDb',[PurchaseOrderController::class,'ChangeStatusPoItemFromDb'])->name('po.changeStatusPoItemFromDb')->middleware('auth');
+Route::get('/po/printReport',[PurchaseOrderController::class,'printReport'])->name('po.report');
 
 
 //BAT
@@ -99,6 +102,7 @@ Route::get('/vehicles/find/{id}',[VehicleController::class,'find']);
 Route::get('/vehicles/edit/status/{id}/{status}',[VehicleController::class,'editStatus']);
 Route::get('/vehicles/next/data/{vid}',[VehicleController::class,'nextIdwithVehicleCode']);
 Route::get('/vehicles/nextId',[VehicleController::class,'nextId']);
+Route::get('/vehicles/get/suggetions',[VehicleController::class,'suggetions']);
 
 Route::get('/products',[ProductController::class,'index'])->middleware(['auth','permitted']);
 Route::get('/products/suggesions',[ProductController::class,'suggetions']);
@@ -131,19 +135,50 @@ Route::get('/grn/code/get/all',[GRNController::class,'suggetions']);
 Route::get('/grn/get/print/{id}',[GRNController::class,'printReport']);
 
 Route::get('/stocks',[StockController::class,'index'])->middleware(['auth','permitted']);
-Route::get('/stocks/get/table/{itemid}/{grnid}/{from}/{to}/{bin}',[StockController::class,'tableView']);
+Route::get('/stocks/get/table/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}',[StockController::class,'tableView']);
+Route::get('/stocks/print/report/{itemid}/{grnid}/{from}/{to}/{bin}/{locationid}',[StockController::class,'printReport']);
+
+Route::get('/job',[JobController::class,'index'])->middleware(['auth','permitted']);
+Route::get('//job/table/get',[JobController::class,'getAll'])->middleware(['auth']);
+Route::get('/job/create',[JobController::class,'create'])->middleware(['auth']);
+Route::get('/job/next/code',[JobController::class,'next'])->middleware(['auth']);
+Route::get('/job/session/table/get',[JobController::class,'sessionTable'])->middleware(['auth']);
+Route::get('/job/session/add',[JobController::class,'sessionAdd'])->middleware(['auth']);
+Route::get('/job/session/clear',[JobController::class,'clearSession'])->middleware(['auth']);
+Route::get('/job/session/remove/{index}',[JobController::class,'removeFromSession'])->middleware(['auth']);
+Route::get('/job/session/get/{index}',[JobController::class,'getFromSession'])->middleware(['auth']);
+Route::get('/job/session/load/{id}',[JobController::class,'show']);
+Route::get('/job/approve/{id}',[JobController::class,'approve']);
+Route::get('/job/refused/{id}',[JobController::class,'refused']);
+Route::get('/job/statistics',[JobController::class,'recordsStatistics']);
+Route::get('/products/suggesions/{vid}',[ProductController::class,'suggetionsVehicle'])->middleware(['auth']);
+Route::get('/job/get/print/{id}',[JobController::class,'printJob'])->middleware(['auth']);
+
+Route::get('/transfer',[TransferController::class,'index'])->middleware(['auth','permitted']);
+Route::get('/transfer/item/suggessions/{from}',[TransferController::class,'itemSuggetions'])->middleware(['auth','permitted']);
 
 //BAT
 
+Route::get('/mr',[MaterialRequestController::class,'index'])->middleware(['auth','permitted']);
+Route::get('/mr/init',[MaterialRequestController::class,'init'])->middleware('auth');
+Route::get('/mr/loaditem',[MaterialRequestController::class,'loadItem'])->middleware('auth');
+Route::get('/mr/loadProduct',[MaterialRequestController::class,'loadProduct'])->middleware('auth');
+Route::get('/mr/itemSaveSession',[MaterialRequestController::class,'itemSaveSession'])->middleware('auth');
+Route::get('/mr/productItemSessionClear',[MaterialRequestController::class,'productItemSessionClear'])->middleware('auth');
+Route::get('/mr/materialsTableView',[MaterialRequestController::class,'materialsTableView'])->middleware('auth');
+Route::get('/mr/removeItemFromSession',[MaterialRequestController::class,'removeItemFromSession'])->middleware('auth');
+Route::get('/mr/saveMaterialRequest',[MaterialRequestController::class,'saveMaterialRequest'])->middleware('auth');
+Route::get('/mr/getProductsOfJobByJobId/{id}',[MaterialRequestController::class,'getProductsOfJobByJobId'])->middleware('auth');
 
-Route::get('/grnreport',function(){
-    return view('dashboard.components.grnReport');
+
+// Route::get('/mr',function(){
+//     return view('dashboard.material_request');
+// });
+
+Route::get('/jobreport',function(){
+    return view('dashboard.components.purchase_order_report');
 });
 
-
-Route::get('/job',function(){
-    return view('dashboard.job');
-});
 
 Route::get('/vehicle_model',function(){
     return view('dashboard.vehicle_model');

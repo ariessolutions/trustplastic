@@ -93,11 +93,11 @@ class VehicleController extends Controller
             $resp[] = [$index, $value->code,
                 $value->brand,
                 $value->model,
-                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'ACTIVE' : 'INACTIVE') . '</span>',
+                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'Active' : 'Inactive') . '</span>',
                 '<div class="input-group flex-nowrap">
                 <div class="m-1">
                     <button class="btn btn-secondary btn-sm" onclick="gvehicledata(' . $value->id . ')">
-                        Edit
+                        View / Edit
                     </button>
                 </div>
                 <div class="m-1">
@@ -116,5 +116,19 @@ class VehicleController extends Controller
     public function getData($id)
     {
         return $this->where('id',$id)->first();
+    }
+
+    public function suggetions(Request $request)
+    {
+        $data = array();
+
+        foreach ((new Vehicle)->suggetions($request->all()) as $item) {
+            $data[] = [
+                'id' => $item->id,
+                'name' => $item->model.' ('.$item->brand.')',
+            ];
+        }
+
+        return response()->json($data, 200);
     }
 }

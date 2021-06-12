@@ -77,7 +77,7 @@ class purchase_order extends Model
 
     public function poitems()
     {
-        return $this->hasMany(po_has_items::class,'po_id','id')->with('item');
+        return $this->hasMany(po_has_items::class,'po_id','id')->with('bindata')->with('item');
     }
 
 
@@ -95,4 +95,12 @@ class purchase_order extends Model
         return $this::where('status',1)->where('id',$id)->with('poitems')->first();
     }
 
+    public function printReport($id){
+        return $this::where('id',$id)->with('poitems')->with('location')->with('supplier')->first();
+    }
+
+    public function location()
+    {
+        return $this->hasOne(location::class, 'id', 'location_id');
+    }
 }
