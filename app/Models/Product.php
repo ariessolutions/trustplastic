@@ -26,7 +26,7 @@ class Product extends Model
 
     public function getAll($status = null)
     {
-        return ($status == null) ? $this::all() : $this::where('status', $status)->with('vehicles')->get();
+        return ($status == null) ? $this::orderBy('id','DESC')->get() : $this::where('status', $status)->with('vehicles')->orderBy('id','DESC')->get();
     }
 
     public function edit($id, $data, $activity)

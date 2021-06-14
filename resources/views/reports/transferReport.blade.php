@@ -24,6 +24,7 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
+
         }
 
         .font {
@@ -33,6 +34,7 @@
         .text-center {
             text-align: center;
         }
+
 
         .row {
             width: 100%;
@@ -44,6 +46,7 @@
         .col-2 {
             width: 16.66%;
         }
+
 
         .col-3 {
             width: 25%;
@@ -62,6 +65,7 @@
             /* border: 1px solid black; */
             padding: 5px;
             margin: 0px;
+
         }
 
         .tbleft {
@@ -83,6 +87,7 @@
             padding-top: 10px;
             padding-bottom: 10px;
             margin: 0px;
+
         }
 
         .alright {
@@ -114,6 +119,7 @@
         .text-left {
             text-align: left;
         }
+
     </style>
 
 </head>
@@ -123,7 +129,7 @@
     <div class="text-center">
         <h3>TRUST PLASTIC INDUSTRIES PRIVATE LIMITED</h3>
         <span>No. 451/6, Makola North, Makola - 11640</span>
-        <span> - <strong>Stock Report</strong></span>
+        <span> - <strong>Transfer Report</strong></span>
     </div>
 
     <br>
@@ -133,95 +139,68 @@
             <div class="col-6">
                 <table>
                     <tr>
-                        <td><b>GRN #</b></td>
+                        <td><b>Transfer Code</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ ($data['filters']['grn']!=null)?$data['filters']['grn']['grn_code']:'-'}}</td>
+                        <td>{{ $data->code }}</td>
                     </tr>
                     <tr>
-                        <td><b>Item</b></td>
+                        <td><b>Date</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ ($data['filters']['item']!=null)?'('.$data['filters']['item']['item_code'].') '.$data['filters']['item']['item_name']:'-'}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Location</b></td>
-                        <td>&nbsp;</td>
-                        <td>{{ ($data['filters']['location']!=null)?$data['filters']['location']['location_name'].' '.$data['filters']['location']['location_address']:'-'}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Bin Location</b></td>
-                        <td>&nbsp;</td>
-                        <td>{{ ($data['filters']['bin']!=null)?$data['filters']['bin']['bin_location_name']:'-'}}</td>
+                        <td>{{ $data->created_at->format('Y-m-d') }}</td>
                     </tr>
                 </table>
             </div>
-
             <div class="col-6">
                 <div style="margin-left: auto; margin-right: 0px">
                     <table>
                         <tr>
-                            <td><b>Date From</b></td>
+                            <td><b>From</b></td>
                             <td>&nbsp;</td>
-                            <td>{{ ($data['filters']['from']!=0)?$data['filters']['from']:'-'}}</td>
+                            <td>{{ $data['fromdata']->location_name }}, {{ $data['fromdata']->location_address }}</td>
                         </tr>
                         <tr>
-                            <td><b>Date To</b></td>
+                            <td><b>To</b></td>
                             <td>&nbsp;</td>
-                            <td>{{ ($data['filters']['to']!=0)?$data['filters']['to']:'-'}}</td>
-                        </tr>
-
-                        <tr>
-                            <td><b>Print Date</b></td>
-                            <td>&nbsp;</td>
-                            <td>{{ Carbon\Carbon::now()->toDateTimeString() }}</td>
-                        </tr>
-
-                        <tr>
-                            <td><b>Print by</b></td>
-                            <td>&nbsp;</td>
-                            <td>{{ Auth::user()->fname }}</td>
+                            <td>{{ $data['todata']->location_name }}, {{ $data['todata']->location_address }}</td>
                         </tr>
                     </table>
                 </div>
-            </div>
 
+            </div>
         </div>
 
         <br>
         <br>
 
         <div>
-            <table class="table-border"
-                style="border-spacing: 0; border-width: 0; padding: 0; border-width: 0; width:100%">
+            <table class="table-border" style="border-spacing: 0; border-width: 0; padding: 0; border-width: 0; width:100%">
                 <thead>
                     <tr class="trcolor">
                         <th class="tborderth tborder tbleft bold-100" style="text-align: left">#</th>
                         <th class="tborderth tborder bold-100" style="text-align: left">Item Code</th>
                         <th class="tborderth tborder bold-100" style="text-align: left">Part Code</th>
-                        <th class="tborderth tborder bold-100" style="text-align: center">Item Name</th>
-                        @if($data['filters']['checked']==1)
+                        <th class="tborderth tborder bold-100" style="text-align: left">Item Name</th>
                         <th class="tborderth tborder bold-100" style="text-align: center">Bin Location</th>
-                        @endif
-                        <th class="tborderth tborder bold-100" style="text-align: center">Qty</th>
-                        <th class="tborderth tborder tbright bold-100" style="text-align: center">Low Stock</th>
+                        <th class="tborderth tborder bold-100 tbright" style="text-align: center">Qty</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php $index=1; @endphp @foreach ($data['records'] as $record)
+                    @php
+                    $index=1;
+                    @endphp
+                    @foreach ($data['stock']['stock_items'] as $record)
                     <tr>
                         <td style="text-align: left" class="tborder tbleft">{{ $index }}</td>
-                        <td style="text-align: left" class="tborder">{{ $record[0]['item_code'] }}</td>
-                        <td style="text-align: left" class="tborder">{{ $record[0]['item_part_code'] }}</td>
-                        <td style="text-align: center" class="tborder">{{ $record[0]['item_name'] }}</td>
-                        @if($data['filters']['checked']==1)
-                        <td style="text-align: center" class="tborder">{{ $record[2] }}</td>
-                        @endif
-                        <td style="text-align: center" class="tborder">{{ $record[1]['totqty'] }}</td>
-                        <td style="text-align: center" class="tborder tbright">{{ ($record[1]['totqty']
-                            <5)? 'YES': 'NO' }}</td>
+                        <td style="text-align: left" class="tborder">{{ $record['item']['item_code'] }}</td>
+                        <td style="text-align: left" class="tborder">{{ $record['item']['item_part_code'] }}</td>
+                        <td style="text-align: left" class="tborder">{{ $record['item']['item_name'] }}</td>
+                        <td style="text-align: center" class="tborder">{{ $record['bindata']['bin_location_name'] }}</td>
+                        <td style="text-align: center" class="tborder tbright">{{ $record->qty }} {{ $record['item']['munit']->symbol }}</td>
                     </tr>
-                    @php $index++; @endphp @endforeach
+                    @php
+                    $index++;
+                    @endphp
+                    @endforeach
                 </tbody>
             </table>
 

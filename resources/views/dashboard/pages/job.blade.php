@@ -32,39 +32,43 @@
                                 </div>
                             </div>
                             @include('alerts.formalert')
-                            <div class="col-xl-12">
+                            <div class="col-xl-12 mb-3">
 
                                 <div class="row">
 
                                     <div class="col-xl-3">
 
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="d-flex mb-3">
-                                            <div class="flex-grow-1">
-                                                <h5 class="mb-1"><span class="text-warning">Pending </span>
-                                                    Jobs</h5>
-                                                <div>Total approval pending job count</div>
-                                            </div>
-                                            <a onclick="refreshStatistics()" class="text-muted"><i class="fa fa-redo"></i></a>
-                                        </div>
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <h3 class="mb-1" id="job_pending_count1">{{ $data['statistics'][2][0] }}</h3>
-                                                <div class="text-success font-weight-600 fs-13px">
-                                                    <i class="fa fa-globe"></i> <span id="job_pending_count11">{{ $data['statistics'][2][1] }}</span>%
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-warning">Pending </span>
+                                                            Jobs</h5>
+                                                        <div>Total approval pending job count</div>
+                                                    </div>
+                                                    <a onclick="refreshStatistics()" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 class="mb-1" id="job_pending_count1">
+                                                            {{ $data['statistics'][2][0] }}</h3>
+                                                        <div class="text-success font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i> <span
+                                                                id="job_pending_count11">{{ $data['statistics'][2][1] }}</span>%
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-warning-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-hourglass-end fa-lg text-warning"></i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="width-50 height-50 bg-warning-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
-                                                <i class="fa fa-hourglass-end fa-lg text-warning"></i>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
                                     </div>
 
                                     <div class="col-xl-3">
-                                        <div class="card mb-3">
+                                        <div class="card h-100">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
                                                     <div class="flex-grow-1">
@@ -72,16 +76,20 @@
                                                         </h5>
                                                         <div>Total active job count</div>
                                                     </div>
-                                                    <a onclick="refreshStatistics()" class="text-muted"><i class="fa fa-redo"></i></a>
+                                                    <a onclick="refreshStatistics()" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
-                                                        <h3 class="mb-1" id="job_pending_count2">{{ $data['statistics'][0][0] }}</h3>
+                                                        <h3 class="mb-1" id="job_pending_count2">
+                                                            {{ $data['statistics'][0][0] }}</h3>
                                                         <div class="text-success font-weight-600 fs-13px">
-                                                            <i class="fa fa-globe"></i> <span id="job_pending_count22">{{ $data['statistics'][0][1] }}</span>%
+                                                            <i class="fa fa-globe"></i> <span
+                                                                id="job_pending_count22">{{ $data['statistics'][0][1] }}</span>%
                                                         </div>
                                                     </div>
-                                                    <div class="width-50 height-50 bg-success-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                    <div
+                                                        class="width-50 height-50 bg-success-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
                                                         <i class="fa fa-check fa-lg text-success"></i>
                                                     </div>
                                                 </div>
@@ -90,7 +98,7 @@
                                     </div>
 
                                     <div class="col-xl-3">
-                                        <div class="card mb-3">
+                                        <div class="card h-100">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
                                                     <div class="flex-grow-1">
@@ -98,17 +106,51 @@
                                                             Jobs</h5>
                                                         <div>Total closed job count</div>
                                                     </div>
-                                                    <a onclick="refreshStatistics()" class="text-muted"><i class="fa fa-redo"></i></a>
+                                                    <a onclick="refreshStatistics()" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
-                                                        <h3 class="mb-1" id="job_pending_count3">{{ $data['statistics'][1][0] }}</h3>
+                                                        <h3 class="mb-1" id="job_pending_count3">
+                                                            {{ $data['statistics'][1][0] }}</h3>
                                                         <div class="text-success font-weight-600 fs-13px">
-                                                            <i class="fa fa-globe"></i> <span id="job_pending_count33">{{ $data['statistics'][1][1] }}</span>%
+                                                            <i class="fa fa-globe"></i> <span
+                                                                id="job_pending_count33">{{ $data['statistics'][1][1] }}</span>%
                                                         </div>
                                                     </div>
-                                                    <div class="width-50 height-50 bg-danger-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                    <div
+                                                        class="width-50 height-50 bg-danger-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
                                                         <i class="fa fa-close fa-lg text-danger"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="mb-1"><span class="text-primary">Completed </span>
+                                                            Jobs</h5>
+                                                        <div>Total completed job count</div>
+                                                    </div>
+                                                    <a onclick="refreshStatistics()" class="text-muted"><i
+                                                            class="fa fa-redo"></i></a>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h3 class="mb-1" id="job_pending_count4">
+                                                            {{ $data['statistics'][3][0] }}</h3>
+                                                        <div class="text-primary font-weight-600 fs-13px">
+                                                            <i class="fa fa-globe"></i> <span
+                                                                id="job_pending_count44">{{ $data['statistics'][3][1] }}</span>%
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="width-50 height-50 bg-primary-transparent-2 rounded-circle d-flex align-items-center justify-content-center">
+                                                        <i class="fa fa-check fa-lg text-primary"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,13 +168,15 @@
                                             <div class="flex-grow-1">
                                                 <h6 class="mt-2">Job List</h6>
                                             </div>
-                                            <a id="jonrecords_refresh" class="text-muted mt-2" data-toggle="tooltip" data-placement="bottom" title="Refresh Table">
+                                            <a id="jonrecords_refresh" class="text-muted mt-2" data-toggle="tooltip"
+                                                data-placement="bottom" title="Refresh Table">
                                                 <i class="fa fa-redo"></i>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="card-body table-responsive">
-                                        <table class="table table-borderless table-striped text-nowrap pt-2 w-100" id="jobDataTable">
+                                        <table class="table table-borderless table-striped text-nowrap pt-2 w-100"
+                                            id="jobDataTable">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
@@ -165,13 +209,14 @@
         <div class="modal-content">
             <form method="GET" action="/job/create" id="job_form">
                 @csrf
-                <div class="modal-header">
+                <div class="modal-header bg-dark-400">
 
-                    <h5 class="modal-title">CREATE NEW JOB</h5>
+                    <h5 class="modal-title text-white header_new_text">CREATE NEW JOB</h5>
 
                     <div class="d-flex">
                         <div class="px-1 ">
-                            <a id="job_modal_reset_button" class="btn btn-sm btn-default btnround"><i class="fa fa-trash"></i></a>
+                            <a id="job_modal_reset_button" class="btn btn-sm btn-default btnround"><i
+                                    class="fa fa-trash"></i></a>
                         </div>
 
                         <div id="jobprintbtn_div">
@@ -211,7 +256,8 @@
                                                         <label class="form-label">
                                                             Job Code
                                                         </label>
-                                                        <input id="job_code" class="form-control consthidden" readonly />
+                                                        <input id="job_code" class="form-control consthidden"
+                                                            readonly />
                                                     </div>
                                                 </div>
 
@@ -220,7 +266,8 @@
                                                         <label class="form-label">
                                                             Job Date
                                                         </label>
-                                                        <input id="job_date" type="date" class="form-control consthidden" readonly />
+                                                        <input id="job_date" type="date"
+                                                            class="form-control consthidden" readonly />
                                                     </div>
                                                 </div>
 
@@ -232,9 +279,12 @@
                                                         Select Location
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <select id="job_location_id" name="job_location" class="form-select">
+                                                    <select id="job_location_id" name="job_location"
+                                                        class="form-select">
                                                         @foreach ($data['locations'] as $location)
-                                                        <option {{ (old('job_location')==$location->id)?'selected':'' }} value="{{ $location->id }}">{{ $location->location_name }}</option>
+                                                        <option {{ (old('job_location')==$location->id)?'selected':'' }}
+                                                            value="{{ $location->id }}">{{ $location->location_name }}
+                                                        </option>
                                                         @endforeach
                                                     </select>
                                                     @error('job_location')
@@ -247,11 +297,17 @@
 
                                             <div class="col-xl-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Select Vehicle<span class="text-danger">*</span></label>
+                                                    <label class="form-label">Select Vehicle<span
+                                                            class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                                        <input id="job_vehicle_suggetions" name="job_vehicle_suggetions" value="{{ old('job_vehicle_suggetions') }}" type="text" placeholder="Type 'Modal Code / Name'" class="form-control rounded-end" />
-                                                        <input id="job_vehicle" name="job_vehicle" type="hidden" value="{{ old('job_vehicle') }}">
+                                                        <span class="input-group-text"><i
+                                                                class="fa fa-search"></i></span>
+                                                        <input id="job_vehicle_suggetions" name="job_vehicle_suggetions"
+                                                            value="{{ old('job_vehicle_suggetions') }}" type="text"
+                                                            placeholder="Type 'Modal Code / Name'"
+                                                            class="form-control rounded-end" />
+                                                        <input id="job_vehicle" name="job_vehicle" type="hidden"
+                                                            value="{{ old('job_vehicle') }}">
                                                         @error('job_vehicle')
                                                         <span class="text-danger">
                                                             <small>{{ $message }}</small>
@@ -264,7 +320,8 @@
                                             <div class="col-xl-12">
                                                 <div class="form-group mb-3">
                                                     <label class="form-label" for="job_remark">Remark</label>
-                                                    <textarea class="form-control" id="job_remark" name="job_remark" rows="6">{{ old('job_remark') }}</textarea>
+                                                    <textarea class="form-control" id="job_remark" name="job_remark"
+                                                        rows="6">{{ old('job_remark') }}</textarea>
                                                 </div>
                                             </div>
 
@@ -296,7 +353,8 @@
                                                                 <div class="flex-grow-1">
                                                                     <h6 class="mt-2">Job Has Products</h6>
                                                                 </div>
-                                                                <a id="job_jhpc_btn" class="text-muted mt-2" data-placement="top" title="Refresh All Feilds">
+                                                                <a id="job_jhpc_btn" class="text-muted mt-2"
+                                                                    data-placement="top" title="Refresh All Feilds">
                                                                     <i class="fa fa-redo text-dark"></i>
                                                                 </a>
                                                             </div>
@@ -308,23 +366,36 @@
 
                                                                 <div class="col-xl-12">
                                                                     <div class="mb-3">
-                                                                        <label class="form-label">Select BIN Location <span class="text-danger">*</span></label>
+                                                                        <label class="form-label">Select BIN Location
+                                                                            <span class="text-danger">*</span></label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-search"></i></span>
 
-                                                                            <input type="text" id="bin_location_suggetion" name="bin_location_suggetion" placeholder="Type 'Type BIN Code'" class="form-control rounded-end" />
-                                                                            <input type="hidden" name="job_bin_location" id="job_bin_location" />
+                                                                            <input type="text"
+                                                                                id="bin_location_suggetion"
+                                                                                name="bin_location_suggetion"
+                                                                                placeholder="Type 'Type BIN Code'"
+                                                                                class="form-control rounded-end" />
+                                                                            <input type="hidden" name="job_bin_location"
+                                                                                id="job_bin_location" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-xl-12">
                                                                     <div class="mb-3">
-                                                                        <label class="form-label">Product Code <span class="text-danger">*</span></label>
+                                                                        <label class="form-label">Product Code <span
+                                                                                class="text-danger">*</span></label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                                                            <input readonly name="job_product_sugg" id="job_product_sugg" type="text" placeholder="Type 'Product Code / Name'" class="form-control rounded-end" />
-                                                                            <input type="hidden" name="job_product" id="job_product" />
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-search"></i></span>
+                                                                            <input readonly name="job_product_sugg"
+                                                                                id="job_product_sugg" type="text"
+                                                                                placeholder="Type 'Product Code / Name'"
+                                                                                class="form-control rounded-end" />
+                                                                            <input type="hidden" name="job_product"
+                                                                                id="job_product" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -332,9 +403,11 @@
                                                                 <div class="col-xl-12">
                                                                     <div class="form-group mb-3">
                                                                         <label class="form-label">
-                                                                            Unit Labour Cost <span class="text-danger">*</span>
+                                                                            Unit Labour Cost <span
+                                                                                class="text-danger">*</span>
                                                                         </label>
-                                                                        <input id="job_unit_labour_cost" type="number" class="form-control" />
+                                                                        <input id="job_unit_labour_cost" type="number"
+                                                                            class="form-control" />
                                                                     </div>
                                                                 </div>
 
@@ -343,7 +416,8 @@
                                                                         <label class="form-label">
                                                                             Qty <span class="text-danger">*</span>
                                                                         </label>
-                                                                        <input id="job_qty" type="number" class="form-control" />
+                                                                        <input id="job_qty" type="number"
+                                                                            class="form-control" />
                                                                     </div>
                                                                 </div>
 
@@ -352,7 +426,8 @@
                                                                         <label class="form-label">
                                                                             VAT (%)
                                                                         </label>
-                                                                        <input id="job_vat" type="number" class="form-control" step="0.01" />
+                                                                        <input id="job_vat" type="number"
+                                                                            class="form-control" step="0.01" />
                                                                     </div>
                                                                 </div>
 
@@ -361,7 +436,8 @@
                                                                         <label class="form-label">
                                                                             Sub Total
                                                                         </label>
-                                                                        <input id="job_sub_total" type="number" class="form-control consthidden" readonly />
+                                                                        <input id="job_sub_total" type="number"
+                                                                            class="form-control consthidden" readonly />
                                                                     </div>
                                                                 </div>
 
@@ -370,7 +446,8 @@
                                                                         <label class="form-label">
                                                                             Net Total
                                                                         </label>
-                                                                        <input id="job_net_total" type="number" class="form-control consthidden" readonly />
+                                                                        <input id="job_net_total" type="number"
+                                                                            class="form-control consthidden" readonly />
                                                                     </div>
                                                                 </div>
 
@@ -393,7 +470,8 @@
                                                                     <h6 class="mt-2">Outside Expenses Details</h6>
                                                                 </div>
 
-                                                                <a id="job_oxc_btn" class="text-muted mt-2" data-placement="top" title="Refresh All Feilds">
+                                                                <a id="job_oxc_btn" class="text-muted mt-2"
+                                                                    data-placement="top" title="Refresh All Feilds">
                                                                     <i class="fa fa-redo text-dark"></i>
                                                                 </a>
 
@@ -428,14 +506,18 @@
                                                                         <label class="form-label">
                                                                             Expense Amount
                                                                         </label>
-                                                                        <input type="number" id="job_exp_amount" class="form-control" />
+                                                                        <input type="number" id="job_exp_amount"
+                                                                            class="form-control" />
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-xl-6">
                                                                     <div class="form-group mb-3">
-                                                                        <label class="form-label" for="ref_remark">Remark</label>
-                                                                        <textarea class="form-control" id="job_ref_remark" name="ref_remark" rows="1"></textarea>
+                                                                        <label class="form-label"
+                                                                            for="ref_remark">Remark</label>
+                                                                        <textarea class="form-control"
+                                                                            id="job_ref_remark" name="ref_remark"
+                                                                            rows="1"></textarea>
                                                                     </div>
                                                                 </div>
 
@@ -448,14 +530,16 @@
                                                             <div class="row">
                                                                 <div class="d-flex flex-row-reverse">
                                                                     <div class="px-1">
-                                                                        <a id="job_add_expenses_button" class="btn btn-primary">
+                                                                        <a id="job_add_expenses_button"
+                                                                            class="btn btn-primary">
                                                                             <i class='fa fa-plus'></i>
                                                                             Add Expense</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="card-header border-1 mt-3 mb-3" style="margin-left: -16px; margin-right: -16px; border-top: 1px solid #e0e0e0">
+                                                            <div class="card-header border-1 mt-3 mb-3"
+                                                                style="margin-left: -16px; margin-right: -16px; border-top: 1px solid #e0e0e0">
                                                                 <h6 class="mt-2 ">Outside Expenses List</h6>
                                                             </div>
 
@@ -496,7 +580,8 @@
                                                     <div class="d-flex flex-row-reverse">
 
                                                         <div class="px-1">
-                                                            <a id="job_sessionclear_button" class="btn btn-default"><i class="fa fa-trash"></i>
+                                                            <a id="job_sessionclear_button" class="btn btn-default"><i
+                                                                    class="fa fa-trash"></i>
                                                                 Delete All</a>
                                                         </div>
 
@@ -534,7 +619,8 @@
                                         <div class="row">
 
                                             <div class="table-responsive">
-                                                <table id="job_register_product_table" class="w-100 table table-borderless table-striped text-nowrap pt-2">
+                                                <table id="job_register_product_table"
+                                                    class="w-100 table table-borderless table-striped text-nowrap pt-2">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -573,12 +659,14 @@
 
                             <div class="d-flex">
                                 <div class="px-1">
-                                    <button id="jobsaveandcompletebtn" type="submit" class="btn btn-teal"> <i class='fa fa-check'></i>
+                                    <button id="jobsaveandcompletebtn" type="submit" class="btn btn-teal"> <i
+                                            class='fa fa-check'></i>
                                         Submit / Update </button>
                                 </div>
 
                                 <div class="px-1">
-                                    <a type="reset" id="jobdeleteall" class="btn btn-default"><i class="fa fa-trash"></i>
+                                    <a type="reset" id="jobdeleteall" class="btn btn-default"><i
+                                            class="fa fa-trash"></i>
                                         Delete All</a>
                                 </div>
 
@@ -600,5 +688,266 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="mr_modal_link">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-dark-400">
+
+                <h5 class="modal-title Available text-white">ADD MATERIAL REQUEST FOR <span id="mr_job_code" class="text-yellow"
+                        style="font-weight: 700"></span></h5>
+
+                <div class="d-flex">
+                    <div class="px-1 ">
+                        <button class="btn btn-sm btn-default btnround"><i class="far fa-trash-alt"></i></button>
+                    </div>
+
+                    <div class="px-1 ">
+                        <button class="btn btn-sm btn-default btnround"><i class="fa fa-print"></i></button>
+                    </div>
+
+                    <div class="px-1 ">
+                        <button id="myi_mr_modal_create" class="btn btn-sm btn-yellow btnround">
+                            <i class="far fa-window-minimize"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-xl-12">
+
+                        <div class="row">
+
+                            <div class="col-xl-12">
+
+                                <div class="row">
+
+                                    <div class="col-xl-3 mb-3">
+
+                                        <div class="card shadow-sm mb-3 border-1 h-100">
+
+                                            <div class="card-header bg-dark-400 ">
+                                                <h6 class="mt-2 text-white">Added Products for Job</h6>
+                                            </div>
+
+                                            <div class="card-body p-0">
+
+                                                <div class="row">
+
+                                                    <div id="mr_created_jobs" class="table-responsive">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xl-9 mb-3">
+
+                                        <div class="card shadow-sm mb-3 border-1 h-100">
+
+                                            <div class="card-header bg-dark-400 ">
+                                                <h6 class="mt-2 text-white">Add Material Request</h6>
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-xl-4">
+
+                                                        <div class="card shadow-sm mb-3 h-100 border-1">
+
+                                                            <div class="card-header">
+
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                        <h6 class="mt-2">Add New Materials</h6>
+                                                                    </div>
+                                                                    <a id="mr_fields_delete" class="text-muted mt-2"
+                                                                        data-placement="top" title="Refresh All Feilds">
+                                                                        <i class="fa fa-redo text-dark"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="row">
+
+                                                                    <div class="col-xl-12">
+                                                                        <div class="form-group mb-3">
+                                                                            <label class="form-label">
+                                                                                Material Request Code
+                                                                            </label>
+                                                                            <input id="mr_code" type="text"
+                                                                                class="form-control" readonly />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-12">
+                                                                        <div class="form-group mb-3">
+                                                                            <label class="form-label">
+                                                                                Product Code <span
+                                                                                    class="text-danger">*</span>
+                                                                            </label>
+                                                                            <input id="mr_selected_prodcut_code"
+                                                                                type="text" class="form-control"
+                                                                                readonly />
+
+                                                                            <input type="text"
+                                                                                id="mr_selected_prodcut_id"
+                                                                                hidden="true">
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Select Item <span
+                                                                                    class="text-danger">*</span></label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><i
+                                                                                        class="fa fa-search"></i></span>
+
+                                                                                <input type="text"
+                                                                                    placeholder="Type 'ITEM CODE / NAME'"
+                                                                                    class="form-control rounded-end"
+                                                                                    id="mr_item_code"
+                                                                                    name="mr_item_code" />
+
+                                                                                <input type="text" id="mr_item_id"
+                                                                                    name="mr_item_id" hidden="true">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-12">
+                                                                        <div class="form-group mb-3">
+                                                                            <label class="form-label">
+                                                                                Quantity <span
+                                                                                    class="text-danger">*</span>
+                                                                            </label>
+                                                                            <input id="mr_item_qty" type="number"
+                                                                                class="form-control" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-12 mb-1">
+                                                                        <div class="input-group flex-nowrap">
+                                                                            <div class="px-1 w-100">
+                                                                                <a id="mr_item_save_session_button"
+                                                                                    class="btn btn-primary w-100">
+                                                                                    <i class='fa fa-check'></i>
+                                                                                    Save Material </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-xl-8">
+
+                                                        <div class="card shadow-sm mb-3 h-100 border-1">
+
+                                                            <div class="card-header">
+
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                        <h6 class="mt-2">Added Product Materials</h6>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="card-body">
+
+                                                                <div class="table-responsive">
+                                                                    <table id="mr_session_added_list"
+                                                                        class="table table-borderless table-striped text-nowrap pt-2 w-100">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>P/Code</th>
+                                                                                <th>Part Code</th>
+                                                                                <th>Qty</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="d-flex">
+
+                            <div class="d-flex">
+                                <div class="px-1">
+                                    <button id="mr_save_to_db_button" class="btn btn-teal"> <i class='fa fa-check'></i>
+                                        Save & Complete </button>
+                                </div>
+
+                                <div class="px-1">
+                                    <button id="mr_session_product_clear" class="btn btn-default"><i
+                                            class="fa fa-trash"></i>
+                                        Delete All</button>
+                                </div>
+
+                                <div class="px-1">
+                                    <button class="btn btn-yellow"> <i class='fa fa-check'></i>
+                                        Approve </button>
+                                </div>
+
+                                <div class="px-1">
+                                    <button class="btn btn-danger"> <i class='fa fa-close'></i>
+                                        Refuse </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection

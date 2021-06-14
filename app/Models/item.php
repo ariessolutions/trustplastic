@@ -14,7 +14,7 @@ class item extends Model
 
     public function getAll()
     {
-        return $this::orderby('status')->get();
+        return $this::orderby('status')->orderBy('id','DESC')->get();
     }
 
     public function getItemCount()
@@ -73,4 +73,30 @@ class item extends Model
         return $this->hasOne(measure_unit::class,'id','measure_unit_id');
     }
 
+    public function suggetionsFrom($from, $input)
+    {
+
+        $data = $this::where([
+            ['status', '=', 1],
+            ["item_code", "LIKE", "%{$input['query']}%"],
+        ])->orWhere([
+            ['status', '=', 1],
+            ["item_name", "LIKE", "%{$input['query']}%"],
+        ])->orWhere([
+            ['status', '=', 1],
+            ['item_part_code', 'LIKE', "%{$input['query']}%"],
+        ])->get();
+
+        $returnData = [];
+
+        foreach ($data as $key => $value) {
+            $isExists=bin_location::where('item_id', $value->id)->where('location_id', $from)->first();
+            if ($isExists) {
+                $returnData[] = $value;
+            }
+        }
+
+        return $returnData;
+
+    }
 }

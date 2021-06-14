@@ -23,7 +23,7 @@ class supplier extends Model
 
     public function getAll()
     {
-        return $this::orderby('status')->get();
+        return $this::orderby('status')->orderBy('id','DESC')->get();
     }
 
     public function getSupplierbyId($value)

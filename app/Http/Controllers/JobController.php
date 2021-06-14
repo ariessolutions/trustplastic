@@ -8,6 +8,8 @@ use App\Models\Job;
 use App\Models\JobHasProduct;
 use App\Models\OutsideExp;
 use App\Models\Product;
+use App\Models\ProductStock;
+use App\Models\ProductStockHasProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +61,6 @@ class JobController extends Controller
                 foreach (JobHasProduct::where('job_id', $request->formkey)->get() as $exKey => $exVal) {
                     OutsideExp::where('jobproduct', $exVal->id)->delete();
                 }
-
                 JobHasProduct::where('job_id', $request->formkey)->delete();
             } else {
                 $check = false;
@@ -184,12 +185,12 @@ class JobController extends Controller
                     $statusColor2 = 'yellow';
                     break;
                 case 4:
-                    $statusText = 'Meterial Approve';
+                    $statusText = 'Material Requested';
                     $statusColor1 = 'success';
                     $statusColor2 = 'green';
                     break;
                 case 5:
-                    $statusText = 'Item Issued';
+                    $statusText = 'Stock Updated';
                     $statusColor1 = 'primary';
                     $statusColor2 = 'blue';
                     break;
@@ -205,15 +206,17 @@ class JobController extends Controller
             $actions = '<div class="input-group flex-nowrap">
                             <div class="m-1">
 
-                            ' . (($value->status == 2) ? '' : '<a onclick="viewJob(' . $value->id . ')" class="btn btn-primary btn-sm">
+                            ' . ((true) ? '<a onclick="viewJob(' . $value->id . ')" class="btn btn-secondary btn-sm">
                             View
-                        </a>') . '
-                        ' . (($value->status == 1) ? '<a onclick="addMaterial(' . $value->id . ')" class="btn btn-teal text-white btn-sm">
+                        </a>' : '') . '
+                        ' . (($value->status == 1 || $value->status == 4) ? '<a id="mr_modal" href="#mr_modal_link" data-bs-toggle="modal" onclick="addMaterial(' . $value->id . ')" class="btn btn-teal btn-sm">
                             <i class="fa fa-plus"></i> Add Materials
                         </a>' : '') . '
-                                ' . (($value->status == 3) ? '<a onclick="editJob(' . $value->id . ')" class="btn btn-secondary btn-sm">
+                                ' . (($value->status == 3) ? '<a onclick="editJob(' . $value->id . ')" class="btn btn-yellow btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i>
                                 Edit
-                            </a>' : '') . '
+                            </a>' : '') . (($value->status == 4) ? '<a onclick="addToProductStock(' . $value->id . ')" class="btn btn-primary btn-sm">
+                            <i class="fa fa-cube"></i> Complete
+                        </a>' : '') . '
                             </div>
                         </div>';
 
@@ -362,23 +365,43 @@ class JobController extends Controller
 
     public function recordsStatistics()
     {
-        $approved = Job::where('status', 1)->get()->count();
+        $approved = Job::whereIn('status', [1, 4, 5])->get()->count();
+        $completed = Job::where('status', 5)->get()->count();
         $refused = Job::where('status', 2)->get()->count();
         $pending = Job::where('status', 3)->get()->count();
 
         $total = $approved + $refused + $pending;
 
-        return [[$approved, (int) (($approved / $total) * 100)], [$refused, (int) (($refused / $total) * 100)], [$pending, (int) (($pending / $total) * 100)]];
+        return [[$approved, (int) (($approved / $total) * 100)], [$refused, (int) (($refused / $total) * 100)], [$pending, (int) (($pending / $total) * 100)],[$completed ,(int) (($completed / $total) * 100)]];
     }
 
     public function printJob($id)
     {
         $data = (new Job)->getRecord($id);
+
         if ($data) {
             return view('reports.jobReport')->with('data', $data);
         } else {
             return 2;
         }
+    }
+
+    public function addToProductStock($jobid)
+    {
+        $record = (new Job)->getRecord($jobid, 4);
+
+        if ($record == null) {
+            return 2;
+        }
+
+        $productStock = (new ProductStock)->addRecord(['job' => $record->id, 'location' => $record->location], ['view' => Session::get('view', 'non'), 'activity' => 'Add Product Stock']);
+        (new Job)->edit($record->id, ['status' => 5], ['view' => Session::get('view', 'non'), 'activity' => 'Product Stock Updated / Job Changed']);
+
+        foreach ($record['jobhasproducts'] as $key => $value) {
+            (new ProductStockHasProducts)->addRecord(['nettotal' => $value->nettotal, 'productstock' => $productStock->id, 'product' => $value->product, 'bin' => $value->bin, 'qty' => $value->qty], ['view' => Session::get('view', 'non'), 'activity' => 'Add Products To Product Stock']);
+        }
+
+        return 1;
     }
 
 }

@@ -103,4 +103,7 @@ class purchase_order extends Model
     {
         return $this->hasOne(location::class, 'id', 'location_id');
     }
+
+    
+
 }

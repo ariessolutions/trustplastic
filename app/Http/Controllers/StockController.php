@@ -17,19 +17,19 @@ class StockController extends Controller
         ]);
     }
 
-    public function tableView($itemid, $grnid, $from, $to, $bin, $locationid,$isChecked)
+    public function tableView($itemid, $grnid, $from, $to, $bin, $locationid, $isChecked)
     {
         $tableData = [];
 
-        foreach ($this->getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid,$isChecked) as $key => $record) {
+        foreach ($this->getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid, $isChecked) as $key => $record) {
             $item = (new item)->getItemById($record['item_id']);
-            $tableData[] = [$key + 1, $item->item_code, $item->item_part_code,(($isChecked==1)?((new bin_location)->getBinLocationById($record->bin_location_id)->bin_location_name):'Multiple Bins'), $item->item_name, $record->totqty . ' ' . $item['munit']['symbol'], ($record->totqty < env('LOWSTOCK')) ? '<span class="badge bg-red-100 text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-danger fs-9px fa-fw me-5px"></i>Low Stock</span>' : '-', '<span class="badge bg-' . (($record->totqty > 0) ? 'green' : 'red') . '-100 text-' . (($record->totqty > 0) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($record->totqty > 0) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($record->totqty > 0) ? 'Available' : 'Unavailable') . '</span>'];
+            $tableData[] = [$key + 1, $item->item_code, $item->item_part_code, (($isChecked == 1) ? ((new bin_location)->getBinLocationById($record->bin_location_id)->bin_location_name) : 'Multiple Bins'), $item->item_name, $record->totqty . ' ' . $item['munit']['symbol'], ($record->totqty < env('LOWSTOCK')) ? '<span class="badge bg-red-100 text-danger px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-danger fs-9px fa-fw me-5px"></i>Low Stock</span>' : '-', '<span class="badge bg-' . (($record->totqty > 0) ? 'green' : 'red') . '-100 text-' . (($record->totqty > 0) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($record->totqty > 0) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($record->totqty > 0) ? 'Available' : 'Unavailable') . '</span>'];
         }
 
         return $tableData;
     }
 
-    public function getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid,$isChecked)
+    public function getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid, $isChecked)
     {
 
         $filters = [
@@ -60,10 +60,10 @@ class StockController extends Controller
             $filters['locationid'] = $locationid;
         }
 
-        return (new GRN)->getStock($filters,(($isChecked==1)?true:false));
+        return (new GRN)->getStock($filters, (($isChecked == 1) ? true : false));
     }
 
-    public function printReport($itemid, $grnid, $from, $to, $bin, $locationid,$isChecked)
+    public function printReport($itemid, $grnid, $from, $to, $bin, $locationid, $isChecked)
     {
         $filters = [
             'grn' => (new GRN)->getGrn($grnid),
@@ -77,11 +77,11 @@ class StockController extends Controller
 
         $records = [];
 
-        $recs = $this->getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid,$isChecked);
+        $recs = $this->getRecordsFromFilters($itemid, $grnid, $from, $to, $bin, $locationid, $isChecked);
 
         if (count($recs) > 0) {
             foreach ($recs as $key => $record) {
-                $records[] = [(new item)->getItemById($record['item_id']), $record,(($isChecked==1)?((new bin_location)->getBinLocationById($record->bin_location_id)->bin_location_name):'Multiple Bins')];
+                $records[] = [(new item)->getItemById($record['item_id']), $record, (($isChecked == 1) ? ((new bin_location)->getBinLocationById($record->bin_location_id)->bin_location_name) : 'Multiple Bins')];
             }
 
             return view('reports.stockReport')->with('data', ['filters' => $filters, 'records' => $records]);

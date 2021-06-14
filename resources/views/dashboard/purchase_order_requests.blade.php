@@ -1428,7 +1428,6 @@
 
         });
 
-
         $('#approvePo').click(function(e) {
             e.preventDefault();
 
@@ -1481,7 +1480,6 @@
                     Notiflix.Notify.Warning('Ignoring refuse purchase order');
                 });
         });
-
 
 
         // Save Scripts

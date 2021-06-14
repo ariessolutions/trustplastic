@@ -93,17 +93,17 @@ class UserController extends Controller
         foreach ((new User)->getUsers(null) as $key => $value) {
             $resp[] = [$index, $value->emp_no,
                 $value->fname,
-                (strlen($value->email) > 12) ? substr($value->email, 0, 12) . ' ..' : $value->email,
+                (strlen($value->email) > 12) ? substr($value->email, 0, 20) . ' ..' : $value->email,
                 (new UserTypeString)->getType($value->usertype),
-                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'ACTIVE' : 'INACTIVE') . '</span>',
+                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'Active' : 'Inactive') . '</span>',
                 '<div class="input-group flex-nowrap">
                 <div class="m-1">
                     <button class="btn btn-secondary btn-sm" onclick="gudata(' . $value->id . ')">
-                        Edit
+                        View / Edit
                     </button>
                 </div>
                 <div class="m-1">
-                    <button style="width:80px" class="btn btn-round btn-outline-' . (($value->status == 1) ? 'danger' : 'success') . ' btn-sm" onclick="csusers(' . $value->id . ',' . $value->status . ')">
+                    <button style="width:80px" class="btn btn-round btn-default text-' . (($value->status == 1) ? 'danger' : 'success') . ' btn-sm" onclick="csusers(' . $value->id . ',' . $value->status . ')">
                         ' . (($value->status == 1) ? 'Deactive' : 'Active') . '
                     </button>
                 </div>

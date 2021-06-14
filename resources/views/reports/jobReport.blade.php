@@ -147,7 +147,7 @@
                     <tr>
                         <td><b>Store Location</b></td>
                         <td>&nbsp;</td>
-                        <td>{{ $data['locationdata']['locationname'] }} {{ $data['locationdata']['locationaddress'] }}</td>
+                        <td>{{ $data['locationdata']['location_name'] }} {{ $data['locationdata']['location_address'] }}</td>
                     </tr>
                     <tr>
                         <td><b>Vehicle & Model #</b></td>

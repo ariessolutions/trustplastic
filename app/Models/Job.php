@@ -31,12 +31,16 @@ class Job extends Model
 
     public function getAll()
     {
-        return $this->with('locationdata')->with('vehicleData')->get();
+        return $this->with('locationdata')->with('vehicleData')->orderBy('id','DESC')->get();
     }
 
-    public function getRecord($id)
+    public function getRecord($id, $status = null)
     {
-        return $this->where('id',$id)->with('locationdata')->with('vehicleData')->with('jobhasproducts')->with('approved_user_data')->first();
+        if ($status != null) {
+            return $this->where('id', $id)->where('status', $status)->with('locationdata')->with('vehicleData')->with('jobhasproducts')->with('approved_user_data')->first();
+        } else {
+            return $this->where('id', $id)->with('locationdata')->with('vehicleData')->with('jobhasproducts')->with('approved_user_data')->first();
+        }
     }
 
     public function locationdata()

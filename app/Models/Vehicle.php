@@ -39,7 +39,7 @@ class Vehicle extends Model
 
     public function getVehicles($status = null)
     {
-        return ($status == null) ? $this::all() : $this::where('status', $status)->get();
+        return ($status == null) ? $this::orderBy('id','DESC')->get() : $this::where('status', $status)->orderBy('id','DESC')->get();
     }
 
     public function edit($id, $data, $activity)

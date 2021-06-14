@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function getUsers($status = null)
     {
-        return ($status == null) ? $this::all() : $this::where('status', $status)->get();
+        return ($status == null) ? $this::all() : $this::where('status', $status)->orderBy('id','DESC')->get();
     }
 
     public function edit($id,$data,$activity)

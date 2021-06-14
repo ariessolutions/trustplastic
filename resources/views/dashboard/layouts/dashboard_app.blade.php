@@ -47,13 +47,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
-        .header_new_text{
+        .header_new_text {
             font-family: 'Ubuntu', sans-serif;
         }
 
-        .seldisable{
-            pointer-events:none;
-            background-color:#DAE0EC;
+        .seldisable {
+            pointer-events: none;
+            background-color: #DAE0EC;
         }
 
         .dataTables_paginate a {
@@ -64,8 +64,8 @@
             border-color: white !important;
         }
 
-        .dataTables_paginate a:hover{
-            background:#eeeeee !important;
+        .dataTables_paginate a:hover {
+            background: #eeeeee !important;
             /* color: #ffffff */
         }
 
@@ -85,15 +85,12 @@
             margin-left: 3px;
         }
 
-        .btnround{
-            display:block;
+        .btnround {
+            display: block;
             height: 30px;
             width: 30px;
             border-radius: 50%;
         }
-
-
-
     </style>
 
 </head>
@@ -145,12 +142,12 @@
                                     <img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
                                 </div>
                                 <div class="menu-text">
-                                    <span class="" data-cfemail="">Poojila Rajakaruna</span>
+                                    <span class="" data-cfemail="">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</span>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end me-lg-3">
 
-                                <a class="dropdown-item d-flex align-items-center" href="#">Log Out <i
+                                <a class="dropdown-item d-flex align-items-center" href="/logout">Log Out <i
                                         class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
                             </div>
                         </div>
@@ -168,80 +165,6 @@
                                 <a href="/inventory" class="menu-link">
                                     <span class="menu-icon"><i class="fa fa-laptop"></i></span>
                                     <span class="menu-text">Dashboard</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-divider"></div>
-
-                            <div class="menu-header">Purchase Order Management</div>
-
-                            <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-qrcode"></i>
-                                    </span>
-                                    <span class="menu-text">Item Management</span>
-                                    <span class="menu-caret"><b class="caret"></b></span>
-                                </a>
-                                <div class="menu-submenu">
-
-                                    <div class="menu-item">
-                                        <a href="/item/category" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-th-large"></i>
-                                            </span>
-                                            <span class="menu-text">Category Registration</span>
-                                        </a>
-                                    </div>
-
-                                    <div class="menu-item">
-                                        <a href="/item" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-book"></i>
-                                            </span>
-                                            <span class="menu-text">Item Registration</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="menu-item">
-                                <a href="/supplier" class="menu-link">
-                                    <span class="menu-icon"><i class="fa fa-user-o"></i></span>
-                                    <span class="menu-text">Supplier Registration</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a href="/po" class="menu-link">
-                                    <span class="menu-icon"><i class="fa fa-clipboard"></i></span>
-                                    <span class="menu-text">Purchase Order Request</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-divider"></div>
-
-                            <div class="menu-header">GRN Management</div>
-
-                            <div class="menu-item">
-                                <a href="/grn" class="menu-link">
-                                    <span class="menu-icon"><i class="fa fa-cube"></i></span>
-                                    <span class="menu-text">GRN</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a href="/stocks" class="menu-link">
-                                    <span class="menu-icon"><i class="fa fa-cubes"></i></span>
-                                    <span class="menu-text">Stock</span>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a href="widgets.html" class="menu-link">
-                                    <span class="menu-icon"><i class="fa fa-rocket"></i></span>
-                                    <span class="menu-text">Inter location Transfer</span>
                                 </a>
                             </div>
 
@@ -278,90 +201,104 @@
                                 </div>
                             </div>
 
-                            <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
+                            <div class="menu-item">
+                                <a href="/job" class="menu-link">
                                     <span class="menu-icon">
-                                        <i class="fa fa-cogs"></i>
+                                        <i class="fa fa-wrench"></i>
                                     </span>
-                                    <span class="menu-text">Job Management</span>
-                                    <span class="menu-caret"><b class="caret"></b></span>
+                                    <span class="menu-text">Job Registration</span>
                                 </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="/job" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-wrench"></i>
-                                            </span>
-                                            <span class="menu-text">Job Registration</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="/mr" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-flask"></i>
-                                            </span>
-                                            <span class="menu-text">Material Requests Registration</span>
-                                        </a>
-                                    </div>
-
-                                    <div class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-paper-plane"></i>
-                                            </span>
-                                            <span class="menu-text">Issuing Items on Material Requests</span>
-                                        </a>
-                                    </div>
-
-                                    <div class="menu-item">
-                                        <a href="email_compose.html" class="menu-link">
-                                            <span class="menu-icon">
-                                                <i class="fa fa-check-square-o"></i>
-                                            </span>
-                                            <span class="menu-text">Job Close & Invoice</span>
-                                        </a>
-                                    </div>
-
-                                </div>
                             </div>
+
+                            <div class="menu-item">
+                                <a href="/mr" class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-flask"></i>
+                                    </span>
+                                    <span class="menu-text">Registered Material Requests</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="" class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </span>
+                                    <span class="menu-text">Issuing Items on Material Requests</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="email_compose.html" class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-check-square-o"></i>
+                                    </span>
+                                    <span class="menu-text">Job Close & Invoice</span>
+                                </a>
+                            </div>
+
 
                             <div class="menu-divider"></div>
 
-                            <div class="menu-header">System Reports</div>
+                            <div class="menu-header">Purchase Order & GRN Management</div>
+
 
                             <div class="menu-item">
-                                <a href="email_inbox.html" class="menu-link">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-file-archive-o"></i>
-                                    </span>
-                                    <span class="menu-text">Stock Report</span>
+                                <a href="/po" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-clipboard"></i></span>
+                                    <span class="menu-text">Purchase Order Request</span>
                                 </a>
                             </div>
 
                             <div class="menu-item">
-                                <a href="email_inbox.html" class="menu-link">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-file-code-o"></i>
-                                    </span>
-                                    <span class="menu-text">Job Report</span>
+                                <a href="/grn" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-cube"></i></span>
+                                    <span class="menu-text">GRN Management</span>
                                 </a>
                             </div>
 
                             <div class="menu-item">
-                                <a href="email_inbox.html" class="menu-link">
-                                    <span class="menu-icon">
-                                        <i class="fa fa-file-word-o"></i>
-                                    </span>
-                                    <span class="menu-text">Material Request</span>
+                                <a href="/stocks" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-cubes"></i></span>
+                                    <span class="menu-text">Stock</span>
                                 </a>
                             </div>
 
                             <div class="menu-item">
-                                <a href="email_inbox.html" class="menu-link">
+                                <a href="/transfer" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-rocket"></i></span>
+                                    <span class="menu-text">Inter location Transfer</span>
+                                </a>
+                            </div>
+
+
+
+                            <div class="menu-divider"></div>
+
+                            <div class="menu-header">Item & Supplier Management</div>
+
+                            <div class="menu-item">
+                                <a href="/item/category" class="menu-link">
                                     <span class="menu-icon">
-                                        <i class="fa fa-file-text-o"></i>
+                                        <i class="fa fa-th-large"></i>
                                     </span>
-                                    <span class="menu-text">Stock Report</span>
+                                    <span class="menu-text">Category Registration</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="/item" class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-book"></i>
+                                    </span>
+                                    <span class="menu-text">Item Registration</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="/supplier" class="menu-link">
+                                    <span class="menu-icon"><i class="fa fa-user-o"></i></span>
+                                    <span class="menu-text">Supplier Registration</span>
                                 </a>
                             </div>
 
@@ -421,9 +358,9 @@
 
 
     @if ((session()->has('code') && session()->get('code') == 2) || $errors->any())
-        <script>
-            $('#modal').modal('show');
-        </script>
+    <script>
+        $('#modal').modal('show');
+    </script>
     @endif
 
     <script>

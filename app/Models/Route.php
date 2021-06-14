@@ -16,6 +16,6 @@ class Route extends Model
 
     public function getAll()
     {
-        return $this->all();
+        return $this->orderBy('id','DESC')->get();
     }
 }

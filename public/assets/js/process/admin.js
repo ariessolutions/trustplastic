@@ -24,7 +24,6 @@ function clearInputs(data) {
 
 $('#modal_close').click(function(e) {
     $("#modal").removeClass("in");
-    $(".modal-backdrop").remove();
     $('#modal').modal('toggle');
 });
 
@@ -877,7 +876,7 @@ function loadExpences() {
         });
     } else {
         var tr = $('<tr></tr>');
-        tr.append($('<td></td>').attr('colspan', '5').addClass('py-1 align-middle text-center').append($('<small>No Outside Expenses</small>').addClass('text-danger py-3')));
+        tr.append($('<td></td>').attr('colspan', '5').addClass('py-2 align-middle text-center').append($('<span>No Outside Expenses</span>').addClass('text-dark py-3')));
         job_outside_exp_list.append(tr);
     }
 }
@@ -1146,6 +1145,22 @@ function viewJob(id) {
     });
 }
 
+function addToProductStock(jobid) {
+    Notiflix.Confirm.Show('Confirmation', 'Are you sure to proceed ?', 'Yes', 'No', function() {
+        $.ajax({
+            type: "GET",
+            url: "/job/add/product/stock/" + jobid,
+            success: function(response) {
+                if (response == 1) {
+                    jobRecordsDataTable.ajax.reload(null, false);
+                    Notiflix.Notify.Success('Product Stock Updated.');
+                } else {
+                    Notiflix.Notify.Failure('Something Wrong.');
+                }
+            }
+        });
+    }, function() {});
+}
 
 function editJob(id) {
     $.ajax({
@@ -1194,6 +1209,8 @@ function refreshStatistics() {
             $('#job_pending_count22').html(response[0][1]);
             $('#job_pending_count3').html(response[1][0]);
             $('#job_pending_count33').html(response[1][1]);
+            $('#job_pending_count4').html(response[3][0]);
+            $('#job_pending_count44').html(response[3][1]);
         }
     });
 }
@@ -1218,8 +1235,21 @@ function printJob(id) {
 
 //START Functions - TRANSFER
 
+var transfer_print_btn_div = $('#transfer_print_btn_div');
+var transfer_print_btn = $('#transfer_print_btn');
+
 $('.transfer_modal_button').click(function(e) {
     e.preventDefault();
+    $('.resetcustom').click();
+    transfer_print_btn.hide();
+    transfer_print_btn_div.hide();
+    transfer_modal_item_add_div.show();
+    transferresetbtn.show();
+    transfer_remark.removeAttr('disabled');
+    transfer_modal_from.removeClass('seldisable');
+    transfer_modal_to.removeClass('seldisable');
+    transfer_modal_item_add_div_title.html('Add Items To Transfer');
+    $('#resetbtn').show();
     $('#modal').modal('show');
 });
 
@@ -1234,7 +1264,7 @@ var transferresetbtn = $('#transferresetbtn');
 var transfermodaltable = $('#transfermodaltable');
 var transfer_session_add_button = $('#transfer_session_add_button');
 var transfer_qty_show_available = $('#transfer_qty_show_available');
-
+var transfer_remark = $('#transfer_remark');
 
 transfer_modal_from.add(transfer_modal_to).change(function(e) {
     e.preventDefault();
@@ -1286,7 +1316,7 @@ function loadTransferModalBins() {
     transfer_available_bins.html('');
     $.ajax({
         type: "GET",
-        url: "/transfer/item/bins/" + transfer_item.val(),
+        url: "/transfer/item/bins/" + transfer_item.val() + '/' + transfer_modal_to.val() + '/' + transfer_modal_from.val(),
         success: function(response) {
             if (response == 2) {
                 Notiflix.Notify.Warning('No item bins available for this product At targeted location.');
@@ -1315,6 +1345,13 @@ transfer_available_bins.change(function(e) {
 });
 
 transfer_qty.keyup(function(e) {
+
+    if (transfer_available_bins.val() == 0 || !transfer_available_bins.val()) {
+        transfer_available_bins.focus();
+        transfer_qty.val('');
+        Notiflix.Notify.Warning('Please select bin location first.');
+    }
+
     if ($(this).val() > Number(transfer_available_bins.attr('aqty'))) {
         markAsErrorField(transfer_qty, true);
     } else {
@@ -1322,11 +1359,125 @@ transfer_qty.keyup(function(e) {
     }
 });
 
-// transfer_session_add_button.click(function (e) {
-//     e.preventDefault();
-//     if(){
+transfer_session_add_button.click(function(e) {
+    e.preventDefault();
+    if (isNotEmpty([transfer_modal_from, transfer_modal_to, [transfer_item, transfer_item_suggetions], transfer_available_bins, transfer_qty]) == true) {
+        $.ajax({
+            type: "GET",
+            url: "/transfer/session/add/" + transfer_item.val() + '/' + transfer_qty.val() + '/' + transfer_available_bins.val() + '/' + transfer_modal_from.val(),
+            success: function(response) {
+                if (response != 'error') {
+                    if (response > 0) {
+                        transfer_modal_from.add(transfer_modal_to).addClass('seldisable');
+                    } else {
+                        transfer_modal_from.add(transfer_modal_to).removeClass('seldisable');
+                    }
+                    transferModalDataTable.ajax.reload(null, false);
+                    clearInputs([transfer_item, transfer_item_suggetions, transfer_qty]);
+                    transfer_available_bins.html('');
+                    transfer_item_suggetions.focus();
+                } else {
+                    markAsErrorField(transfer_qty, true);
+                    transfer_qty.focus();
+                    Notiflix.Notify.Warning('Invalid Quantity.');
+                }
+            }
+        });
+    }
+});
 
-//     }
-// });
+var transferModalDataTable = transfermodaltable.DataTable({
+    ajax: {
+        url: '/transfer/modal/get',
+        dataSrc: ''
+    },
+    createdRow: function(row, data, dataIndex, cells) {
+        $(cells).addClass('py-1 align-middle');
+    }
+});
+
+function transferRemoveFromSession(index) {
+    $.ajax({
+        type: "GET",
+        url: "/transfer/session/remove/" + index,
+        success: function(response) {
+            if (response > 0) {
+                transfer_modal_from.add(transfer_modal_to).addClass('seldisable');
+            } else {
+                transfer_modal_from.add(transfer_modal_to).removeClass('seldisable');
+            }
+            transferModalDataTable.ajax.reload(null, false);
+        }
+    });
+}
+
+$('.resetcustom').click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: "/transfer/session/clear",
+        success: function(response) {
+            transferModalDataTable.ajax.reload(null, false);
+        }
+    });
+});
+
+var transfer_filter_from = $('#transfer_filter_from');
+var transfer_filter_to = $('#transfer_filter_to');
+var transfer_filter_btn = $('#transfer_filter_btn');
+var transfer_modal_item_add_div = $('#transfer_modal_item_add_div');
+var transfer_modal_item_add_div_title = $('#transfer_modal_item_add_div_title');
+
+transfer_filter_btn.click(function(e) {
+    e.preventDefault();
+    transferHistoryDataTable.ajax.url('/transfer/history/view/' + ((transfer_filter_from.val() !== '') ? transfer_filter_from.val() : 0) + '/' + ((transfer_filter_to.val() !== '') ? transfer_filter_to.val() : 0)).load(null, false);
+});
+
+var transfer_history_table = $('#transfer_history_table');
+var transferHistoryDataTable = transfer_history_table.DataTable({
+    ajax: {
+        url: '/transfer/history/view/' + ((transfer_filter_from.val() !== '') ? transfer_filter_from.val() : 0) + '/' + ((transfer_filter_to.val() !== '') ? transfer_filter_to.val() : 0),
+        dataSrc: ''
+    },
+    createdRow: function(row, data, dataIndex, cells) {
+        $(cells).addClass('py-1 align-middle');
+    }
+});
+
+function viewTransfer(tid) {
+    transfer_modal_item_add_div.hide();
+    transferresetbtn.hide();
+    $('#resetbtn').hide();
+    transfer_print_btn_div.show();
+    transfer_print_btn.show();
+    transfer_modal_from.addClass('seldisable');
+    transfer_print_btn.attr('onclick', 'printTransfer(' + tid + ')');
+    transfer_modal_to.addClass('seldisable');
+    transfer_remark.attr('disabled', true);
+    transfer_print_btn_div.show();
+    transfer_modal_item_add_div_title.html('Transfered Items');
+
+    $.ajax({
+        type: "GET",
+        url: "/transfer/view/" + tid,
+        success: function(response) {
+            transfer_modal_from.val(response.from);
+            transfer_modal_to.val(response.to);
+            transfer_remark.html(response.remark);
+            transferModalDataTable.ajax.reload(null, false);
+            $('#modal').modal('show');
+        }
+    });
+}
+
+function printTransfer(tid) {
+    $.ajax({
+        type: "GET",
+        url: "/transfer/print/" + tid,
+        success: function(response) {
+            printReport(response);
+        }
+    });
+}
 
 //END Functions - TRANSFER

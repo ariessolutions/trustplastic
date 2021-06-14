@@ -33,7 +33,7 @@ class GRN extends Model
 
     public function getAll($status = 1)
     {
-        return $this::where('grn_status', $status)->with('poitems')->with('location')->with('po')->get();
+        return $this::where('grn_status', $status)->with('poitems')->with('location')->with('po')->orderBy('id','DESC')->get();
     }
 
     public function poitems()
@@ -61,40 +61,40 @@ class GRN extends Model
         return $this::where('id', $id)->with('grnitems')->with('po')->with('location')->first();
     }
 
-    public function getStock($data,$binWise=false)
+    public function getStock($data, $binWise = false)
     {
         $query = StockHasItems::where('status', 1);
 
-        if ($data['startgrndate']!=null) {
+        if ($data['startgrndate'] != null) {
             $query->whereDate('created_at', '>=', Carbon::parse($data['startgrndate']));
         }
 
-        if ($data['endgrndate']!=null) {
+        if ($data['endgrndate'] != null) {
             $query->whereDate('created_at', '<=', Carbon::parse($data['endgrndate']));
         }
 
-        if ($data['binlocation']!=null) {
+        if ($data['binlocation'] != null) {
             $query->where('bin_location_id', $data['binlocation']);
         }
 
-        if ($data['item_id']!=null) {
-            $query=$query->where('item_id', $data['item_id']);
+        if ($data['item_id'] != null) {
+            $query = $query->where('item_id', $data['item_id']);
         }
 
-        if ($data['locationid']!=null) {
+        if ($data['locationid'] != null) {
             $query->whereIn('stock_id', (new Stock)->getLocationStocks($data['locationid']));
         }
 
-        if ($data['grnid']!=null) {
+        if ($data['grnid'] != null) {
             $query->whereIn('stock_id', (new Stock)->getGrnStocks($data['grnid']));
         }
 
-        if($binWise==false){
+        if ($binWise == false) {
             return $query->selectRaw("item_id,SUM(qty) as totqty")
-            ->groupBy('item_id')->get();
-        }else{
+                ->groupBy('item_id')->orderBy('id','DESC')->get();
+        } else {
             return $query->selectRaw("item_id,bin_location_id,SUM(qty) as totqty")
-            ->groupBy('bin_location_id')->get();
+                ->groupBy('bin_location_id')->orderBy('id','DESC')->get();
         }
     }
 

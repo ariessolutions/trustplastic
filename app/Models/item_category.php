@@ -13,7 +13,7 @@ class item_category extends Model
     protected $fillable=['item_category_code','item_category_name','status'];
 
     public function getAll(){
-        return $this::orderby('status')->get();
+        return $this::orderby('status')->orderBy('id','DESC')->get();
     }
 
     public function getActiveAll(){

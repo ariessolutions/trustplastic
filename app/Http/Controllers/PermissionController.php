@@ -30,15 +30,15 @@ class PermissionController extends Controller
         foreach ((new UserType)->getUserTypes() as $key => $value) {
             $resp[] = [$index,
                 $value->usertype,
-                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'ACTIVE' : 'INACTIVE') . '</span>',
+                '<span class="badge bg-' . (($value->status == 1) ? 'green' : 'red') . '-100 text-' . (($value->status == 1) ? 'success' : 'danger') . ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-' . (($value->status == 1) ? 'teal' : 'danger') . ' fs-9px fa-fw me-5px"></i>' . (($value->status == 1) ? 'Active' : 'Inactive') . '</span>',
                 '<div class="input-group flex-nowrap">
                 <div class="m-1">
                     <button class="btn btn-secondary btn-sm" onclick="gutdata(' . $value->id . ')">
-                        Edit
+                       View / Edit
                     </button>
                 </div>
                 <div class="m-1">
-                    <button style="width:80px" class="btn btn-round btn-outline-' . (($value->status == 1) ? 'danger' : 'success') . ' btn-sm" onclick="csusertypes(' . $value->id . ',' . $value->status . ')">
+                    <button style="width:80px" class="btn btn-round btn-default text-' . (($value->status == 1) ? 'danger' : 'success') . ' btn-sm" onclick="csusertypes(' . $value->id . ',' . $value->status . ')">
                         ' . (($value->status == 1) ? 'Deactive' : 'Active') . '
                     </button>
                 </div>

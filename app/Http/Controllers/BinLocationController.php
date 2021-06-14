@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\bin_location;
-use Illuminate\Http\Request;
 
 class BinLocationController extends Controller
 {
     public function getLocationBinLocationSuggetions($lid)
     {
-        $data=[];
+        $data = [];
         foreach ((new bin_location)->getLocationBins($lid) as $item) {
             $data[] = [
                 'id' => $item->id,

@@ -21,7 +21,18 @@ class bin_location extends Model
 
     public function getLocationBins($lid)
     {
-        return $this::where('location_id', $lid)->where('status',1)->get();
+        return $this::where('location_id', $lid)->where('status', 1)->get();
     }
+
+    public function getBinLocationByItemAndLocation($id,$to)
+    {
+        return $this::where('item_id', $id)->with('item')->where('location_id',$to)->get();
+    }
+
+    public function item()
+    {
+        return $this->hasOne(item::class,'id','item_id')->with('munit');
+    }
+
 
 }

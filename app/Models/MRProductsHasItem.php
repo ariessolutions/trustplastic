@@ -22,4 +22,14 @@ class MRProductsHasItem extends Model
         return $this->create($data);
     }
 
+    public function getjobHasProducts()
+    {
+        return $this->hasOne(Product::class, 'id', 'job_has_product_id');
+    }
+
+    public function getItemById()
+    {
+        return $this->hasOne(Item::class, 'id' , 'item_id');
+    }
+
 }

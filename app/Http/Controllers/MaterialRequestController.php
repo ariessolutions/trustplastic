@@ -19,13 +19,34 @@ class MaterialRequestController extends Controller
 
     public function index()
     {
-        return view('dashboard.material_request');
+
+        $mr = (new material_request)->getAll();
+        return view('dashboard.material_request', compact('mr'));
     }
 
-    public function init()
+    public function init(Request $request)
     {
+
+        if (Session::has('job_id')) {
+            if (Session::get('job_id') != $request->id) {
+
+                $this->productItemSessionClear();
+                if (Session::has('mr_job_id')) {
+                    Session::forget('mr_job_id');
+                }
+
+                if (Session::has('mr_code')) {
+                    Session::forget('mr_code');
+                }
+
+                Session::put('job_id', $request->id);
+            }
+        } else {
+            Session::put('job_id', $request->id);
+        }
+
         $mr_code = 'MR/' . date('smy') . '/' . str_pad((new material_request)->getMrCount() + 1, 3, '0', STR_PAD_LEFT);
-        $job_id = 4;
+        $job_id = $request->id;
         $job = Job::find($job_id);
         $job_products = (new material_request)->getProductsOfJobByJobId($job_id);
 
@@ -132,7 +153,7 @@ class MaterialRequestController extends Controller
                             Remove
                         </button>
                     </div>
-                </div>', ];
+                </div>'];
         }
 
         return $tableData;
@@ -157,6 +178,10 @@ class MaterialRequestController extends Controller
     public function saveMaterialRequest(Request $request)
     {
 
+        if(!Session::has('mr_has_item')){
+            return 3;
+        }
+
         if (!$request->session()->has('mr_code')) {
             return 2;
         }
@@ -169,6 +194,7 @@ class MaterialRequestController extends Controller
         ];
 
         $material_request = (new material_request)->add($data);
+        (new Job)->edit($request->session()->get('mr_job_id'), ['status' => 4], ['view' => Session::get('view', 'non'), 'activity' => 'Add a Material Request / Job Changed']);
 
         $records = $this->sessionRecords();
 
@@ -195,6 +221,22 @@ class MaterialRequestController extends Controller
     {
         if (Session::has('mr_has_item')) {
             Session::forget('mr_has_item');
+        }
+    }
+
+    public function loadRequestedMaterial(Request $request)
+    {
+        return (new material_request)->getMaterialRequestById($request->mr_id)->first();
+    }
+
+    public function printRequestedMaterial(Request $request)
+    {
+        $data = (new material_request)->getMaterialRequestById($request->mr_id)->first();
+        if($data){
+            // return $data;
+            return view('reports.material_request_report')->with('data',$data);
+        }else{
+            return 2;
         }
     }
 

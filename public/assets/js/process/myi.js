@@ -1,20 +1,35 @@
 $('#added_material_list').DataTable();
+$('#mr_list').DataTable();
 
-$('#mr_modal').click(function (e) {
-    e.preventDefault();
+
+$('#myi_mr_modal_create').click(function(e) {
+    $('#mr_modal_link').modal('toggle');
+});
+
+$('#myi_mr_modal_view').click(function(e) {
+    $('#mr_view_modal').modal('toggle');
+});
+
+function addMaterial(id) {
 
     $.ajax({
         type: "GET",
         url: "/mr/init",
-        success: function (response) {
+        data: {
+            id: id,
+        },
+        success: function(response) {
+
+            mr_Table.ajax.reload(null, false);
+            $('#mr_selected_prodcut_code').val('');
 
             $('#mr_created_jobs').html('');
 
             var row_data = '';
             for (let i = 0; i < response["products"].length; i++) {
 
-                row_data += '<div>' +
-                    '<div class="list-group-item d-flex ps-3 border-0 shadow-sm mb-3">' +
+                row_data += '<div style="border-bottom:1px solid #e0e0e0">' +
+                    '<div class="list-group-item d-flex ps-3 border-0 ">' +
                     '<div class="me-3">' +
                     '<i class="fa fa-cube fa-fw fa-lg" style="color:#212121" ></i>' +
                     '</div>' +
@@ -47,7 +62,14 @@ $('#mr_modal').click(function (e) {
 
     });
 
-});
+}
+
+// $('#mr_modal').click(function(e) {
+//     e.preventDefault();
+
+
+
+// });
 
 function mr_loadProductDetails(id) {
 
@@ -57,7 +79,7 @@ function mr_loadProductDetails(id) {
         data: {
             id: id
         },
-        success: function (response) {
+        success: function(response) {
 
             Notiflix.Notify.Info('Selected ' + response.code + ' product');
 
@@ -68,7 +90,7 @@ function mr_loadProductDetails(id) {
     });
 }
 
-$('#mr_item_save_session_button').click(function (e) {
+$('#mr_item_save_session_button').click(function(e) {
     e.preventDefault();
 
     $.ajax({
@@ -79,14 +101,14 @@ $('#mr_item_save_session_button').click(function (e) {
             item_id: $('#mr_item_id').val(),
             qty: $('#mr_item_qty').val(),
         },
-        success: function (response) {
+        success: function(response) {
 
             if ($.isEmptyObject(response.error)) {
                 mr_clearFields();
                 mr_Table.ajax.reload(null, false);
                 Notiflix.Notify.Success('Item successfully saved to session ');
             } else {
-                $.each(response.error, function (key, value) {
+                $.each(response.error, function(key, value) {
                     Notiflix.Notify.Failure(value);
                 });
             }
@@ -100,7 +122,7 @@ var mr_Table = $('#mr_session_added_list').DataTable({
         url: '/mr/materialsTableView',
         dataSrc: ''
     },
-    createdRow: function (row, data, dataIndex, cells) {
+    createdRow: function(row, data, dataIndex, cells) {
         $(cells).addClass('py-1 align-middle');
     }
 });
@@ -113,7 +135,7 @@ function mr_removeItemInSession(index) {
         data: {
             index: index
         },
-        success: function (response) {
+        success: function(response) {
 
             if (response === '1') {
                 mr_Table.ajax.reload(null, false);
@@ -126,29 +148,41 @@ function mr_removeItemInSession(index) {
 
 }
 
-$('#mr_save_to_db_button').click(function (e) {
+$('#mr_save_to_db_button').click(function(e) {
     e.preventDefault();
 
     $.ajax({
         type: "GET",
         url: "/mr/saveMaterialRequest",
-        success: function (response) {
-            if (response === '1') {
-                $('#mr_selected_prodcut_code').val('');
-                $('#mr_selected_prodcut_id').val('');
-                mr_clearFields();
-                mr_closeModal();
-                mr_Table.ajax.reload(null, false);
-                Notiflix.Notify.Success('Successfully saved material request');
-            } else if (response === '2') {
-                Notiflix.Danger.Danger('Invalid material request number');
+        success: function(response) {
+
+            if ($.isEmptyObject(response.error)) {
+
+                if (response === '1') {
+                    $('#mr_selected_prodcut_code').val('');
+                    $('#mr_selected_prodcut_id').val('');
+                    mr_clearFields();
+                    mr_closeModal();
+                    mr_Table.ajax.reload(null, false);
+                    jobRecordsDataTable.ajax.reload(null, false);
+                    Notiflix.Notify.Success('Successfully saved material request');
+                } else if (response === '2') {
+                    Notiflix.Notify.Failure('Invalid material request number');
+                } else if (response === '3') {
+                    Notiflix.Notify.Failure('Please add materials to save');
+                }
+
+            } else {
+                $.each(response.error, function(key, value) {
+                    Notiflix.Notify.Failure(value);
+                });
             }
         }
     });
 
 });
 
-$('#mr_fields_delete').click(function (e) {
+$('#mr_fields_delete').click(function(e) {
     e.preventDefault();
 
     mr_clearFields();
@@ -156,23 +190,24 @@ $('#mr_fields_delete').click(function (e) {
 });
 
 //Delete Later
-$('#mr_session_product_clear').click(function (e) {
+$('#mr_session_product_clear').click(function(e) {
     e.preventDefault();
 
     Notiflix.Confirm.Show('Notiflix Confirm', 'Do you agree with me?', 'Yes', 'No',
-        function () {
+        function() {
 
             $.ajax({
                 type: "GET",
                 url: "/mr/productItemSessionClear",
-                success: function (response) {
-                    Notiflix.Notify.Success('Material item session successfully cleared ');
+                success: function(response) {
                     mr_clearFields();
+                    mr_Table.ajax.reload(null, false);
+                    Notiflix.Notify.Success('Material item session successfully cleared ');
                 }
             });
 
         },
-        function () {
+        function() {
             Notiflix.Notify.Warning('Ignored material item session remove');
         });
 
@@ -181,9 +216,8 @@ $('#mr_session_product_clear').click(function (e) {
 });
 
 function mr_closeModal() {
-    $('#modal').modal('hide');
-    $("#modal").removeClass("in");
-    $('#modal').modal('toggle');
+    $('#mr_modal_link').modal('hide');
+    $('#mr_modal_link').modal('toggle');
 }
 
 function mr_clearFields() {
@@ -195,10 +229,10 @@ function mr_clearFields() {
 var mr_itemsDataArray = {};
 
 var mrItemsTypeHead = $('#mr_item_code').typeahead({
-    source: function (query, process) {
+    source: function(query, process) {
         return $.get("/mr/loaditem", {
             query: query,
-        }, function (data) {
+        }, function(data) {
             mr_itemsDataArray = {};
             data.forEach(element => {
                 mr_itemsDataArray[element['name']] = element['id'];
@@ -208,12 +242,68 @@ var mrItemsTypeHead = $('#mr_item_code').typeahead({
     },
 });
 
-mrItemsTypeHead.change(function (e) {
+mrItemsTypeHead.change(function(e) {
     var tempId = mr_itemsDataArray[$('#mr_item_code').val()];
     if (tempId != undefined) {
         $('#mr_item_id').val(tempId);
     }
 });
 
+function mr_view_modal_on_mr(id) {
+
+    $.ajax({
+        type: "GET",
+        url: "/mr/loadRequestedMaterial",
+        data: {
+            mr_id: id,
+        },
+        success: function(response) {
+
+            $('#mr_view_job_code').html('#' +
+                response['mr_code']);
+            $('#mr_view_t_mr_code').html(response['mr_code']);
+            $('#mr_view_t_job').html(response['get_jobs']['code']);
+            $('#mr_view_t_date').html(response['date']);
+            $('#mr_view_t_location').html(response['get_jobs']['locationdata']['location_name']);
+            $('#mr_view_print_btn').attr('onclick', 'mr_view_print(' + response['id'] + ')');
+
+            $data = '';
+
+            for (let i = 0; i < response['get_all_materials'].length; i++) {
+                console.log(response['get_all_materials'][i]['item_id']);
+
+                x = i + 1;
+
+                $data += '<tr>' +
+                    '<td > ' + x + ' </td>' +
+                    '<td>' + response['get_all_materials'][i]['getjob_has_products']['code'] + '</td>' +
+                    '<td> ' + response['get_all_materials'][i]['get_item_by_id']['item_part_code'] + ' </td>' +
+                    '<td> ' + response['get_all_materials'][i]['qty'] + ' </td>' +
+                    '</tr > ';
+            }
+
+            $('#mr_view_modal_tbody').html($data);
+
+        }
+    });
+
+}
 
 
+function mr_view_print(id) {
+
+    $.ajax({
+        type: "GET",
+        url: "/mr/printRequestedMaterial",
+        data: {
+            mr_id: id
+        },
+        success: function(response) {
+            if (response == 2) {
+                Notiflix.Notify.Warning('Something Wrong.');
+            } else {
+                printReport(response);
+            }
+        }
+    });
+}

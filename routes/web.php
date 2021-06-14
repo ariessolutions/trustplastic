@@ -4,6 +4,7 @@ use App\Http\Controllers\BinLocationController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\GRNController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LocationController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +43,8 @@ Route::get('/user-registration',function(){
 Route::get('/home',function(){
     return view('dashboard.dashboard');
 })->middleware('auth');
+
+Route::get('/logout', [HomeController::class, 'logout'])->middleware('auth');
 
 Route::get('/item/category',[ItemCategoryController::class,'index'])->middleware(['auth','permitted']);
 Route::post('/item/category/store',[ItemCategoryController::class,'store'])->middleware('auth');
@@ -152,10 +156,22 @@ Route::get('/job/approve/{id}',[JobController::class,'approve']);
 Route::get('/job/refused/{id}',[JobController::class,'refused']);
 Route::get('/job/statistics',[JobController::class,'recordsStatistics']);
 Route::get('/products/suggesions/{vid}',[ProductController::class,'suggetionsVehicle'])->middleware(['auth']);
-Route::get('/job/get/print/{id}',[JobController::class,'printJob'])->middleware(['auth']);
+Route::get('/job/get/print/{id}',[JobController::class,'printJob']);
+Route::get('/job/add/product/stock/{jobid}',[JobController::class,'addToProductStock']);
 
 Route::get('/transfer',[TransferController::class,'index'])->middleware(['auth','permitted']);
-Route::get('/transfer/item/suggessions/{from}',[TransferController::class,'itemSuggetions'])->middleware(['auth','permitted']);
+Route::get('/transfer/add',[TransferController::class,'add'])->middleware(['auth']);
+Route::get('/transfer/view/{tid}',[TransferController::class,'viewTransfer']);
+Route::get('/transfer/print/{tid}',[TransferController::class,'printTransfer']);
+Route::get('/transfer/history/view/{from}/{to}',[TransferController::class,'getTableView'])->middleware(['auth']);
+Route::get('/transfer/item/suggessions/{from}',[TransferController::class,'itemSuggetions'])->middleware(['auth']);
+Route::get('/transfer/item/bins/{item}/{to}/{from}',[TransferController::class,'getItemBins'])->middleware(['auth']);
+Route::get('/transfer/session/add/{itemId}/{quantity}/{binLocation}/{from}',[TransferController::class,'addToSession'])->middleware(['auth']);
+Route::get('/transfer/session/remove/{index}',[TransferController::class,'removeFromSession'])->middleware(['auth']);
+Route::get('/transfer/session/clear',[TransferController::class,'clearSession'])->middleware(['auth']);
+Route::get('/transfer/modal/get',[TransferController::class,'getModalTable'])->middleware(['auth']);
+
+
 
 //BAT
 
@@ -169,6 +185,8 @@ Route::get('/mr/materialsTableView',[MaterialRequestController::class,'materials
 Route::get('/mr/removeItemFromSession',[MaterialRequestController::class,'removeItemFromSession'])->middleware('auth');
 Route::get('/mr/saveMaterialRequest',[MaterialRequestController::class,'saveMaterialRequest'])->middleware('auth');
 Route::get('/mr/getProductsOfJobByJobId/{id}',[MaterialRequestController::class,'getProductsOfJobByJobId'])->middleware('auth');
+Route::get('/mr/loadRequestedMaterial',[MaterialRequestController::class,'loadRequestedMaterial']);
+Route::get('/mr/printRequestedMaterial',[MaterialRequestController::class,'printRequestedMaterial']);
 
 
 // Route::get('/mr',function(){
@@ -176,7 +194,7 @@ Route::get('/mr/getProductsOfJobByJobId/{id}',[MaterialRequestController::class,
 // });
 
 Route::get('/jobreport',function(){
-    return view('dashboard.components.purchase_order_report');
+    return view('reports.material_request_report');
 });
 
 
